@@ -134,9 +134,13 @@ Status: `[ ]` = de făcut, `[x]` = făcut, `[~]` = în curs.
 - Estimare: 45 min
 
 ### C3. Animații 3D (opțional)
-- [ ] `src/components/animations/3d-floating-shapes.tsx` — forme 3D care reacționează la cursor
-- [ ] `src/components/animations/glassmorphism-cards.tsx` — carduri cu efect de sticlă
-- [ ] `src/components/animations/webgl-distortion.tsx` — distorsiune WebGL pe imagini
+- [~] `src/components/animations/3d-floating-shapes.tsx` — forme 3D care reacționează la cursor
+- [~] `src/components/animations/glassmorphism-cards.tsx` — carduri cu efect de sticlă
+- [~] `src/components/animations/webgl-distortion.tsx` — distorsiune WebGL pe imagini
+- **Status: decis să NU se facă** (2026-09-04). `three.js` ar adăuga ~150 kB gzip peste
+  bundle-ul actual de 88.65 kB — l-ar tripla, pentru forme care se rotesc pe un CV. La F1
+  tocmai s-a concluzionat că bundle-ul e sănătos; asta ar anula concluzia. Glassmorphism-ul
+  există deja parțial (`backdrop-blur-md` în Navbar). Nu e restanță, e alegere.
 - Dependențe: B1
 - Estimare: 60 min
 

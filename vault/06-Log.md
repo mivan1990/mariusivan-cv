@@ -180,4 +180,20 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - [x] `npm run build` — trece: 1633 module, 276.38 kB js (88.59 kB gzip)
 - [x] Subtask bifat în `11-Taskuri.md` (C2: cursor-trail)
 
+#### 21:50 — Faza C închisă; C3 (3D/WebGL) decis să nu se facă
+
+- [x] Toate efectele din C sunt gata: reveal la scroll (`useReveal`, exista dinainte), numere
+  animate (`useCountUp`), typing effect (`useTyping`), parallax (`useParallax`), cursor trail
+  (`CursorTrail.tsx`). Micro-interacțiunile există prin `transition hover:` din Tailwind.
+- [x] `useReducedMotion` extras într-un hook comun — toate cele cinci efecte îl respectă
+- [~] C3 (3D, WebGL, glassmorphism): **decis să nu**, vezi `11-Taskuri.md`
+- Notă: bundle-ul a crescut de la 87.2 la 88.65 kB gzip pe toată faza — 1.4 kB pentru cinci
+  efecte. `three.js` singur ar fi adăugat de o sută de ori mai mult.
+- Notă: planul C era scris ca listă de 11 fișiere de creat, dar implementarea a folosit hooks
+  reutilizabile în loc de componente-wrapper. Efectele există, fișierele din plan nu — de aceea
+  subtaskurile sunt bifate după efect, nu după numele fișierului.
+- Notă: **niciun efect n-a fost văzut în browser.** Build-ul care trece nu spune nimic despre
+  cum arată parallax-ul, urma de cursor sau tastarea. Rămâne de verificat vizual.
+
+
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]
