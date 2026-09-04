@@ -19,7 +19,7 @@ From `package.json`:
 ```
 src/
 ├── assets/
-│   └── hero.png
+│   └── hero.png               # not referenced anywhere yet
 ├── components/
 │   ├── CursorTrail.tsx        # subtle fading dot trail following the pointer (fine pointers only)
 │   ├── LanguageToggle.tsx     # EN/RO switch, persisted to localStorage
