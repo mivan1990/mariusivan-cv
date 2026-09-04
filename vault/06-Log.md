@@ -135,4 +135,15 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - [x] `npm run build` — trece: 1628 module, 272.35 kB js (87.21 kB gzip), 19.14 kB css (4.60 kB gzip)
 - Commit: `532c178` (fără push)
 
+#### 20:05 — B3: stats — numere animate
+- [x] `src/hooks/useCountUp.ts` — hook nou: descompune valoarea în prefix + cifre + suffix (regex `^(\D*)(\d+)(\D*)$`), animează doar cifra cu `requestAnimationFrame` (1.2 s, ease-out cubic), folosește `useReveal` pentru viewport (fără al doilea IntersectionObserver)
+- [x] `Hero.tsx` — `StatBox` folosește `useCountUp`; ref-ul e pe cardul întreg
+- [x] Capcane: `'≤6'` — prefixul `≤` rămâne, se animează doar `6`; `'2023'` — **alegere: pornesc de aproape (target − 25, adică de la 1998)**, nu de la 0 — un an numărat de la zero arată prostesc, iar delta mică e încă vizibilă ca mișcare; `'82'` — de la 0, normal
+- [x] `prefers-reduced-motion` — respectat: valoarea finală direct, fără animatie (media query + listener la `change`)
+- [x] Comutare EN/RO — cifra curentă e ținută într-un ref; la schimbarea valorii se continuă de la cifra afișată, nu repornește de la zero; valori identice → fără animatie
+- [x] Valoare fără cifre → se afișează ca atare (fallback, nu cade)
+- [x] `npm run build` — trece: 1629 module, 273.44 kB js (87.59 kB gzip), 19.18 kB css
+- [x] Subtask bifat în `11-Taskuri.md` (B3: stats.tsx — numere animate)
+- Commit: `db16346` (fără push)
+
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]

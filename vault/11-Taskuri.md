@@ -98,7 +98,7 @@ Status: `[ ]` = de făcut, `[x]` = făcut, `[~]` = în curs.
 - [x] `src/components/sections/experience.tsx` — timeline verticală
 - [x] `src/components/sections/projects.tsx` — grid de carduri
 - [x] `src/components/sections/skills.tsx` — grid de badge-uri
-- [ ] `src/components/sections/stats.tsx` — numere animate
+- [x] `src/components/sections/stats.tsx` — numere animate
 - [x] `src/components/sections/faq.tsx` — accordion
 - [x] `src/components/sections/contact.tsx` — formular
 - Dependențe: B1
