@@ -16,21 +16,21 @@ Status: `[ ]` = de făcut, `[x]` = făcut, `[~]` = în curs.
 
 ### A1. Creare repo nou
 - [x] `git init` într-un director nou (ex. `~/Projects/cv/` sau `~/Projects/mariusivan-cv/`)
-- [ ] `git add . && git commit -m "Initial commit"`
-- [ ] Creează repo pe GitHub: `github.com/mivan1990/mariusivan-cv`
-- [ ] `git remote add origin git@github.com:mivan1990/mariusivan-cv.git`
-- [ ] `.gitignore` standard pentru Node/React (node_modules, dist, .env, .DS_Store)
+- [x] `git add . && git commit -m "Initial commit"`
+- [x] Creează repo pe GitHub: `github.com/mivan1990/mariusivan-cv`
+- [x] `git remote add origin git@github.com:mivan1990/mariusivan-cv.git`
+- [x] `.gitignore` standard pentru Node/React (node_modules, dist, .env, .DS_Store)
 - Dependențe: none
 - Estimare: 10 min
-- Status: folder creat la `~/Projects/PERSONAL/CV/mariusivan-cv/`
+- Status: **gata** — repo la `~/Projects/PERSONAL/mariusivan-cv/`, remote confirmat pe GitHub (2026-09-04). Nimic nu e împins încă: local e cu 2 commit-uri înaintea lui `origin/main`.
 
 ### A2. Inițializare proiect Vite + React + TypeScript
 - [x] `npx create-vite mariusivan-cv --template react-ts`
-- [ ] `cd mariusivan-cv && npm install`
-- [ ] Verifică: `npm run dev` pornește, `npm run build` funcționează
+- [x] `cd mariusivan-cv && npm install`
+- [~] Verifică: `npm run dev` pornește, `npm run build` funcționează
 - Dependențe: A1
 - Estimare: 15 min
-- Status: proiect inițializat, `package.json` + `vite.config.ts` + `tsconfig.json` prezente
+- Status: `npm run build` trece de la 2026-09-04 (commit `d273c15`, a cerut 4 fix-uri). `npm run dev` încă neverificat.
 
 ### A3. Configurație Tailwind CSS
 - [x] `npm install -D tailwindcss postcss autoprefixer`
