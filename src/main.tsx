@@ -9,6 +9,7 @@ import { Skills } from '@/components/sections/Skills'
 import { Contact } from '@/components/sections/Contact'
 import { Faq } from '@/components/sections/Faq'
 import { Footer } from '@/components/sections/Footer'
+import { CursorTrail } from '@/components/CursorTrail'
 import './index.css'
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
         </main>
         <Footer />
       </div>
+      <CursorTrail />
     </TooltipProvider>
   )
 }

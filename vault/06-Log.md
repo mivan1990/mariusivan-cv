@@ -169,4 +169,15 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - Notă: animația `float` din `tailwind.config.js` **nu a fost combinată** — ambele scriu pe `transform` (parallax direct pe `style`, `float` prin `@keyframes`), deci s-ar anula reciproc; iar două mișcări continue (float infinit + parallax) pe elemente deja `blur-3xl` ar fi fost prea agitat pentru un fundal subtil. Rămâne definită, nefolosită
 - Commit: vezi `git log` (fără push)
 
+#### 21:32 — C2: cursor trail (urma discretă după cursor)
+- [x] `src/components/CursorTrail.tsx` — componentă izolată (se scoate dintr-o singură linie din `main.tsx`): 5 puncte mici (8→3 px) în `primary` cu opacitate descrescătoare (0.4→0.1), fiecare urmărește pe cel din față cu lerp → efect de urmă estompată
+- [x] Dezactivată pe touch: `window.matchMedia("(pointer: fine)")` + listener la `change` — pe dispozitive fără pointer fin nu randează nimic și nu se atașează niciun listener
+- [x] `prefers-reduced-motion` — folosește hook-ul existent `useReducedMotion` (fără copie): reduce activ → `return null`
+- [x] `pointer-events: none` pe container + `z-40` (sub navbar-ul `z-50`) — nu blochează click/hover, nu acoperă navbarul
+- [x] Performanță: zero `setState` pe `pointermove` — coordonatele intră într-un ref, pozițiile se scriu direct pe `style.transform` (`translate3d`) într-un buclă `requestAnimationFrame`; listener `{ passive: true }`
+- [x] Curățare la unmount: `removeEventListener` + `cancelAnimationFrame`; containerul se stinge (`opacity: 0`) când pointerul părăsește pagina sau fereastra pierde focusul
+- [x] Montată în `main.tsx` ca ultim copil, înaintea `</TooltipProvider>`
+- [x] `npm run build` — trece: 1633 module, 276.38 kB js (88.59 kB gzip)
+- [x] Subtask bifat în `11-Taskuri.md` (C2: cursor-trail)
+
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]
