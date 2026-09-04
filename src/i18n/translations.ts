@@ -41,6 +41,7 @@ export interface Translation {
     experience: string
     projects: string
     skills: string
+    faq: string
     contact: string
   }
   hero: {
@@ -87,6 +88,11 @@ export interface Translation {
     sub: string
     groups: { title: string; items: string[] }[]
   }
+  faq: {
+    heading: string
+    sub: string
+    items: { q: string; a: string }[]
+  }
   contact: {
     heading: string
     sub: string
@@ -124,6 +130,7 @@ export const translations: Record<Lang, Translation> = {
       experience: 'Experience',
       projects: 'Projects',
       skills: 'Skills',
+      faq: 'FAQ',
       contact: 'Contact',
     },
     hero: {
@@ -293,6 +300,32 @@ export const translations: Record<Lang, Translation> = {
         },
       ],
     },
+    faq: {
+      heading: 'FAQ',
+      sub: 'Questions recruiters might ask before the first call.',
+      items: [
+        {
+          q: 'How did you get into programming?',
+          a: 'I started with zero programming knowledge and taught myself. I joined FEG Group as a Junior Developer in January 2023 and grew within a team of up to 6 developers.',
+        },
+        {
+          q: 'What is the 82-module Laravel monolith?',
+          a: 'A large-scale internal business intranet at FEG Group (Fortuna and Casa Pariurilor), built as a modular monolith on Laravel — 82 modules covering betting operations, HR, finance, compliance and employee productivity, for both brands and all shop locations.',
+        },
+        {
+          q: 'What are your personal projects?',
+          a: 'Three, all real: Portfolio XP — an interactive Windows XP desktop, live at xp.mariusivan.ro and the only project a recruiter can touch in a browser; CS2 Leaderboard — a production app on a local Windows machine, actively used by a group of friends for 2v2 competitions; Fortuna WC2026 — FIFA World Cup 2026 betting with real live match data from football-data.org.',
+        },
+        {
+          q: 'What technologies do you work with?',
+          a: 'Backend: PHP 8.2, Laravel 10, MySQL, Redis. Frontend: React, TypeScript, Vite, Tailwind, shadcn/ui, plus Blade, Bootstrap and jQuery in the production project. Data and infra: SQLite, Redis, AWS S3, nginx, Let’s Encrypt.',
+        },
+        {
+          q: 'What kind of roles are you open to?',
+          a: 'Backend, full-stack and product-engineering roles.',
+        },
+      ],
+    },
     contact: {
       heading: 'Contact',
       sub: 'Let’s build something.',
@@ -328,6 +361,7 @@ export const translations: Record<Lang, Translation> = {
       experience: 'Experiență',
       projects: 'Proiecte',
       skills: 'Skills',
+      faq: 'FAQ',
       contact: 'Contact',
     },
     hero: {
@@ -494,6 +528,32 @@ export const translations: Record<Lang, Translation> = {
         {
           title: 'Instrumente',
           items: ['Git', 'Artisan', 'dompdf', 'FPDF', 'wkhtmltopdf', 'Google Maps'],
+        },
+      ],
+    },
+    faq: {
+      heading: 'FAQ',
+      sub: 'Întrebări pe care un recrutor le-ar pune înainte de primul call.',
+      items: [
+        {
+          q: 'Cum ai ajuns la programare?',
+          a: 'Am început de la zero cunoștințe de programare și m-am autodidactat. Am intrat la FEG Group ca Junior Developer în ianuarie 2023 și am crescut într-o echipă de maximum 6 developeri.',
+        },
+        {
+          q: 'Care e monolith-ul Laravel cu 82 de module?',
+          a: 'Un intranet intern la scară largă la FEG Group (Fortuna și Casa Pariurilor), construit ca monolith modular pe Laravel — 82 de module care acoperă operațiuni pariuri, HR, finanțe, conformitate și productivitate angajați, pentru ambele branduri și toate locațiile.',
+        },
+        {
+          q: 'Care sunt proiectele tale personale?',
+          a: 'Trei, toate reale: Portfolio XP — un desktop Windows XP interactiv, live pe xp.mariusivan.ro, singurul proiect pe care un recrutor îl poate atinge în browser; CS2 Leaderboard — o aplicație în producție pe o mașină Windows locală, folosită activ de un grup de prieteni pentru competiții 2v2; Fortuna WC2026 — pariuri pe FIFA World Cup 2026 cu date live reale de la football-data.org.',
+        },
+        {
+          q: 'Cu ce tehnologii lucrezi?',
+          a: 'Backend: PHP 8.2, Laravel 10, MySQL, Redis. Frontend: React, TypeScript, Vite, Tailwind, shadcn/ui, plus Blade, Bootstrap și jQuery în proiectul din producție. Date și infrastructură: SQLite, Redis, AWS S3, nginx, Let’s Encrypt.',
+        },
+        {
+          q: 'La ce fel de roluri ești deschis?',
+          a: 'Roluri de backend, full-stack și product-engineering.',
         },
       ],
     },

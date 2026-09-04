@@ -128,4 +128,11 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - [x] **H2**: static pur confirmat (fără `fetch()` către API-uri proprii, fără `import.meta.env`); navigarea e doar ancore `#hash` + `scrollIntoView` (fără react-router) → rewrite SPA nu e necesar; config nginx scris în `vault/13-Nginx.md` (cache: assets hashuite 1 an immutable, `index.html` no-cache)
 - [ ] Deploy pe VPS (I1–I4) — urmează
 
+#### 19:20 — B3: secțiunea FAQ (accordion)
+- [x] `expandFaq` / `collapseFaq` adăugate în ambele limbi din `translations.ts` (build-ul era stricat de lipsa lor)
+- [x] `src/components/sections/Faq.tsx` — accordion Radix (`type="multiple"`), `useReveal`, `id="faq"` pentru ancora din Navbar
+- [x] Montată în `main.tsx` între `<Contact />` și `</main>`; link `t.nav.faq` adăugat în Navbar (desktop + mobil)
+- [x] `npm run build` — trece: 1628 module, 272.35 kB js (87.21 kB gzip), 19.14 kB css (4.60 kB gzip)
+- Commit: `532c178` (fără push)
+
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]

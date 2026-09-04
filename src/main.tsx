@@ -7,6 +7,7 @@ import { Experience } from '@/components/sections/Experience'
 import { Projects } from '@/components/sections/Projects'
 import { Skills } from '@/components/sections/Skills'
 import { Contact } from '@/components/sections/Contact'
+import { Faq } from '@/components/sections/Faq'
 import { Footer } from '@/components/sections/Footer'
 import './index.css'
 
@@ -21,6 +22,7 @@ function App() {
           <Projects />
           <Skills />
           <Contact />
+          <Faq />
         </main>
         <Footer />
       </div>

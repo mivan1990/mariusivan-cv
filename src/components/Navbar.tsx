@@ -21,6 +21,7 @@ export function Navbar() {
     { id: 'projects', label: t.nav.projects },
     { id: 'skills', label: t.nav.skills },
     { id: 'contact', label: t.nav.contact },
+    { id: 'faq', label: t.nav.faq },
   ]
 
   const go = (id: string) => {
