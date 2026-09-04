@@ -13,7 +13,7 @@ Actualizat la fiecare sesiune — la închidere, scrie ce e gata, ce e în curs,
 ## Stare curentă
 
 **Ultima actualizare:** 2026-09-04
-**Stare:** Build-ul de producție TRECE. Toate fazele de cod sunt închise (A, B, C, F1, F3, G1, H1, H2, J2). Rămâne doar deploy-ul (I1–I4) și finalizarea git (J1, J4).
+**Stare:** Build-ul de producție TRECE. Toate fazele de cod sunt închise (A, B, C, F1, F3, G1, G2, H1, H2, J2, J3). Rămâne deploy-ul (I1–I4) și finalizarea git (J1, J4), plus testarea vizuală (F2, sărită prin decizie).
 
 **Calea proiectului:** `~/Projects/PERSONAL/mariusivan-cv/` — vault-ul Obsidian e **în interiorul repo-ului**, la `vault/`. Vechea cale `~/Vaults/cv/` **nu mai există** (mutat la consolidarea din 2026-09-04, vezi `06-Log.md`).
 
@@ -27,7 +27,10 @@ Actualizat la fiecare sesiune — la închidere, scrie ce e gata, ce e în curs,
 - [x] **Faza C — Animații & Interacțiuni**: reveal la scroll, numere animate, typing effect, parallax, cursor trail — toate cu `prefers-reduced-motion`. (C3 / 3D: decis să NU se facă — vezi mai jos.)
 - [x] **F1 — Optimizare performanță**: bundle ~88.65 kB gzip, analizat (lazy-load nu merită, imagini nefolosite lăsate în loc)
 - [x] **F3 — Accesibilitate**: aria-labels, focus vizibil, audit contrast (contrastul `primary` în dark e sub 4.5:1 — raportat, paleta neschimbată)
-- [x] **G1 — Dev server**: `npm run dev` pornește (confirmat)
+- [~] **G1 — Dev server**: `npm run dev` pornește în 133 ms (confirmat). Hot-reload-ul
+  NU a fost verificat — cere o editare făcută cu pagina deschisă în browser.
+- [x] **G2 — Preview build**: `npm run preview` servește pe :4173, `HTTP 200` pe `/` și pe
+  assetul hashuit. Verificat prin request-uri, nu vizual.
 - [x] **H1 — Build producție**: `npm run build` trece, `dist/` corect
 - [x] **H2 — Config VPS**: static pur confirmat, config nginx scris în `vault/13-Nginx.md`
 - [x] **J2 — README**: rescris în engleză, reflectă structura reală
@@ -38,7 +41,6 @@ Actualizat la fiecare sesiune — la închidere, scrie ce e gata, ce e în curs,
 - [ ] **C3 — Animații 3D (WebGL)**: **decis să NU se facă** (2026-09-04). `three.js` ar adăuga ~150 kB gzip peste bundle-ul de 88.65 kB — l-ar tripla, pentru forme care se rotesc pe un CV. Nu e restanță, e alegere.
 - [ ] **I1–I4 — Deploy pe prod**: **nu se pot face din cod** — necesită acces Cloudflare (DNS record `xp`) și SSH pe VPS (vhost, certbot, nginx). Depinde de tine, nu de repo.
 - [ ] **J1 — Git**: commit final + tag `v1.0` + push (încă nefăcut; local e înaintea `origin/main`)
-- [ ] **J3 — Actualizare Obsidian**: acest fișier + `06-Log.md` (în curs de actualizare)
 - [ ] **J4 — Beta → Prod**: marcarea ca „ready to deploy”
 
 ## Probleme cunoscute
@@ -122,7 +124,7 @@ Două dintre cele trei probleme găsite în auditul static din `06-Log.md` (16:4
 ├── public/
 │   ├── favicon.svg ✓ (singurul asset folosit)
 │   ├── icons.svg   (nefolosit în cod)
-│   └── assets/hero.png (nefolosit în cod)
+│   (hero.png e în `src/assets/`, nu aici — și nu e folosit nicăieri)
 ├── README.md            ✓
 └── vault/               ✓ (vault Obsidian — toată documentația)
 ```
