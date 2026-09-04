@@ -1,7 +1,5 @@
-import { useEffect, useState } from 'react'
 import { useLanguage } from '@/hooks/useLanguage'
 import { Button } from '@/components/ui/button'
-import { cn } from '@/lib/utils'
 
 export function LanguageToggle() {
   const { lang, toggle } = useLanguage()

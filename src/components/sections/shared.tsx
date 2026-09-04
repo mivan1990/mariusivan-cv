@@ -1,4 +1,3 @@
-import { useLanguage } from '@/hooks/useLanguage'
 import { useReveal } from '@/hooks/useReveal'
 import { cn } from '@/lib/utils'
 import type { ReactNode } from 'react'

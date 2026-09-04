@@ -9,6 +9,14 @@ import { cn } from '@/lib/utils'
 import { ExternalLink, GitBranch, MousePointerClick } from 'lucide-react'
 import type { Project } from '@/i18n/translations'
 
+// badgeTone din date foloseste 'primary'; Badge (shadcn) nu are varianta
+// 'primary' — 'default' e exact badge-ul colorat pe primary (bg-primary/10 text-primary).
+const TONE_TO_VARIANT: Record<Project['badgeTone'], 'default' | 'success' | 'info'> = {
+  primary: 'default',
+  success: 'success',
+  info: 'info',
+}
+
 function ProjectCard({
   project,
   liveDemo,
@@ -31,7 +39,7 @@ function ProjectCard({
       <CardHeader>
         <div className="flex items-start justify-between gap-3">
           <CardTitle className="text-lg">{project.name}</CardTitle>
-          <Badge variant={project.badgeTone}>{project.badge}</Badge>
+          <Badge variant={TONE_TO_VARIANT[project.badgeTone]}>{project.badge}</Badge>
         </div>
         <p className="text-xs font-semibold text-muted-foreground">
           {project.role} · {project.status}

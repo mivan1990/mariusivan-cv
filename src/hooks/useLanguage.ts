@@ -13,7 +13,7 @@ function readInitial(): Lang {
 
 export function useLanguage() {
   const [lang, setLang] = useState<Lang>(readInitial)
-  const [t, setT] = useState<Translation>(translations[readInitial])
+  const [t, setT] = useState<Translation>(translations[readInitial()])
 
   useEffect(() => {
     window.localStorage.setItem(STORAGE_KEY, lang)
