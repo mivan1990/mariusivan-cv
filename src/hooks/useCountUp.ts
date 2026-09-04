@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { useReveal } from '@/hooks/useReveal'
+import { useReducedMotion } from '@/hooks/useReducedMotion'
 
 const DURATION = 1200
 
@@ -20,19 +21,6 @@ function isYear(n: number): boolean {
 
 function startValue(target: number): number {
   return isYear(target) ? Math.max(0, target - 25) : 0
-}
-
-function useReducedMotion(): boolean {
-  const [reduced, setReduced] = useState(
-    () => typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches,
-  )
-  useEffect(() => {
-    const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
-    const onChange = () => setReduced(mq.matches)
-    mq.addEventListener('change', onChange)
-    return () => mq.removeEventListener('change', onChange)
-  }, [])
-  return reduced
 }
 
 /**

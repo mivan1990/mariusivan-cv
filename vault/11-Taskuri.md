@@ -126,7 +126,7 @@ Status: `[ ]` = de făcut, `[x]` = făcut, `[~]` = în curs.
 - Estimare: 30 min
 
 ### C2. Animații avansate
-- [ ] `src/components/animations/typing-effect.tsx` — efect de tastare
+- [x] `src/components/animations/typing-effect.tsx` — efect de tastare (implementat ca `useTyping` + span animat în `Hero.tsx`, 2026-09-04)
 - [ ] `src/components/animations/animated-counter.tsx` — numere animate
 - [ ] `src/components/animations/cursor-trail.tsx` — urmă după cursor
 - [ ] `src/components/animations/micro-interactions.tsx` — micro-interacțiuni pe butoane

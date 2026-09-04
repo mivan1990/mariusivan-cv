@@ -23,21 +23,6 @@ export function Hero() {
 
   return (
     <section id="hero" className="relative overflow-hidden px-5 pb-16 pt-28 sm:pb-24 sm:pt-36">
-      {/* keyframes pentru cursorul de tastare — injectate aici ca sa tinem
-          modificarea in Hero.tsx + hook; reduced-motion: fara clipit */}
-      <style>{`
-        @keyframes typing-blink {
-          0%, 45% { opacity: 1; }
-          50%, 95% { opacity: 0; }
-          100% { opacity: 1; }
-        }
-        .typing-cursor-blink {
-          animation: typing-blink 1.1s step-end infinite;
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .typing-cursor-blink { animation: none; }
-        }
-      `}</style>
       {/* fundal decorativ — raze subtile, fără imagini externe */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute -left-24 -top-24 h-72 w-72 rounded-full bg-primary/8 blur-3xl" />
@@ -71,7 +56,7 @@ export function Hero() {
                     aria-hidden="true"
                     className={cn(
                       'typing-cursor ml-0.5 inline-block h-[1em] w-0.5 translate-y-[0.1em] bg-foreground',
-                      done && 'typing-cursor-blink',
+                      done && 'animate-typing-blink',
                     )}
                   />
                 )}

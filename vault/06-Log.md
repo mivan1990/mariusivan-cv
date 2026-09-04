@@ -146,4 +146,16 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - [x] Subtask bifat în `11-Taskuri.md` (B3: stats.tsx — numere animate)
 - Commit: `db16346` (fără push)
 
+### 2026-09-04
+
+#### 11:00 — C2: typing effect pe rolul din Hero
+- [x] `src/hooks/useTyping.ts` — hook nou: tastează textul literă cu literă (~50 ms/caracter, `setInterval`), repornește de la zero la schimbarea textului (EN/RO), curăță timerul la unmount și la schimbare
+- [x] `prefers-reduced-motion` — afișează textul complet direct, fără animatie și fără cursor (media query + listener la `change`)
+- [x] Accesibilitate — spanul animat `aria-hidden`, textul complet într-un `.sr-only` (e citit o dată, întreg), cursorul `aria-hidden`
+- [x] Fără layout shift — textul complet invizibil (`invisible`) rezervă spațiul; textul animat e suprapus `absolute inset-0`
+- [x] Cursorul clipește doar după terminare; keyframes injectate printr-un `<style>` în Hero (modificarea ținută doar în Hero.tsx + hook)
+- [x] `npm run build` — trece: 1630 module, 274.87 kB js (87.98 kB gzip)
+- [x] Subtask bifat în `11-Taskuri.md` (C2: typing-effect)
+- Commit: `b3786af` (fără push)
+
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]
