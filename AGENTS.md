@@ -24,15 +24,16 @@ npm run build    # tsc -b && vite build
 npm run preview
 ```
 
-## Bug-uri deschise (build-ul NU trece)
+## Starea build-ului
 
-1. `vite.config.ts` nu are `resolve.alias` pentru `@/` → Rollup nu rezolvă `@/components/...`.
-   `tsconfig.app.json` are `paths`, dar Vite are nevoie de alias-ul lui. **Ăsta blochează tot.**
-2. `src/components/sections/Projects.tsx:34` — variantă `"primary"` inexistentă pe `Badge`
-   (acceptă doar `default | success | info | outline`).
-3. `src/hooks/useLanguage.ts:16` — `() => Lang` folosit ca index type; lipsește apelul funcției.
-4. Importuri nefolosite în `src/components/LanguageToggle.tsx` și `src/components/sections/shared.tsx`
-   (`noUnusedLocals` e pornit, deci sunt erori, nu warning-uri).
+`npm run build` **trece** de la commit-ul `d273c15` (2026-09-04): 1622 module,
+251.95 kB js (80.98 kB gzip), 18.00 kB css.
+
+Nu există bug-uri de build cunoscute. Dacă `npm run build` pică, e ceva introdus recent —
+raportează eroarea, nu presupune că e una veche și știută.
+
+Ce **nu** e verificat încă: `npm run dev` n-a fost pornit de nimeni, iar aplicația n-a fost
+deschisă în browser. Nu presupune că randează corect doar fiindcă build-ul trece.
 
 ## REGULA — după FIECARE task terminat
 
