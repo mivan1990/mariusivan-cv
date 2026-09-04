@@ -158,4 +158,15 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - [x] Subtask bifat în `11-Taskuri.md` (C2: typing-effect)
 - Commit: `b3786af` (fără push)
 
+#### 21:25 — C1: parallax subtil pe petele decorative din Hero
+- [x] `src/hooks/useParallax.ts` — hook nou: scrie direct pe `element.style.transform` printr-un ref (zero `setState` → zero re-rendere), coalescerea evenimentelor de scroll cu `requestAnimationFrame`, listener `{ passive: true }`, doar `translate3d` (compositor, fără layout)
+- [x] `Hero.tsx` — cele două pete `blur-3xl` primesc viteze diferite (0.04 / 0.09) → adâncime; plafon 40/55 px, efect subtil
+- [x] `prefers-reduced-motion` — folosește hook-ul existent `useReducedMotion` (fără copie): cu reduce activ nu se atașează niciun listener, petele rămân pe loc
+- [x] Curățare la unmount: `removeEventListener` + `cancelAnimationFrame` + reset transform
+- [x] Masurarea se face pe containerul părinte (stabil), nu pe element — altfel transform-ul aplicat s-ar include în măsurătoare (feedback loop)
+- [x] `npm run build` — trece: 1632 module, 274.83 kB js (88.04 kB gzip)
+- [x] Subtask bifat în `11-Taskuri.md` (C1: parallax)
+- Notă: animația `float` din `tailwind.config.js` **nu a fost combinată** — ambele scriu pe `transform` (parallax direct pe `style`, `float` prin `@keyframes`), deci s-ar anula reciproc; iar două mișcări continue (float infinit + parallax) pe elemente deja `blur-3xl` ar fi fost prea agitat pentru un fundal subtil. Rămâne definită, nefolosită
+- Commit: vezi `git log` (fără push)
+
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]

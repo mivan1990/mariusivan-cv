@@ -121,7 +121,7 @@ Status: `[ ]` = de făcut, `[x]` = făcut, `[~]` = în curs.
 - [ ] `src/components/animations/fade-in.tsx` — fade-in la scroll
 - [ ] `src/components/animations/slide-up.tsx` — slide-up la scroll
 - [ ] `src/components/animations/scale-up.tsx` — scale-up la scroll
-- [ ] `src/components/animations/parallax.tsx` — parallax pe fundal
+- [x] `src/components/animations/parallax.tsx` — parallax pe fundal (implementat ca hook `src/hooks/useParallax.ts`, aplicat pe petele decorative din Hero)
 - Dependențe: B1
 - Estimare: 30 min
 
