@@ -107,4 +107,17 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - Notă: am resetat commitul inițial care trasea `AGENTS.md` (modificat de altcineva în paralel, secțiunea „Bug-uri deschise" → „Starea build-ului"); commitul final conține doar cele 7 fișiere ale taskului
 
 
+#### 16:40 — F2 sărit prin decizie; audit static de linkuri
+
+- [x] `npm run dev` pornește (133 ms) — era neverificat de la început, acum confirmat
+- [x] Push pe origin: `c373d0f..eec7031`, 4 commit-uri (baseline, fix build, log F3, corectură AGENTS.md)
+- [ ] **F2 nu s-a făcut** — decizie explicită (Marius, 2026-09-04): sărim peste testarea în browser
+- Notă: nu s-a putut testa automat oricum — extensiile de browser (Claude in Chrome, Playwright MCP Bridge) nu sunt conectate. Rămân netestate: Chrome/Firefox/Safari, mobil real, și dacă toggle-ul EN/RO comută corect vizual.
+- Notă: **trei probleme găsite din audit static, toate încă nereparate:**
+  1. `github.com/mivan1990/CS2Leaderboard` întoarce **404** — repo privat sau nume greșit. Linkul e în `translations.ts`, în ambele limbi.
+  2. `Projects.tsx:89` — `className="gap--1.5"` (două minusuri), clasă Tailwind inexistentă → butonul „View repo" n-are spațiu între iconiță și text. **Preexistent**, verificat cu `git show 5171be6` — nu vine de la F3. Tot acolo, indentarea e stricată în jurul liniei 74.
+  3. Ambele butoane din `Projects.tsx` folosesc `window.open(url, '_blank')` fără `noopener` → pagina deschisă primește `window.opener` (reverse tabnabbing). Linkurile `<a>` din Contact/Footer au `rel="noreferrer"` și sunt în regulă.
+- Notă: `xp.mariusivan.ro` nu rezolvă, dar e normal — taskul I1 („Mută XP-ul pe subdomeniu") e încă nefăcut. Nu e bug, e ordinea de deploy.
+
+
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]

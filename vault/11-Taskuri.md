@@ -240,9 +240,10 @@ Status: `[ ]` = de făcut, `[x]` = făcut, `[~]` = în curs.
 - [ ] Testează pe Chrome, Firefox, Safari
 - [ ] Testează pe mobile (real sau emulator)
 - [ ] Testează toggle-ul EN/RO
-- [ ] Testează că toate linkurile merg
+- [~] Testează că toate linkurile merg
 - Dependențe: E2
 - Estimare: 30 min
+- Status: **sărit prin decizie** (2026-09-04). Doar linkurile au fost verificate, static: CS2Leaderboard dă 404, `xp.mariusivan.ro` nu rezolvă încă (așteaptă I1). Restul cere browser — extensiile de automatizare nu sunt conectate. Vezi `06-Log.md`, 16:40, pentru cele trei probleme găsite și nereparate.
 
 ### F3. Testare accesibilitate
 - [x] Verifică contrastul culorilor
