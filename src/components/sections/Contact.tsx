@@ -12,11 +12,13 @@ function ContactRow({
   label,
   value,
   href,
+  a11y,
 }: {
   icon: ReactNode
   label: string
   value: string
   href?: string
+  a11y?: string
 }) {
   return (
     <div className="flex items-center gap-3">
@@ -32,7 +34,8 @@ function ContactRow({
             href={href}
             target={href.startsWith('http') ? '_blank' : undefined}
             rel="noreferrer"
-            className="text-sm font-medium text-foreground underline decoration-primary/40 underline-offset-4 hover:decoration-primary"
+            aria-label={a11y ? `${a11y} (${value})` : undefined}
+            className="text-sm font-medium text-foreground underline decoration-primary/40 underline-offset-4 hover:decoration-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm"
           >
             {value}
           </a>
@@ -67,18 +70,21 @@ export function Contact() {
                 label="Email"
                 value={c.email}
                 href={`mailto:${c.email}`}
+                a11y={t.a11y.email}
               />
               <ContactRow
                 icon={<Github className="h-4.5 w-4.5 text-primary" />}
                 label="GitHub"
                 value={c.github}
                 href={`https://${c.github}`}
+                a11y={t.a11y.github}
               />
               <ContactRow
                 icon={<MapPin className="h-4.5 w-4.5 text-primary" />}
                 label="Live"
                 value={c.live}
                 href={`https://${c.live}`}
+                a11y={t.a11y.liveSite}
               />
             </div>
             <div className="rounded-lg bg-muted/50 px-4 py-3 text-sm text-muted-foreground">

@@ -68,6 +68,12 @@
     @apply bg-background text-foreground antialiased font-sans;
     font-feature-settings: 'cv' 1;
   }
+  /* focus vizibil la navigarea cu tastatura — fallback global pentru orice
+     element interactiv care nu are stil focus explicit */
+  :where(a, button, input, select, textarea, [role='button'], [tabindex]):focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+  }
 }
 
 @layer utilities {

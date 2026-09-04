@@ -22,11 +22,15 @@ function ProjectCard({
   liveDemo,
   viewRepo,
   comingSoon,
+  liveDemoA11y,
+  viewRepoA11y,
 }: {
   project: Project
   liveDemo: string
   viewRepo: string
   comingSoon: string
+  liveDemoA11y: string
+  viewRepoA11y: string
 }) {
   const { ref, visible } = useReveal()
   const hasLive = Boolean(project.liveUrl)
@@ -70,6 +74,7 @@ function ProjectCard({
             size="sm"
                 className="gap-1.5"
                 onClick={() => window.open(project.liveUrl!, '_blank')}
+                aria-label={`${liveDemoA11y} — ${project.name}`}
               >
                 <MousePointerClick />
                 {liveDemo}
@@ -83,6 +88,7 @@ function ProjectCard({
                 variant="outline"
                 className="gap--1.5"
                 onClick={() => window.open(project.repoUrl!, '_blank')}
+                aria-label={`${viewRepoA11y} — ${project.name}`}
               >
                 <GitBranch />
                 {viewRepo}
@@ -117,6 +123,8 @@ export function Projects() {
             liveDemo={p.liveDemo}
             viewRepo={p.viewRepo}
             comingSoon={p.comingSoon}
+            liveDemoA11y={t.a11y.liveDemo}
+            viewRepoA11y={t.a11y.viewRepo}
           />
         ))}
       </div>

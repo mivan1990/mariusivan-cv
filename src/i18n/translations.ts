@@ -99,6 +99,17 @@ export interface Translation {
     line: string
     github: string
   }
+  a11y: {
+    toggleLanguage: string
+    openMenu: string
+    closeMenu: string
+    home: string
+    liveDemo: string
+    viewRepo: string
+    email: string
+    github: string
+    liveSite: string
+  }
 }
 
 export const translations: Record<Lang, Translation> = {
@@ -294,6 +305,17 @@ export const translations: Record<Lang, Translation> = {
       line: 'Built with React, TypeScript, Vite, Tailwind and shadcn/ui.',
       github: 'github.com/mivan1990',
     },
+    a11y: {
+      toggleLanguage: 'Switch to Romanian',
+      openMenu: 'Open menu',
+      closeMenu: 'Close menu',
+      home: 'Go to top of page',
+      liveDemo: 'Open live demo in a new tab',
+      viewRepo: 'Open repository in a new tab',
+      email: 'Send an email',
+      github: 'Open GitHub profile in a new tab',
+      liveSite: 'Open live site in a new tab',
+    },
   },
   ro: {
     meta: {
@@ -486,6 +508,17 @@ export const translations: Record<Lang, Translation> = {
     footer: {
       line: 'Construit cu React, TypeScript, Vite, Tailwind și shadcn/ui.',
       github: 'github.com/mivan1990',
+    },
+    a11y: {
+      toggleLanguage: 'Comută pe Engleză',
+      openMenu: 'Deschide meniul',
+      closeMenu: 'Închide meniul',
+      home: 'Mergi sus, la începutul paginii',
+      liveDemo: 'Deschide demo-ul live într-un tab nou',
+      viewRepo: 'Deschide repo-ul într-un tab nou',
+      email: 'Trimite un email',
+      github: 'Deschide profilul GitHub într-un tab nou',
+      liveSite: 'Deschide site-ul live într-un tab nou',
     },
   },
 }

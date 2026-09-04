@@ -40,7 +40,8 @@ export function Navbar() {
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
         <button
           onClick={() => go('hero')}
-          className="group flex items-center gap-2 font-semibold"
+          aria-label={t.a11y.home}
+          className="group flex items-center gap-2 rounded-lg font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         >
           <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 font-mono-code text-sm font-bold text-primary transition group-hover:bg-primary/20">
             MI
@@ -54,7 +55,7 @@ export function Navbar() {
             <button
               key={l.id}
               onClick={() => go(l.id)}
-              className="rounded-lg px-3 py-2 text-sm text-muted-foreground transition hover:bg-accent hover:text-accent-foreground"
+              className="rounded-lg px-3 py-2 text-sm text-muted-foreground transition hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
               {l.label}
             </button>
@@ -64,9 +65,11 @@ export function Navbar() {
         <div className="flex items-center gap-2">
           <LanguageToggle />
           <button
-            className="flex h-10 w-10 items-center justify-center rounded-lg border border-border md:hidden"
+            className="flex h-10 w-10 items-center justify-center rounded-lg border border-border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background md:hidden"
             onClick={() => setOpen((o) => !o)}
-            aria-label="Menu"
+            aria-label={open ? t.a11y.closeMenu : t.a11y.openMenu}
+            aria-expanded={open}
+            aria-controls="mobile-menu"
           >
             <div className="space-y-1">
               <span className="block h-0.5 w-4 bg-foreground" />
@@ -79,13 +82,13 @@ export function Navbar() {
 
       {/* mobile menu */}
       {open && (
-        <div className="border-t border-border bg-background/95 backdrop-blur-md md:hidden">
+        <div id="mobile-menu" className="border-t border-border bg-background/95 backdrop-blur-md md:hidden">
           <div className="mx-auto max-w-6xl px-5 py-3">
             {links.map((l) => (
               <button
                 key={l.id}
                 onClick={() => go(l.id)}
-                className="block w-full rounded-lg px-3 py-2.5 text-left text-sm text-muted-foreground transition hover:bg-accent hover:text-accent-foreground"
+                className="block w-full rounded-lg px-3 py-2.5 text-left text-sm text-muted-foreground transition hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               >
                 {l.label}
               </button>

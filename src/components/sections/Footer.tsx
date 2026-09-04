@@ -13,7 +13,8 @@ export function Footer() {
             href={`https://${t.contact.github}`}
             target="_blank"
             rel="noreferrer"
-            className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground transition hover:text-primary"
+            aria-label={`${t.a11y.github} (${t.contact.github})`}
+            className="flex items-center gap-1.5 rounded-sm text-sm font-medium text-muted-foreground transition hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           >
             <Github className="h-4 w-4" />
             {t.footer.github}
