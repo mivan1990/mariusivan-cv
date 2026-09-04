@@ -68,7 +68,7 @@ Vezi `04-Deploy.md` în vault-ul Obsidian.
 ## Vault Obsidian
 
 Toate detaliile sunt documentate în:
-`/Users/mariusivan/Vaults/cv/`
+`vault/` (în acest repo — deschide-l ca vault în Obsidian)
 
 ## Regula de aur
 

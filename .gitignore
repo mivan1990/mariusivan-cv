@@ -37,3 +37,7 @@ coverage
 .cache
 tmp
 temp
+# Obsidian (state local al vaultului)
+vault/.obsidian/workspace.json
+vault/.obsidian/workspace-mobile.json
+vault/.obsidian/cache

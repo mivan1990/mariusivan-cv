@@ -1,0 +1,25 @@
+{
+  "$schema": "https://www.shadcn.com/schema.json",
+  "style": "default",
+  "rsc": false,
+  "tsx": true,
+  "tailwind": {
+    "config": "tailwind.config.js",
+    "css": "src/index.css",
+    "baseColor": "slate",
+    "cssVariables": true
+  },
+  "headings": {
+    "h1": "font-bold tracking-tight",
+    "h2": "font-semibold tracking-tight",
+    "h3": "font-semibold",
+    "h4": "font-medium"
+  },
+  "alias": {
+    "components": "@/components",
+    "utils": "@/lib/utils",
+    "ui": "@/components/ui",
+    "lib": "@/lib",
+    "hooks": "@/hooks"
+  }
+}

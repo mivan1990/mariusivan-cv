@@ -1,0 +1,100 @@
+/* shadcn/ui — tema pe variabile CSS, core pentru theming-ul modern al CV-ului */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* paleta: modern, curat, cu accent indigo — profesional pentru un CV */
+    --background: 0 0% 100%;
+    --foreground: 240 10% 7%;
+
+    --muted: 240 5% 96%;
+    --muted-foreground: 240 4% 40%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 7%;
+
+    --primary: 243 72% 52%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 240 5% 96%;
+    --secondary-foreground: 240 10% 15%;
+
+    --accent: 243 72% 96%;
+    --accent-foreground: 243 72% 40%;
+
+    --border: 240 8% 90%;
+    --input: 240 8% 90%;
+    --ring: 243 72% 52%;
+
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 240 12% 6%;
+    --foreground: 0 0% 96%;
+
+    --muted: 240 8% 12%;
+    --muted-foreground: 240 6% 65%;
+
+    --card: 240 10% 9%;
+    --card-foreground: 0 0% 96%;
+
+    --primary: 243 72% 60%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 240 8% 14%;
+    --secondary-foreground: 240 6% 85%;
+
+    --accent: 243 40% 16%;
+    --accent-foreground: 243 80% 75%;
+
+    --border: 240 8% 16%;
+    --input: 240 8% 16%;
+    --ring: 243 72% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+  body {
+    @apply bg-background text-foreground antialiased font-sans;
+    font-feature-settings: 'cv' 1;
+  }
+}
+
+@layer utilities {
+  .font-mono-code {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* subliniere animata pentru link-urile din hero */
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+.animate-shimmer {
+  animation: shimmer 3s linear infinite;
+}
+
+/* aparitie graduala la scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}

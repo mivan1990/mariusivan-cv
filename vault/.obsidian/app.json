@@ -1,0 +1,32 @@
+{
+  "app": {
+    "language": "ro"
+  },
+  "editor": {
+    "fontFamily": "",
+    "fontSize": 16,
+    "lineHeight": 1.6,
+    "fontScale": 1
+  },
+  "appearance": {
+    "theme": "system",
+    "accentColor": "#4dab9a"
+  },
+  "file-explorer": {},
+  "markdown": {},
+  "outline": {},
+  "graph": {
+    "showOrphans": true,
+    "byType": {
+      "note": true,
+      "folder": true
+    }
+  },
+  "templates": {
+    "folder": "Templates"
+  },
+  "note-composer": {},
+  "daily-notes": {
+    "folder": "Daily"
+  }
+}
