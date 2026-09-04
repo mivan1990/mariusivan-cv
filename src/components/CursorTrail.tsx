@@ -39,10 +39,21 @@ export function CursorTrail() {
   useEffect(() => {
     if (reducedMotion || !finePointer) return
 
+    let raf = 0
+    let running = false
+
+    const start = () => {
+      if (!running) {
+        running = true
+        raf = requestAnimationFrame(tick)
+      }
+    }
+
     const onMove = (e: PointerEvent) => {
       target.current.x = e.clientX
       target.current.y = e.clientY
       if (containerRef.current) containerRef.current.style.opacity = '1'
+      start()
     }
     const onLeave = () => {
       if (containerRef.current) containerRef.current.style.opacity = '0'
@@ -52,24 +63,34 @@ export function CursorTrail() {
     document.addEventListener('pointerleave', onLeave)
     window.addEventListener('blur', onLeave)
 
-    let raf = 0
-    const tick = () => {
+    function tick() {
       const pts = positions.current
+      // Cat timp vreun punct e inca in miscare, mai cerem un cadru. Cand toate
+      // au ajuns din urma cursorul, bucla se opreste si porneste iar abia la
+      // urmatoarea miscare — altfel am tine procesorul treaz degeaba.
+      let moving = false
       for (let i = 0; i < pts.length; i++) {
         const p = pts[i]
         const t = i === 0 ? target.current : pts[i - 1]
         // Fiecare punct urmareste pe cel din fata cu lerp — efect de urma.
         const ease = i === 0 ? 0.35 : 0.25
-        p.x += (t.x - p.x) * ease
-        p.y += (t.y - p.y) * ease
+        const dx = t.x - p.x
+        const dy = t.y - p.y
+        if (Math.abs(dx) > 0.1 || Math.abs(dy) > 0.1) moving = true
+        p.x += dx * ease
+        p.y += dy * ease
         const el = dotRefs.current[i]
         if (el) {
           el.style.transform = `translate3d(${p.x}px, ${p.y}px, 0) translate(-50%, -50%)`
         }
       }
-      raf = requestAnimationFrame(tick)
+      if (moving) {
+        raf = requestAnimationFrame(tick)
+      } else {
+        running = false
+      }
     }
-    raf = requestAnimationFrame(tick)
+    start()
 
     return () => {
       window.removeEventListener('pointermove', onMove)
