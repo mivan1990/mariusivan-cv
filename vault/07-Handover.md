@@ -51,6 +51,10 @@ Două dintre cele trei probleme găsite în auditul static din `06-Log.md` (16:4
 2. ~~**`gap--1.5` în `Projects.tsx:89`**~~ — **reparat** (2026-09-04): `gap-1.5`, ca la butonul de deasupra; butonul „View repo” are din nou spațiu între iconiță și text.
 3. ~~**`window.open` fără `noopener` în `Projects.tsx`**~~ — **reparat** (2026-09-04): ambele butoane folosesc acum `window.open(url, '_blank', 'noopener,noreferrer')` (reverse tabnabbing închis). Linkurile `<a>` din Contact/Footer aveau deja `rel="noreferrer"`.
 
+## Bug-uri reparate (istoric)
+
+4. ~~**Comutarea EN/RO nu funcționa**~~ — **reparat** (2026-09-04). `useLanguage.ts` folosea `useState` local, deci fiecare dintre cele ~9 componente care îl chemau (LanguageToggle, Navbar, Hero, Experience, Projects, Skills, Contact, Footer, Faq) avea propria copie independentă a limbii, fixată la montare. Apăsarea butonului schimba doar starea lui `LanguageToggle`; restul rămăneau pe limba de la montare (confirmat cu Playwright: după click → buton `EN`, navbar `Experience` netradus, `localStorage` deja `ro`; traducerea apărea abia după refresh). **Fix:** hook-ul rescris ca store la nivel de modul (o singură variabilă `lang` + `Set` de listeneri, citit cu `useSyncExternalStore`; snapshot stabil = primitivul `lang`). `toggle` notifică toți abonații, persistă în `localStorage` și actualizează `<html lang>`. API-ul `{ lang, t, toggle }` e identic — nicio componentă modificată, fără provider în `main.tsx`.
+
 ## Decizii deschise
 
 - **Formularul de contact**: B3 zice că există, dar în realitate `Contact.tsx` are doar linkuri (email, GitHub, live site). **De decis**: se face un formular adevărat sau rămân linkurile? Dacă da, **prin ce serviciu** (Formspree, Netlify Forms, backend propriu)?

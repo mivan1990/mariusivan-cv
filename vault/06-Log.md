@@ -238,4 +238,16 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - Notă: singurul fișier atins e `Projects.tsx`; fără schimbări vizuale în afara spațiului dintre iconiță și text de la punctul 1
 - Commit: vezi `git log` (fără push)
 
+### 2026-09-04
+
+#### 23:16 — Bug fix: comutarea EN/RO nu funcționa (doar butonul se schimba)
+- [x] **Bug confirmat în browser (Playwright):** după click pe toggle → butonul afișa `EN`, dar navbar-ul rămânea `Experience` (netradus), iar `localStorage` conținea deja `ro`. Traducerea apărea abia după un refresh manual
+- [x] **Cauză:** `useLanguage.ts` folosea `useState` local — fiecare componentă care chema `useLanguage()` (LanguageToggle, Navbar, Hero, Experience, Projects, Skills, Contact, Footer, Faq — ~9 apeluri) avea propria copie independentă a limbii, fixată la montare. `toggle` schimba doar starea locală a butonului
+- [x] **Fix:** rescris `useLanguage.ts` ca store la nivel de modul — o singură variabilă `lang` + un `Set` de listeneri, citit cu `useSyncExternalStore(subscribe, getSnapshot, getSnapshot)`. `getSnapshot` întoarce primitivul `lang` (referință stabilă, fără obiect nou la fiecare apel → fără buclă infinită). `toggle` scrie variabila, persistă în `localStorage` + `document.documentElement.lang`, și notifica toți abonații
+- [x] **De ce nu React Context:** nu cere niciun provider în `main.tsx` și nu atinge nicio componentă — API-ul `{ lang, t, toggle }` e identic, toate cele ~9 apeluri funcționează neschimbate
+- [x] Comportamentul păstrat: citire inițială din `localStorage 'cv:lang'`, fallback pe `navigator.language` (ro → `ro`, altfel `en`), scriere în localStorage la schimbare, actualizare `<html lang>`
+- [x] `npm run build` — trece: 1633 module, 276.71 kB js (88.73 kB gzip), 20.29 kB css
+- [ ] Verificare vizuală în browser (toggle comută acum toate secțiunile instant) — rămâne la F2
+- Commit: vezi `git log` (fără push)
+
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]
