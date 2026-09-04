@@ -41,13 +41,13 @@ Actualizat la fiecare sesiune — la închidere, scrie ce e gata, ce e în curs,
 - [ ] **J3 — Actualizare Obsidian**: acest fișier + `06-Log.md` (în curs de actualizare)
 - [ ] **J4 — Beta → Prod**: marcarea ca „ready to deploy”
 
-## Trei probleme cunoscute, nereparate
+## Probleme cunoscute
 
-Toate trei au fost găsite în auditul static din `06-Log.md` (16:40) și **rămân așa**:
+Două dintre cele trei probleme găsite în auditul static din `06-Log.md` (16:40) au fost **reparate pe 2026-09-04 (22:30)**; una rămâne deschisă:
 
-1. **Linkul către CS2Leaderboard dă 404** — `github.com/mivan1990/CS2Leaderboard` (în `translations.ts`, ambele limbi). Repo privat sau nume greșit.
-2. **`gap--1.5` în `Projects.tsx:89`** — clasă Tailwind **invalidă** (două minusuri) → butonul „View repo” n-are spațiu între iconiță și text. Preexistent, nu vine de la F3.
-3. **`window.open` fără `noopener` în `Projects.tsx`** — ambele butoane („Live demo”, „View repo”) deschid fără `noopener` → pagina țintă primește `window.opener` (reverse tabnabbing). Linkurile `<a>` din Contact/Footer au `rel="noreferrer"` și sunt în regulă.
+1. **Linkul către CS2Leaderboard dă 404** — `github.com/mivan1990/CS2Leaderboard` (în `translations.ts`, ambele limbi). Repo privat sau nume greșit. **Rămâne deschis** — cere răspunsul lui Marius (se face repo-ul public, sau se schimbă numele linkului?).
+2. ~~**`gap--1.5` în `Projects.tsx:89`**~~ — **reparat** (2026-09-04): `gap-1.5`, ca la butonul de deasupra; butonul „View repo” are din nou spațiu între iconiță și text.
+3. ~~**`window.open` fără `noopener` în `Projects.tsx`**~~ — **reparat** (2026-09-04): ambele butoane folosesc acum `window.open(url, '_blank', 'noopener,noreferrer')` (reverse tabnabbing închis). Linkurile `<a>` din Contact/Footer aveau deja `rel="noreferrer"`.
 
 ## Decizii deschise
 

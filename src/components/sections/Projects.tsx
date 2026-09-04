@@ -72,13 +72,13 @@ function ProjectCard({
         {hasLive && (
           <Button
             size="sm"
-                className="gap-1.5"
-                onClick={() => window.open(project.liveUrl!, '_blank')}
-                aria-label={`${liveDemoA11y} — ${project.name}`}
-              >
-                <MousePointerClick />
-                {liveDemo}
-              </Button>
+            className="gap-1.5"
+            onClick={() => window.open(project.liveUrl!, '_blank', 'noopener,noreferrer')}
+            aria-label={`${liveDemoA11y} — ${project.name}`}
+          >
+            <MousePointerClick />
+            {liveDemo}
+          </Button>
         )}
         {project.repoUrl && (
           <Tooltip>
@@ -86,8 +86,8 @@ function ProjectCard({
               <Button
                 size="sm"
                 variant="outline"
-                className="gap--1.5"
-                onClick={() => window.open(project.repoUrl!, '_blank')}
+                className="gap-1.5"
+                onClick={() => window.open(project.repoUrl!, '_blank', 'noopener,noreferrer')}
                 aria-label={`${viewRepoA11y} — ${project.name}`}
               >
                 <GitBranch />

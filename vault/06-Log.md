@@ -228,5 +228,14 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
   întoarce 200 nu spune nimic despre ce se randează. Avertismentul din `07-Handover.md`
   rămâne valabil.
 
+#### 22:30 — Reparate două din cele trei probleme cunoscute
+
+- [x] `Projects.tsx:89` — `className="gap--1.5"` (două minusuri, clasă Tailwind invalidă) → `gap-1.5`, ca la butonul de deasupra. Butonul „View repo” primește spațiu între iconiță și text
+- [x] `Projects.tsx` — ambele butoane: `window.open(url, '_blank')` → `window.open(url, '_blank', 'noopener,noreferrer')` (reverse tabnabbing închis)
+- [x] Indentarea stricată din jurul liniei 74 (butonul „Live demo”) aliniată cu restul fișierului — fără nicio schimbare de logică
+- [x] `npm run build` — trece: 1633 module, 276.51 kB js (88.66 kB gzip), 20.29 kB css (4.81 kB gzip)
+- [ ] Problema 1 din audit (linkul CS2Leaderboard care dă 404) **rămâne deschisă** — cere răspunsul lui Marius (repo privat sau nume greșit)
+- Notă: singurul fișier atins e `Projects.tsx`; fără schimbări vizuale în afara spațiului dintre iconiță și text de la punctul 1
+- Commit: vezi `git log` (fără push)
 
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]
