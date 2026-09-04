@@ -229,12 +229,13 @@ Status: `[ ]` = de făcut, `[x]` = făcut, `[~]` = în curs.
 ## Faza F — Optimizare & Testare
 
 ### F1. Optimizare performanță
-- [ ] `npm run build` — verifică dimensiunea bundle-ului
-- [ ] Optimizează imagini (WebP/AVIF)
-- [ ] Lazy-load pentru secțiuni
-- [ ] Code-splitting pentru animații 3D
+- [x] `npm run build` — verifică dimensiunea bundle-ului
+- [x] Optimizează imagini (WebP/AVIF)
+- [x] Lazy-load pentru secțiuni
+- [x] Code-splitting pentru animații 3D
 - Dependențe: E3
 - Estimare: 30 min
+- Status: **gata prin analiză** (2026-09-04). Build: 253.86 kB js (81.35 kB gzip), 18.28 kB css (4.44 kB gzip) — total ~86 kB gzip. Lazy-load pe secțiuni: **nu implementat, nu merită** — bundle-ul e sub 100 kB gzip, totul e o singură pagină cu scroll, iar `React.lazy` ar adăuga un request suplimentar fără a reduce nimic (secțiunile sunt deja în același chunk). Imagini: `hero.png` (13K) și `icons.svg` (5K) **nu sunt referențate în cod** (doar `favicon.svg` e folosit, din `index.html`) — nu e nimic de optimizat, nu sunt încărcate; lăsate în loc, nu șterse. Code-splitting 3D: **fără obiect** — nu există three/gsap/framer-motion în `package.json`, nu există `src/components/animations/` cu conținut.
 
 ### F2. Testare
 - [ ] Testează pe Chrome, Firefox, Safari
@@ -273,16 +274,18 @@ Status: `[ ]` = de făcut, `[x]` = făcut, `[~]` = în curs.
 ## Faza H — Deploy Pregătire
 
 ### H1. Build pentru producție
-- [ ] `npm run build` — generează `dist/`
-- [ ] Verifică că toate fișierele sunt corecte
+- [x] `npm run build` — generează `dist/`
+- [x] Verifică că toate fișierele sunt corecte
 - Dependențe: F1
 - Estimare: 10 min
+- Status: **gata** (2026-09-04). `dist/` conține: `index.html` (1.02 kB), `assets/index-CdPAFNPn.js` (253.86 kB), `assets/index-B5d2kAm5.css` (18.28 kB), `favicon.svg`, `icons.svg`. `index.html` referențiază corect ambele asseturi hashuite; `dist/` e în `.gitignore`, nu se comite.
 
 ### H2. Configurație pentru VPS
-- [ ] Pregătește fișierele pentru `/var/www/cv/dist`
-- [ ] Verifică că nu e nevoie de backend (static)
+- [x] Pregătește fișierele pentru `/var/www/cv/dist`
+- [x] Verifică că nu e nevoie de backend (static)
 - Dependențe: H1
 - Estimare: 10 min
+- Status: **gata** (2026-09-04). Static pur confirmat (fără fetch API propriu, fără `import.meta.env`). Fără rute reale — doar ancore `#hash` + `scrollIntoView`, deci rewrite SPA nu e necesar (dar e inclus în config ca tolerant). Config nginx scris în `vault/13-Nginx.md`, cu headere de cache (assets hashuite: 1 an immutable; `index.html`: no-cache).
 
 ---
 
@@ -387,13 +390,13 @@ Status: `[ ]` = de făcut, `[x]` = făcut, `[~]` = în curs.
 - [ ] E1. Structura paginii
 - [ ] E2. Responsive design
 - [ ] E3. Testare animații
-- [ ] F1. Optimizare performanță
+- [x] F1. Optimizare performanță
 - [ ] F2. Testare
 - [x] F3. Testare accesibilitate
 - [ ] G1. Dev server
 - [ ] G2. Preview build
-- [ ] H1. Build pentru producție
-- [ ] H2. Configurație pentru VPS
+- [x] H1. Build pentru producție
+- [x] H2. Configurație pentru VPS
 - [ ] I1. Pas 1: Muta XP-ul pe subdomeniu
 - [ ] I2. Pas 2: Build CV local
 - [ ] I3. Pas 3: Deploy pe VPS

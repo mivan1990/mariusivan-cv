@@ -119,5 +119,13 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
   3. Ambele butoane din `Projects.tsx` folosesc `window.open(url, '_blank')` fără `noopener` → pagina deschisă primește `window.opener` (reverse tabnabbing). Linkurile `<a>` din Contact/Footer au `rel="noreferrer"` și sunt în regulă.
 - Notă: `xp.mariusivan.ro` nu rezolvă, dar e normal — taskul I1 („Mută XP-ul pe subdomeniu") e încă nefăcut. Nu e bug, e ordinea de deploy.
 
+#### 18:36 — F1 + H1 + H2: performanță, build prod, config nginx
+- [x] **F1**: `npm run build` — 1622 module, 253.86 kB js (81.35 kB gzip), 18.28 kB css (4.44 kB gzip), index.html 1.02 kB. Total ~86 kB gzip
+- [x] Lazy-load pe secțiuni: **nu implementat, cu argument** — bundle-ul e sub 100 kB gzip, o singură pagină cu scroll; `React.lazy` ar adăuga un request suplimentar fără a reduce dimensiunea (secțiunile sunt deja în același chunk). Codul n-a fost atins
+- [x] Imagini: confirmat că `hero.png` (13K) și `icons.svg` (5K) **nu sunt referențate în cod** — singurul asset folosit e `favicon.svg` (din `index.html`). Nu e nimic de optimizat pentru că nu sunt încărcate; **nu au fost șterse** (decizie explicită)
+- [x] Code-splitting 3D: **fără obiect** — nici three, nici gsap, nici framer-motion în `package.json`; `src/components/animations/` nu are conținut
+- [x] **H1**: `dist/` verificat — `index.html` referențiază corect `index-CdPAFNPn.js` + `index-B5d2kAm5.css`; nimic nu lipsește
+- [x] **H2**: static pur confirmat (fără `fetch()` către API-uri proprii, fără `import.meta.env`); navigarea e doar ancore `#hash` + `scrollIntoView` (fără react-router) → rewrite SPA nu e necesar; config nginx scris în `vault/13-Nginx.md` (cache: assets hashuite 1 an immutable, `index.html` no-cache)
+- [ ] Deploy pe VPS (I1–I4) — urmează
 
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]
