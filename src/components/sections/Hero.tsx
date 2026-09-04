@@ -1,13 +1,15 @@
 import { useLanguage } from '@/hooks/useLanguage'
 import { useReveal } from '@/hooks/useReveal'
+import { useCountUp } from '@/hooks/useCountUp'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { Globe, FolderOpen, Download } from 'lucide-react'
 
 function StatBox({ value, label }: { value: string; label: string }) {
+  const { ref, text } = useCountUp(value)
   return (
-    <div className="rounded-xl border border-border/70 bg-card/60 px-4 py-3">
-      <div className="font-mono-code text-2xl font-bold text-primary sm:text-3xl">{value}</div>
+    <div ref={ref} className="rounded-xl border border-border/70 bg-card/60 px-4 py-3">
+      <div className="font-mono-code text-2xl font-bold text-primary sm:text-3xl">{text}</div>
       <div className="mt-1 text-xs leading-snug text-muted-foreground sm:text-sm">{label}</div>
     </div>
   )
