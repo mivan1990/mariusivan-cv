@@ -263,15 +263,20 @@ Status: `[ ]` = de făcut, `[x]` = făcut, `[~]` = în curs.
 ## Faza G — Local Development
 
 ### G1. Dev server
-- [ ] `npm run dev` — verifică că totul funcționează local
+- [x] `npm run dev` — pornește în 133 ms și servește pe :5173
 - [ ] Verifică hot-reload
 - Dependențe: E1
 - Estimare: 10 min
+- Status: serverul pornește și răspunde (2026-09-04). Hot-reload-ul NU a fost verificat —
+  cere o modificare făcută cu pagina deschisă în browser.
 
 ### G2. Preview build
-- [ ] `npm run build && npm run preview` — verifică build-ul
+- [x] `npm run build && npm run preview` — verifică build-ul
 - Dependențe: F1
 - Estimare: 10 min
+- Status: **gata** (2026-09-04). `npm run preview` servește pe :4173, `HTTP 200` pe `/` și pe
+  assetul hashuit `/assets/index-*.js`; `index.html` referențiază corect ambele asseturi.
+  Verificat prin request-uri, nu vizual — pagina tot n-a fost privită de nimeni.
 
 ---
 
@@ -399,8 +404,8 @@ Status: `[ ]` = de făcut, `[x]` = făcut, `[~]` = în curs.
 - [x] F1. Optimizare performanță
 - [ ] F2. Testare
 - [x] F3. Testare accesibilitate
-- [ ] G1. Dev server
-- [ ] G2. Preview build
+- [~] G1. Dev server
+- [x] G2. Preview build
 - [x] H1. Build pentru producție
 - [x] H2. Configurație pentru VPS
 - [ ] I1. Pas 1: Muta XP-ul pe subdomeniu

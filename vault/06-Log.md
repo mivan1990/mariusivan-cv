@@ -218,4 +218,15 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - [ ] J4 rămâne deschis (beta → prod) — depinde de deploy (I1–I4)
 - Commit: fără push
 
+#### 23:05 — G2 verificat, G1 parțial
+
+- [x] `npm run preview` servește build-ul de producție pe :4173 — `HTTP 200` pe `/` și pe
+  `/assets/index-NxjMIJgu.js`, iar `index.html` referențiază corect assetul hashuit
+- [x] `npm run dev` pornește în 133 ms (verificat mai devreme)
+- [ ] Hot-reload neverificat — cere o editare făcută cu pagina deschisă în browser
+- Notă: ambele verificări s-au făcut prin request-uri HTTP, nu vizual. Faptul că serverul
+  întoarce 200 nu spune nimic despre ce se randează. Avertismentul din `07-Handover.md`
+  rămâne valabil.
+
+
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]
