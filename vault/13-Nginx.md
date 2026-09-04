@@ -40,24 +40,36 @@ server {
     root /var/www/cv/dist;
     index index.html;
 
+    # ATENȚIE: în nginx, `add_header` dintr-un bloc ANULEAZĂ toate `add_header`
+    # moștenite de la nivelul superior. De aceea headerele de securitate sunt
+    # într-un snippet inclus în FIECARE location care își pune propriul header,
+    # nu doar o dată la nivel de server.
+    # Creează /etc/nginx/snippets/security-headers.conf cu:
+    #   add_header X-Content-Type-Options "nosniff" always;
+    #   add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+
     # index.html: revalidare la fiecare request (e mic, 1 kB, gzip 0.5 kB)
     location = /index.html {
-        add_header Cache-Control "no-cache";
+        include snippets/security-headers.conf;
+        add_header Cache-Control "no-cache" always;
     }
 
     # Asseturi hashuite: cache imutabil, 1 an
     location /assets/ {
-        add_header Cache-Control "public, max-age=31536000, immutable";
+        include snippets/security-headers.conf;
+        add_header Cache-Control "public, max-age=31536000, immutable" always;
         try_files $uri =404;
     }
 
     # Restul (favicon, icons): cache moderat
     location ~* \.(svg|png|jpg|jpeg|webp|avif|woff2?)$ {
-        add_header Cache-Control "public, max-age=2592000";
+        include snippets/security-headers.conf;
+        add_header Cache-Control "public, max-age=2592000" always;
         try_files $uri =404;
     }
 
     location / {
+        include snippets/security-headers.conf;
         try_files $uri $uri/ /index.html;
     }
 
@@ -67,11 +79,32 @@ server {
     gzip_min_length 1024;
     gzip_types text/css application/javascript application/json image/svg+xml;
 
-    # Security headers de bază
-    add_header X-Content-Type-Options "nosniff" always;
-    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+    # Headerele de securitate NU se pun aici — vezi nota de mai sus.
+    # La nivel de server ar fi anulate în orice location cu `add_header` propriu.
 }
 ```
+
+## Capcana cu `add_header`
+
+Merită reținută, fiindcă e cea mai frecventă greșeală de configurare nginx:
+
+> `add_header` se moștenește de la nivelul superior **doar dacă** nivelul curent
+> nu declară niciun `add_header` propriu. Unul singur le anulează pe toate.
+
+Concret: dacă pui headerele de securitate la nivel de `server` și apoi ai un
+`location /assets/` cu `add_header Cache-Control ...`, asseturile ajung servite
+**fără** `X-Content-Type-Options` și `Referrer-Policy`. Nu primești niciun
+avertisment — `nginx -t` trece, totul pare în regulă.
+
+De verificat după deploy, pe fiecare tip de resursă:
+
+```bash
+curl -sI https://mariusivan.ro/ | grep -i "x-content-type\|referrer\|cache-control"
+curl -sI https://mariusivan.ro/index.html | grep -i "x-content-type\|referrer\|cache-control"
+curl -sI https://mariusivan.ro/assets/index-CdPAFNPn.js | grep -i "x-content-type\|referrer\|cache-control"
+```
+
+Toate trei trebuie să arate ambele headere de securitate.
 
 ## Pasul de deploy (pe VPS)
 
