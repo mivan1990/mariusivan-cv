@@ -344,10 +344,11 @@ Status: `[ ]` = de făcut, `[x]` = făcut, `[~]` = în curs.
 - Status: **gata** (2026-09-04). README rescris în engleză, reflectând structura reală de pe disc (hooks, i18n, secțiuni); vechiul README descria foldere care nu existau (layout/, projects/, animations/, styles/, data/, types/). Stack din `package.json`, deploy rezumat cu trimitere la `13-Nginx.md`, sectiuni pentru vault și accesibilitate. Fără promisiuni neverificate (n-a fost testat în browser). `npm run build` trece.
 
 ### J3. Actualizare Obsidian
-- [ ] Actualizează `06-Log.md` cu toate task-urile făcute
-- [ ] Actualizează `07-Handover.md` cu starea finală
+- [x] Actualizează `06-Log.md` cu toate task-urile făcute
+- [x] Actualizează `07-Handover.md` cu starea finală
 - Dependențe: J2
 - Estimare: 15 min
+- Status: **gata** (2026-09-04). `07-Handover.md` rescris la starea reală (cale, build, faze, probleme, decizii deschise); notă adăugată în `06-Log.md`
 
 ### J4. Beta → Prod
 - [ ] Marchează proiectul ca "ready to deploy"
@@ -408,7 +409,7 @@ Status: `[ ]` = de făcut, `[x]` = făcut, `[~]` = în curs.
 - [ ] I4. Verificare finală
 - [ ] J1. Git
 - [x] J2. README
-- [ ] J3. Actualizare Obsidian
+- [x] J3. Actualizare Obsidian
 - [ ] J4. Beta → Prod
 
 [[README]] · [[05-Plan-Execuție]] · [[06-Log]] · [[07-Handover]]

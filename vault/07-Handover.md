@@ -12,78 +12,95 @@ Actualizat la fiecare sesiune — la închidere, scrie ce e gata, ce e în curs,
 
 ## Stare curentă
 
-**Ultima actualizare:** 2026-09-03
-**Stare:** Faze 0–3 implementate, gata de testare locală
+**Ultima actualizare:** 2026-09-04
+**Stare:** Build-ul de producție TRECE. Toate fazele de cod sunt închise (A, B, C, F1, F3, G1, H1, H2, J2). Rămâne doar deploy-ul (I1–I4) și finalizarea git (J1, J4).
+
+**Calea proiectului:** `~/Projects/PERSONAL/mariusivan-cv/` — vault-ul Obsidian e **în interiorul repo-ului**, la `vault/`. Vechea cale `~/Vaults/cv/` **nu mai există** (mutat la consolidarea din 2026-09-04, vezi `06-Log.md`).
+
+> ⚠️ **Citește asta înainte de orice:** aplicația **NU a fost deschisă niciodată într-un browser.** Build-ul care trece (tsc + vite) nu spune nimic despre cum arată cele cinci efecte de animație (reveal, numere animate, typing, parallax, cursor trail) — niciunul nu a fost văzut vizual. Dacă preiei, primul lucru pe care îl faci e să pornești `npm run dev` și să te uiți cu adevărat.
 
 ## Ce e gata
 
-- [x] Structura proiectului în Obsidian (`~/Vaults/cv/`)
-- [x] Conținut CV real (FEG Group, 82 module, responsabilități)
-- [x] Lista de proiecte de prezentare (CS2 Leaderboard, Portfolio XP, Fortuna WC2026)
-- [x] Decizii tehnice (React+TS+Vite+Tailwind+shadcn, 21st.dev punctual)
-- [x] Plan de deploy (SWAP pe subdomeniu, 3 pași)
-- [x] Plan de execuție pe 6 faze
-- [x] Log de progres
-- [x] Lista completă de componente (08-Componente)
-- [x] Design-ul site-ului, de la sus la jos (09-Design)
-- [x] **Faza 0: Repo creat** (`~/Projects/PERSONAL/CV/mariusivan-cv/`)
-- [x] **Faza 1: Structură completă** (Vite + React + TS + Tailwind + shadcn)
-- [x] **Faza 2: Conținut** (i18n EN/RO, hero, experiență, proiecte, skills, contact)
-- [x] **Faza 3: Componente** (20+ fișiere, toate secțiunile)
+- [x] **Faza A — Setup & Fundație** (A1–A5): repo, Vite+React+TS, Tailwind, shadcn, structură fișiere
+- [x] **Faza B — Componente** (B1–B4): componente shadcn, Navbar/Footer, secțiuni (Hero, Experience, Projects, Skills, FAQ, Contact), carduri proiecte
+  - ⚠️ **cu excepția formularului de contact** — vezi „Decizii deschise” mai jos. B3 e bifat, dar `Contact.tsx` conține doar linkuri (email, GitHub, live site), nu un formular.
+- [x] **Faza C — Animații & Interacțiuni**: reveal la scroll, numere animate, typing effect, parallax, cursor trail — toate cu `prefers-reduced-motion`. (C3 / 3D: decis să NU se facă — vezi mai jos.)
+- [x] **F1 — Optimizare performanță**: bundle ~88.65 kB gzip, analizat (lazy-load nu merită, imagini nefolosite lăsate în loc)
+- [x] **F3 — Accesibilitate**: aria-labels, focus vizibil, audit contrast (contrastul `primary` în dark e sub 4.5:1 — raportat, paleta neschimbată)
+- [x] **G1 — Dev server**: `npm run dev` pornește (confirmat)
+- [x] **H1 — Build producție**: `npm run build` trece, `dist/` corect
+- [x] **H2 — Config VPS**: static pur confirmat, config nginx scris în `vault/13-Nginx.md`
+- [x] **J2 — README**: rescris în engleză, reflectă structura reală
 
-## Ce e în curs
+## Ce NU e gata (și de ce)
 
-- [ ] **Faza 3: Testare locală** (`npm run dev` / `npm run build`)
-- [ ] **Faza 4: Deploy** (SWAP pe subdomeniu, 3 pași)
-- [ ] **Faza 5: Finalizare** (Git tag, README, .env)
+- [ ] **F2 — Testare în browser**: **sărită prin decizie explicită** (2026-09-04). Doar linkurile au fost verificate static; testarea pe Chrome/Firefox/Safari + mobil + toggle vizual EN/RO nu s-a făcut. Aici se suprapune și avertismentul de mai sus: n-a fost văzut nimic vizual.
+- [ ] **C3 — Animații 3D (WebGL)**: **decis să NU se facă** (2026-09-04). `three.js` ar adăuga ~150 kB gzip peste bundle-ul de 88.65 kB — l-ar tripla, pentru forme care se rotesc pe un CV. Nu e restanță, e alegere.
+- [ ] **I1–I4 — Deploy pe prod**: **nu se pot face din cod** — necesită acces Cloudflare (DNS record `xp`) și SSH pe VPS (vhost, certbot, nginx). Depinde de tine, nu de repo.
+- [ ] **J1 — Git**: commit final + tag `v1.0` + push (încă nefăcut; local e înaintea `origin/main`)
+- [ ] **J3 — Actualizare Obsidian**: acest fișier + `06-Log.md` (în curs de actualizare)
+- [ ] **J4 — Beta → Prod**: marcarea ca „ready to deploy”
 
-## Ce e blocat / de rezolvat
+## Trei probleme cunoscute, nereparate
 
-- [ ] Pas 1 Deploy: muta XP-ul pe `xp.` (trebuie făcut înainte de a construi CV-ul)
-- [ ] Faza 3: rulează `npm run dev` și verifică
-- [ ] Faza 4: deploy pe VPS
+Toate trei au fost găsite în auditul static din `06-Log.md` (16:40) și **rămân așa**:
+
+1. **Linkul către CS2Leaderboard dă 404** — `github.com/mivan1990/CS2Leaderboard` (în `translations.ts`, ambele limbi). Repo privat sau nume greșit.
+2. **`gap--1.5` în `Projects.tsx:89`** — clasă Tailwind **invalidă** (două minusuri) → butonul „View repo” n-are spațiu între iconiță și text. Preexistent, nu vine de la F3.
+3. **`window.open` fără `noopener` în `Projects.tsx`** — ambele butoane („Live demo”, „View repo”) deschid fără `noopener` → pagina țintă primește `window.opener` (reverse tabnabbing). Linkurile `<a>` din Contact/Footer au `rel="noreferrer"` și sunt în regulă.
+
+## Decizii deschise
+
+- **Formularul de contact**: B3 zice că există, dar în realitate `Contact.tsx` are doar linkuri (email, GitHub, live site). **De decis**: se face un formular adevărat sau rămân linkurile? Dacă da, **prin ce serviciu** (Formspree, Netlify Forms, backend propriu)?
+- **Contorul de an care pornește de la 1998**: în `useCountUp`, valoarea `'2023'` e animată pornind de la `target − 25` (= 1998), nu de la 0 — ca să nu pară prostesc. E o alegere, nu un bug; dacă nu-ți place, se schimbă.
 
 ## Unde e tot
 
 | Fișier | Conținut |
 |---|---|
-| `README.md` | Hub-ul proiectului, rezumat |
-| `01-Conținut-CV.md` | Conținut real FEG Group |
-| `02-Proiecte.md` | Cele 3 proiecte |
-| `03-Stack-Și-Componente.md` | Stack + componente |
-| `04-Deploy.md` | Plan de deploy |
-| `05-Plan-Execuție.md` | Checklist complet |
-| `06-Log.md` | Jurnal de progres |
-| `07-Handover.md` | Acest fișier |
-| `08-Componente.md` | Lista completă de componente |
-| `09-Design.md` | Cum arată site-ul |
-| `10-Research.md` | Ce putem lua de la alți site-uri |
-| `11-Taskuri.md` | Taskuri de la A la Z |
+| `README.md` | Hub-ul proiectului, rezumat (engleză) |
+| `vault/01-Conținut-CV.md` | Conținut real FEG Group |
+| `vault/02-Proiecte.md` | Cele 3 proiecte |
+| `vault/03-Stack-Și-Componente.md` | Stack + componente |
+| `vault/04-Deploy.md` | Plan de deploy |
+| `vault/05-Plan-Execuție.md` | Checklist complet |
+| `vault/06-Log.md` | Jurnal de progres |
+| `vault/07-Handover.md` | Acest fișier |
+| `vault/08-Componente.md` | Lista completă de componente |
+| `vault/09-Design.md` | Cum arată site-ul |
+| `vault/10-Research.md` | Ce putem lua de la alți site-uri |
+| `vault/11-Taskuri.md` | Taskuri de la A la Z |
+| `vault/12-Prompt.md` | Prompt-ul de lucru |
+| `vault/13-Nginx.md` | **Configurația nginx** (cache, headere, vhost) |
+| `vault/CV-BRIEF.md` | Brief-ul inițial |
 
 ## Structura proiectului
 
 ```
 ~/Projects/PERSONAL/mariusivan-cv/
-├── package.json     ✓ (React 18, Vite 5, TS, Tailwind)
-├── vite.config.ts   ✓
+├── package.json     ✓ (React 18.3, Vite 5.4, TS 5.6, Tailwind 3.4)
+├── vite.config.ts   ✓ (alias `@` → src)
 ├── tailwind.config.js ✓
 ├── components.json  ✓ (shadcn)
 ├── postcss.config.js ✓
 ├── index.html       ✓
+├── AGENTS.md        ✓ (reguli pentru agent)
 ├── src/
 │   ├── main.tsx     ✓ (entry point)
-│   ├── index.css    ✓ (tema + animații)
+│   ├── index.css    ✓ (tema + animații + focus global)
 │   ├── i18n/
-│   │   └── translations.ts ✓ (490 linii, EN/RO)
+│   │   └── translations.ts ✓ (EN/RO)
 │   ├── components/
 │   │   ├── Navbar.tsx ✓
 │   │   ├── LanguageToggle.tsx ✓
+│   │   ├── CursorTrail.tsx ✓ (urma după cursor)
 │   │   ├── sections/
-│   │   │   ├── Hero.tsx ✓
+│   │   │   ├── Hero.tsx ✓ (stats animate, typing, parallax)
 │   │   │   ├── Experience.tsx ✓
 │   │   │   ├── Projects.tsx ✓
 │   │   │   ├── Skills.tsx ✓
-│   │   │   ├── Contact.tsx ✓
+│   │   │   ├── Faq.tsx ✓ (accordion)
+│   │   │   ├── Contact.tsx ✓ (doar linkuri, NU formular)
 │   │   │   ├── Footer.tsx ✓
 │   │   │   └── shared.tsx ✓
 │   │   └── ui/
@@ -91,61 +108,67 @@ Actualizat la fiecare sesiune — la închidere, scrie ce e gata, ce e în curs,
 │   │       ├── card.tsx ✓
 │   │       ├── tabs.tsx ✓
 │   │       ├── badge.tsx ✓
-│   │       └── tooltip.tsx ✓
+│   │       ├── tooltip.tsx ✓
+│   │       └── accordion.tsx ✓
 │   ├── hooks/
 │   │   ├── useLanguage.ts ✓
-│   │   └── useReveal.ts ✓
+│   │   ├── useReveal.ts ✓
+│   │   ├── useCountUp.ts ✓ (numere animate)
+│   │   ├── useTyping.ts ✓ (efect de tastare)
+│   │   ├── useParallax.ts ✓ (parallax fundal)
+│   │   └── useReducedMotion.ts ✓ (compartit)
 │   └── lib/
 │       └── utils.ts ✓
 ├── public/
-│   ├── favicon.svg ✓
-│   └── icons.svg ✓
+│   ├── favicon.svg ✓ (singurul asset folosit)
+│   ├── icons.svg   (nefolosit în cod)
+│   └── assets/hero.png (nefolosit în cod)
 ├── README.md            ✓
-└── vault/               ✓ (vault Obsidian — toată documentația + CV-BRIEF.md)
+└── vault/               ✓ (vault Obsidian — toată documentația)
 ```
 
 ## Cum preia
 
 1. Citește `README.md` pentru rezumat
-2. Citește `05-Plan-Execuție.md` pentru pașii în ordine
-3. Verifică `06-Log.md` pentru ce s-a făcut deja
-4. Pornește de la prima fază neterminată
+2. Citește `06-Log.md` pentru ce s-a făcut deja (în ordine cronologică)
+3. **Pornește `npm run dev` și uită-te cu adevărat la cele cinci efecte** — n-a fost făcut niciodată
+4. Pornește de la prima treabă neterminată: F2 (testare vizuală) → I1–I4 (deploy) → J1/J4 (git)
 
 ## Pas cu pas — ce ai de făcut
 
-### Pas 1: Testare locală
+### Pas 1: Testare vizuală (F2)
 ```bash
 cd ~/Projects/PERSONAL/mariusivan-cv
 npm install
 npm run dev
 # Deschide http://localhost:5173
-# Verifică:
-# - Hero cu statistici
-# - Secțiunea Experience (FEG Group)
-# - Cele 3 proiecte
-# - Skills
-# - Contact
-# - Toggle EN/RO
+# Verifică CU ADEVĂRAT (niciunul n-a fost văzut încă):
+# - reveal la scroll, numere animate, typing, parallax, cursor trail
+# - Hero, Experience, Projects, Skills, FAQ, Contact
+# - Toggle EN/RO comută corect vizual
+# - Responsive pe mobile
 ```
 
 ### Pas 2: Build
 ```bash
 npm run build
-# Verifică că dist/ e generat
+# Trece (confirmat): ~88.65 kB gzip js
 # Testează cu npm run preview
 ```
 
-### Pas 3: Deploy
-Vezi [[04-Deploy]] pentru detaliile complete.
+### Pas 3: Deploy (I1–I4)
+Vezi `vault/13-Nginx.md` pentru config și `vault/04-Deploy.md` pentru plan.
 
-1. Muta XP-ul pe `xp.`
-2. Build CV-ul local
-3. Deploy pe VPS (`/var/www/cv/dist`)
-4. Verifică: `https://` arată CV-ul nou
-5. Verifică: `https://xp.` încă arată XP-ul
+1. Cloudflare: record `A` pentru `xp`, Proxied ON
+2. VPS: vhost nou pentru `xp.mariusivan.ro` + `certbot --nginx -d xp.mariusivan.ro`
+3. Build CV-ul local, copiază `dist/` în `/var/www/cv/dist`
+4. Schimbă `root` în vhost-ul `mariusivan.ro`, `nginx -t && systemctl reload nginx`
+5. Verifică: `https://mariusivan.ro` = CV nou, `https://xp.mariusivan.ro` = XP
+
+> Toți pașii cer acces Cloudflare + SSH pe VPS — nu se pot face din cod.
 
 ## Regula de aur
 
 Comenzi SSH pe o singură linie. Se rup la copiere dacă au newline-uri.
 
-[[README]] · [[05-Plan-Execuție]] · [[06-Log]] · [[11-Taskuri]]
+[[README]] · [[05-Plan-Execuție]] · [[06-Log]] · [[11-Taskuri]] · [[13-Nginx]]

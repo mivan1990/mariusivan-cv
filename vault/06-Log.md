@@ -210,4 +210,12 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - Notă: n-am promis testare în browsere (nu a fost făcută — vezi F2); README-ul nu
   pretinde niciun lucru neverificat
 
+#### 22:40 — J3: handover rescris la starea reală
+- [x] `07-Handover.md` rescris: calea corectă (`~/Projects/PERSONAL/mariusivan-cv/`, vault în `vault/`, vechea `~/Vaults/cv` nu mai există), build-ul trece, fazele gata (A, B, C, F1, F3, G1, H1, H2, J2), ce nu e gata și de ce (F2 sărită, C3 decis să nu, I1–I4 cer Cloudflare+SSH, J1/J3/J4), cele 3 probleme cunoscute, cele 2 decizii deschise
+- [x] Accent pus clar: **aplicația nu a fost deschisă niciodată într-un browser** — build-ul care trece nu spune nimic despre cele cinci efecte
+- [x] `npm run build` re-rulat pentru verificare: 1633 module, 276.47 kB js (88.65 kB gzip), 20.29 kB css (4.81 kB gzip) — trece
+- [x] J3 bifat în `11-Taskuri.md` (ambele locuri)
+- [ ] J4 rămâne deschis (beta → prod) — depinde de deploy (I1–I4)
+- Commit: fără push
+
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]
