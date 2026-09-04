@@ -250,4 +250,26 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - [ ] Verificare vizuală în browser (toggle comută acum toate secțiunile instant) — rămâne la F2
 - Commit: vezi `git log` (fără push)
 
+#### 23:40 — F2 făcut cu adevărat; suită E2E în repo
+
+- [x] Deblocat testarea în browser: extensiile (Claude in Chrome, Playwright MCP Bridge) nu sunt
+  conectate, dar Playwright avea deja browserele în `~/Library/Caches/ms-playwright`, iar Chrome
+  e instalat pe sistem. Se conduce Chrome-ul real prin `channel: 'chrome'`.
+- [x] `tests/e2e.mjs` — 21 de verificări pe build-ul de producție: randare, typing effect,
+  numere animate, cele 6 secțiuni, accordion FAQ, comutare EN/RO, focus vizibil la Tab, ancore
+  navbar, cursor trail, meniu mobil, scroll orizontal, erori de consolă, plus `prefers-reduced-motion`
+- [x] **21/21 trec** după fixul de limbă
+- [x] Confirmat vizual: aplicația arată corect pe 1440px și pe 390px, fără erori JS
+- [ ] Firefox și Safari — netestate. WebKit e descărcat local, dar revizia nu se potrivește cu
+  pachetul playwright din cache.
+- Notă: **cel mai important lucru al zilei** — testul a găsit că butonul EN/RO nu funcționa.
+  `useLanguage` folosea `useState` local, deci fiecare componentă avea propria copie a limbii;
+  click-ul schimba doar butonul, restul aplicației se traducea abia după refresh. Nu se vedea
+  nici din build (tsc mulțumit), nici din review pe fișier (hook-ul era corect în sine), nici
+  din `npm run preview` (pagina se randa perfect). Doar apăsând butonul.
+- Notă: primele două „eșecuri" ale suitei au fost erori ale testului, nu ale aplicației — alesesem
+  butonul „Home" (care duce corect la `scrollY = 0`) și câmpul `role`, identic în ambele limbi.
+  Merită reținut: un test care pică nu e automat un bug găsit.
+
+
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]

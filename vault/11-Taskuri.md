@@ -242,13 +242,20 @@ Status: `[ ]` = de făcut, `[x]` = făcut, `[~]` = în curs.
 - Status: **gata prin analiză** (2026-09-04). Build: 253.86 kB js (81.35 kB gzip), 18.28 kB css (4.44 kB gzip) — total ~86 kB gzip. Lazy-load pe secțiuni: **nu implementat, nu merită** — bundle-ul e sub 100 kB gzip, totul e o singură pagină cu scroll, iar `React.lazy` ar adăuga un request suplimentar fără a reduce nimic (secțiunile sunt deja în același chunk). Imagini: `hero.png` (13K) și `icons.svg` (5K) **nu sunt referențate în cod** (doar `favicon.svg` e folosit, din `index.html`) — nu e nimic de optimizat, nu sunt încărcate; lăsate în loc, nu șterse. Code-splitting 3D: **fără obiect** — nu există three/gsap/framer-motion în `package.json`, nu există `src/components/animations/` cu conținut.
 
 ### F2. Testare
-- [ ] Testează pe Chrome, Firefox, Safari
-- [ ] Testează pe mobile (real sau emulator)
-- [ ] Testează toggle-ul EN/RO
-- [~] Testează că toate linkurile merg
+- [~] Testează pe Chrome, Firefox, Safari — **Chrome: da** (automat, `tests/e2e.mjs`).
+  Firefox și Safari: nu. WebKit e descărcat local, dar build-ul nu se potrivește cu pachetul.
+- [x] Testează pe mobile (real sau emulator) — viewport 390×844, hamburger + meniu mobil,
+  zero scroll orizontal
+- [x] Testează toggle-ul EN/RO — **a găsit un bug real**, vezi mai jos
+- [x] Testează că toate linkurile merg
 - Dependențe: E2
 - Estimare: 30 min
-- Status: **sărit prin decizie** (2026-09-04). Doar linkurile au fost verificate, static: CS2Leaderboard dă 404, `xp.mariusivan.ro` nu rezolvă încă (așteaptă I1). Restul cere browser — extensiile de automatizare nu sunt conectate. Vezi `06-Log.md`, 16:40, pentru cele trei probleme găsite și nereparate.
+- Status: **făcut** (2026-09-04, seara). Suită E2E în `tests/e2e.mjs`, rulată pe build-ul de
+  producție prin Chrome-ul instalat: **21/21 verificări trec**. A scos la iveală bug-ul de
+  comutare a limbii (vezi `06-Log.md` și `07-Handover.md`), invizibil din build și din review
+  de cod. Rămân netestate Firefox și Safari.
+- Notă istorică: taskul fusese sărit prin decizie mai devreme în aceeași zi, când extensiile de
+  automatizare browser nu erau conectate. S-a rezolvat conducând direct Chrome-ul prin Playwright.
 
 ### F3. Testare accesibilitate
 - [x] Verifică contrastul culorilor
@@ -402,7 +409,7 @@ Status: `[ ]` = de făcut, `[x]` = făcut, `[~]` = în curs.
 - [ ] E2. Responsive design
 - [ ] E3. Testare animații
 - [x] F1. Optimizare performanță
-- [ ] F2. Testare
+- [x] F2. Testare
 - [x] F3. Testare accesibilitate
 - [~] G1. Dev server
 - [x] G2. Preview build
