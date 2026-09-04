@@ -1,6 +1,7 @@
 import { useLanguage } from '@/hooks/useLanguage'
 import { useReveal } from '@/hooks/useReveal'
 import { useCountUp } from '@/hooks/useCountUp'
+import { useTyping } from '@/hooks/useTyping'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { Globe, FolderOpen, Download } from 'lucide-react'
@@ -18,9 +19,25 @@ function StatBox({ value, label }: { value: string; label: string }) {
 export function Hero() {
   const { t } = useLanguage()
   const { ref, visible } = useReveal()
+  const { typed, done, reduced } = useTyping(t.hero.role)
 
   return (
     <section id="hero" className="relative overflow-hidden px-5 pb-16 pt-28 sm:pb-24 sm:pt-36">
+      {/* keyframes pentru cursorul de tastare — injectate aici ca sa tinem
+          modificarea in Hero.tsx + hook; reduced-motion: fara clipit */}
+      <style>{`
+        @keyframes typing-blink {
+          0%, 45% { opacity: 1; }
+          50%, 95% { opacity: 0; }
+          100% { opacity: 1; }
+        }
+        .typing-cursor-blink {
+          animation: typing-blink 1.1s step-end infinite;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .typing-cursor-blink { animation: none; }
+        }
+      `}</style>
       {/* fundal decorativ — raze subtile, fără imagini externe */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute -left-24 -top-24 h-72 w-72 rounded-full bg-primary/8 blur-3xl" />
@@ -40,8 +57,26 @@ export function Hero() {
             <h1 className="text-4xl font-extrabold tracking-tight sm:text-6xl">
               {t.hero.name}
             </h1>
-            <p className="mt-3 text-lg font-semibold text-muted-foreground sm:text-xl">
-              {t.hero.role}
+            {/* rolul: efect de tastare; spatiul e rezervat de span-ul invisibil
+                cu textul complet (fara layout shift), iar textul intreg e
+                expus tehnologiilor asistive prin .sr-only */}
+            <p className="relative mt-3 text-lg font-semibold text-muted-foreground sm:text-xl">
+              <span aria-hidden="true" className="invisible">
+                {t.hero.role}
+              </span>
+              <span aria-hidden="true" className="absolute inset-0">
+                {typed}
+                {!reduced && (
+                  <span
+                    aria-hidden="true"
+                    className={cn(
+                      'typing-cursor ml-0.5 inline-block h-[1em] w-0.5 translate-y-[0.1em] bg-foreground',
+                      done && 'typing-cursor-blink',
+                    )}
+                  />
+                )}
+              </span>
+              <span className="sr-only">{t.hero.role}</span>
             </p>
 
             <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
