@@ -245,11 +245,12 @@ Status: `[ ]` = de făcut, `[x]` = făcut, `[~]` = în curs.
 - Estimare: 30 min
 
 ### F3. Testare accesibilitate
-- [ ] Verifică contrastul culorilor
-- [ ] Verifică navigare cu tastatură
-- [ ] Adaugă aria-labels unde e necesar
+- [x] Verifică contrastul culorilor
+- [x] Verifică navigare cu tastatură
+- [x] Adaugă aria-labels unde e necesar
 - Dependențe: F2
 - Estimare: 20 min
+- Status: terminat 2026-09-04 (commit `2813640`) — aria-labels din `t.a11y` (EN/RO), focus-visible global + pe componente; contrast: doar `primary` pe bg/card în dark e sub 4.5:1 (3.35/3.17), raportat, paleta neschimbată
 
 ---
 
@@ -387,7 +388,7 @@ Status: `[ ]` = de făcut, `[x]` = făcut, `[~]` = în curs.
 - [ ] E3. Testare animații
 - [ ] F1. Optimizare performanță
 - [ ] F2. Testare
-- [ ] F3. Testare accesibilitate
+- [x] F3. Testare accesibilitate
 - [ ] G1. Dev server
 - [ ] G2. Preview build
 - [ ] H1. Build pentru producție

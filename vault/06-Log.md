@@ -90,5 +90,21 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - Notă: fix-urile au fost generate de Qwen3.8-27B rulat local (mtplx + hermes), nu scrise de mână
 - Notă: prima rulare a picat cu `insufficient memory` în timpul prefill-ului — 33 GB de model pe 48 GB RAM lasă prea puțin loc. Modelul apucase să scrie fișierele, dar a murit înainte de commit. De rulat serverul cu limita GPU ridicată (`sudo sysctl iogpu.wired_limit_mb=40960`) sau cu KV cache q8.
 
+#### 16:15 — F3: Accesibilitate (aria-labels, focus vizibil, audit contrast)
+- [x] `translations.ts` — bloc nou `a11y` (EN + RO): toggleLanguage, openMenu/closeMenu, home, liveDemo, viewRepo, email, github, liveSite. Nicio etichetă hardcodată în componente
+- [x] `LanguageToggle.tsx` — aria-label din `t.a11y` (era hardcodat ternar)
+- [x] `Navbar.tsx` — logo: aria-label „Go to top"; butonul hamburger: aria-label dinamic (open/close) + `aria-expanded` + `aria-controls="mobile-menu"`; toate butoanele de nav au focus ring
+- [x] `Projects.tsx` — butoanele „Live demo"/„View repo" au aria-label cu numele proiectului + mențiunea „într-un tab nou"
+- [x] `Contact.tsx` — linkurile au aria-label (ex. „Open GitHub profile in a new tab (github.com/mivan1990)") + focus ring
+- [x] `Footer.tsx` — linkul GitHub: aria-label + focus ring
+- [x] `index.css` — fallback global `:where(a, button, ...):focus-visible` cu outline 2px pe `--ring`; butoanele shadcn deja aveau ring
+- [x] `npm run build` trece; commit `2813640`
+- [ ] Contrast: `primary` pe fundal/card în tema dark e sub 4.5:1 — paleta NU s-a schimbat (cerință), doar raportat
+- Notă: **audit contrast (WCAG 2.1, perechi text/fundal din paletă):**
+  - LIGHT: totul trece — foreground/bg 19.0, muted-foreground/bg 6.1, primary/bg 8.2, accent-foreground/accent 9.8
+  - DARK: **`primary` pe `background` = 3.35:1** și **`primary` pe `card` = 3.17:1** — sub 4.5:1. Atinge 3:1 (AA pentru UI grafic), deci e ok ca iconițe/borduri, dar NU ca text. În dark, textul colorat pe `text-primary` (eyebrow-uri, stat values, badge-uri, stack pills) nu atinge AA
+  - Restul dark: foreground/bg 17.7, muted-foreground 7.1–7.5, accent-foreground/accent 5.9 — toate trec
+- Notă: am resetat commitul inițial care trasea `AGENTS.md` (modificat de altcineva în paralel, secțiunea „Bug-uri deschise" → „Starea build-ului"); commitul final conține doar cele 7 fișiere ale taskului
+
 
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]
