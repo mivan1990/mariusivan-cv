@@ -5,7 +5,7 @@ tags: [handover, cv]
 ---
 # Handover
 
-Document de preluare pentru cineia ia proiectul de unde l-am lăsat.
+Document de preluare pentru cine ia proiectul de unde l-am lăsat.
 Actualizat la fiecare sesiune — la închidere, scrie ce e gata, ce e în curs, ce e blocat.
 
 ---
