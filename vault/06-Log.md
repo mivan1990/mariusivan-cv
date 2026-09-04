@@ -195,5 +195,19 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - Notă: **niciun efect n-a fost văzut în browser.** Build-ul care trece nu spune nimic despre
   cum arată parallax-ul, urma de cursor sau tastarea. Rămâne de verificat vizual.
 
+#### 22:12 — J2: README rescris
+- [x] `README.md` rescris în engleză (repo public pe GitHub), reflectând proiectul real:
+  descriere (CV interactiv, bilingv EN/RO, static pur), stack din `package.json` (React 18.3,
+  TS 5.6, Vite 5.4, Tailwind 3.4, Radix/shadcn, lucide), structura reală a `src/` cu cei
+  6 hooks descriși pe câte o linie, comenzi (dev/build/preview), deploy rezumat
+  (static, nginx, `/var/www/cv/dist`) cu trimitere la `vault/13-Nginx.md` (fără duplicarea
+  configului), sectiune pentru vault (Obsidian), sectiune „Accessibility"
+  (prefers-reduced-motion, aria-labels din `t.a11y`, focus vizibil)
+- [x] Vechiul README descria o structură care nu exista niciodată (layout/, projects/,
+  animations/, styles/, data/, types/) și trimitea la `04-Deploy.md` fără prefixul `vault/`
+- [x] `npm run build` — trece: 1633 module, 276.47 kB js (88.65 kB gzip), 20.29 kB css (4.81 kB gzip)
+- [x] J2 bifat în `11-Taskuri.md` (ambele locuri)
+- Notă: n-am promis testare în browsere (nu a fost făcută — vezi F2); README-ul nu
+  pretinde niciun lucru neverificat
 
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]

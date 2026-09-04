@@ -334,13 +334,14 @@ Status: `[ ]` = de făcut, `[x]` = făcut, `[~]` = în curs.
 - Estimare: 10 min
 
 ### J2. README
-- [ ] Scrie `README.md` cu:
+- [x] Scrie `README.md` cu:
   - Ce e proiectul
   - Cum rulezi local
   - Cum deployezi
   - Structura fișierelor
 - Dependențe: J1
 - Estimare: 20 min
+- Status: **gata** (2026-09-04). README rescris în engleză, reflectând structura reală de pe disc (hooks, i18n, secțiuni); vechiul README descria foldere care nu existau (layout/, projects/, animations/, styles/, data/, types/). Stack din `package.json`, deploy rezumat cu trimitere la `13-Nginx.md`, sectiuni pentru vault și accesibilitate. Fără promisiuni neverificate (n-a fost testat în browser). `npm run build` trece.
 
 ### J3. Actualizare Obsidian
 - [ ] Actualizează `06-Log.md` cu toate task-urile făcute
@@ -406,7 +407,7 @@ Status: `[ ]` = de făcut, `[x]` = făcut, `[~]` = în curs.
 - [ ] I3. Pas 3: Deploy pe VPS
 - [ ] I4. Verificare finală
 - [ ] J1. Git
-- [ ] J2. README
+- [x] J2. README
 - [ ] J3. Actualizare Obsidian
 - [ ] J4. Beta → Prod
 
