@@ -1,7 +1,7 @@
 import { useLanguage } from '@/hooks/useLanguage'
 import { useReveal } from '@/hooks/useReveal'
 import { Section, SectionHeading } from './shared'
-import { Card, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card } from '@/components/ui/card'
 import Floating, { FloatingElement } from '@/components/ui/parallax-floating'
 import {
   Dialog,
@@ -12,19 +12,20 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog'
 import { cn } from '@/lib/utils'
-import { Building2, CheckCircle2, Code2 } from 'lucide-react'
+import { CheckCircle2, Code2 } from 'lucide-react'
 
-// 8 pozitii (top/left procentuale) in jurul centrului — clase statice ca Tailwind sa le genereze.
-// Centrul ramane liber; depth-uri diferite (0.3–0.9) pentru straturi.
+// 8 pozitii (top/left procentuale), imprastiate DENS in jurul centrului.
+// Banda centrala (top ~30-65%, left ~25-75%) ramane libera pentru textul central.
+// depth-uri 0.5–2 ca miscarea de parallax sa fie vizibila.
 const FLOATING_CARDS = [
-  { pos: 'top-[6%] left-[8%]', depth: 0.55 },
-  { pos: 'top-[10%] left-[72%]', depth: 0.35 },
-  { pos: 'top-[38%] left-[3%]', depth: 0.7 },
-  { pos: 'top-[48%] left-[82%]', depth: 0.45 },
-  { pos: 'top-[70%] left-[6%]', depth: 0.9 },
-  { pos: 'top-[84%] left-[30%]', depth: 0.3 },
-  { pos: 'top-[76%] left-[66%]', depth: 0.6 },
-  { pos: 'top-[3%] left-[42%]', depth: 0.8 },
+  { pos: 'top-[4%] left-[10%]', depth: 1.4 },
+  { pos: 'top-[9%] left-[70%]', depth: 0.8 },
+  { pos: 'top-[30%] left-[2%]', depth: 1.8 },
+  { pos: 'top-[34%] left-[84%]', depth: 1.1 },
+  { pos: 'top-[62%] left-[4%]', depth: 2 },
+  { pos: 'top-[70%] left-[80%]', depth: 0.7 },
+  { pos: 'top-[88%] left-[24%]', depth: 1.5 },
+  { pos: 'top-[90%] left-[58%]', depth: 0.9 },
 ]
 
 const CARD_BUTTON =
@@ -54,7 +55,7 @@ export function Experience() {
   const { ref, visible } = useReveal()
 
   return (
-    <Section id="experience" alt>
+    <Section id="experience" className="dark bg-background text-foreground">
       <SectionHeading eyebrow={e.heading} title={e.heading} sub={e.sub} />
 
       <div ref={ref} className={cn('reveal space-y-8', visible && 'is-visible')}>
@@ -65,45 +66,20 @@ export function Experience() {
             <h3 className="font-semibold">{e.responsibilitiesHeading}</h3>
           </div>
 
-          <div className="relative md:min-h-[520px]">
-            {/* bloc central — static pe mobil, centrat + z-10 pe desktop */}
-            <div className="md:absolute md:left-1/2 md:top-1/2 md:z-10 md:w-[min(600px,58%)] md:-translate-x-1/2 md:-translate-y-1/2">
-              <Card className="border-primary/20 bg-card">
-                <CardHeader className="gap-1">
-                  <div className="flex items-start gap-3">
-                    <div className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
-                      <Building2 className="text-primary" />
-                    </div>
-                    <div>
-                      <CardTitle className="text-lg sm:text-xl">{e.company}</CardTitle>
-                      <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1">
-                        <span className="text-sm font-semibold text-primary">{e.role}</span>
-                        <span className="text-sm text-muted-foreground">·</span>
-                        <span className="font-mono-code text-xs text-muted-foreground">
-                          {e.period}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <p className="text-sm leading-relaxed text-muted-foreground">
-                    {e.intro}{' '}
-                    <span className="font-semibold text-foreground">{e.introStrong}</span>{' '}
-                    {e.introTail}
-                  </p>
-                  <div className="mt-3 rounded-lg border bg-muted/40 p-4">
-                    <div className="flex items-center gap-2">
-                      <Code2 className="h-4 w-4 text-primary" />
-                      <span className="text-sm font-semibold">{e.projectHeading}</span>
-                    </div>
-                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                      {e.projectBody}{' '}
-                      <span className="font-semibold text-foreground">
-                        {e.projectBodyStrong}
-                      </span>
-                    </p>
-                  </div>
-                </CardHeader>
-              </Card>
+          <div className="relative md:min-h-[560px]">
+            {/* bloc central — static pe mobil, centrat + z-10 pe desktop.
+                Doar compania (mare) + rol/perioada (mic), nimic altceva. */}
+            <div className="md:absolute md:left-1/2 md:top-1/2 md:z-10 md:w-[min(420px,60%)] md:-translate-x-1/2 md:-translate-y-1/2">
+              <div className="text-center">
+                <div className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
+                  {e.company}
+                </div>
+                <div className="mt-2 flex flex-wrap items-center justify-center gap-x-2 text-sm text-muted-foreground">
+                  <span className="font-medium">{e.role}</span>
+                  <span aria-hidden="true">·</span>
+                  <span className="font-mono-code text-xs">{e.period}</span>
+                </div>
+              </div>
             </div>
 
             {/* harta — carduri plutitoare, doar desktop */}
@@ -126,6 +102,29 @@ export function Experience() {
               ))}
             </div>
           </div>
+
+          {/* intro + proiect — sub zona plutitoare, bloc centrat */}
+          <div className="mx-auto mt-10 max-w-3xl text-center">
+            <p className="leading-relaxed text-muted-foreground">
+              {e.intro}{' '}
+              <span className="font-semibold text-foreground">{e.introStrong}</span>{' '}
+              {e.introTail}
+            </p>
+            <div className="mt-4 rounded-lg border bg-muted/40 p-4 text-left">
+              <div className="flex items-center gap-2">
+                <Code2 className="h-4 w-4 text-primary" />
+                <span className="text-sm font-semibold text-foreground">
+                  {e.projectHeading}
+                </span>
+              </div>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                {e.projectBody}{' '}
+                <span className="font-semibold text-foreground">
+                  {e.projectBodyStrong}
+                </span>
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* tehnologii — grupe */}
@@ -144,7 +143,7 @@ export function Experience() {
                   {g.items.map((it) => (
                     <span
                       key={it}
-                      className="rounded-md bg-primary/8 px-2 py-0.5 text-xs font-medium text-primary"
+                      className="rounded-md bg-primary/8 px-2 py-0.5 text-xs font-medium text-foreground"
                     >
                       {it}
                     </span>
