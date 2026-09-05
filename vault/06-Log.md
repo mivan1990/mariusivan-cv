@@ -312,5 +312,18 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - [x] `npm run build` — trece: 1634 module, 278.45 kB js (89.32 kB gzip), 20.64 kB css (4.87 kB gzip)
 - Commit: vezi `git log` (fără push)
 
+#### 12:10 — Experience devine hartă interactivă (carduri plutitoare)
+- [x] `src/components/sections/Experience.tsx` rescris — singurul fișier atins
+- [x] **Bloc central** (companie + rol + perioadă + intro cu `introStrong` + blocul de proiect): centrat pe desktop cu `md:absolute left-1/2 top-1/2 -translate-1/2`, `z-10` peste carduri, lățime `min(600px, 58%)` — centrul rămâne liber
+- [x] **8 carduri plutitoare** (doar `md:` în sus): fiecare responsabilitate e un `<button>` compact (doar `title`), focusabil cu Tab + focus ring consistent cu restul proiectului; click-ul deschide un `<Dialog>` (DialogTitle = `r.title`, DialogDescription = `r.detail`)
+- [x] Împrăștiate cu poziții procentuale statice (`FLOATING_CARDS`, top/left în clase Tailwind) în jurul centrului; adâncimi diferite 0.3–0.9 pentru straturi; container `<Floating sensitivity={0.5}>` → deplasare max ~30px pe 1440px, fără `pointer-events-none` (cardurile sunt clicibile)
+- [x] **Mobil (sub `md`)**: nimic nu pluteste — aceleași 8 carduri într-o grilă `grid gap-3 sm:grid-cols-2` (`md:hidden`), fiecare tot buton → același Dialog
+- [x] Zona plutitoare are `md:min-h-[520px]` explicit (elementele sunt absolute)
+- [x] `techGroups` rămân dedesubt, neschimbate (grid de carduri cu etichete) — nu intră în zona plutitoare
+- [x] `<Section id="experience" alt>` + `<SectionHeading eyebrow title sub>` păstrate — ancora din navbar funcționează
+- [x] `npm run build` — trece: 1675 module, 303.67 kB js (97.69 kB gzip), 23.54 kB css (5.19 kB gzip). Creșterea de la 88.7→97.7 kB gzip vine din Dialog (Radix) + componenta Floating care acum e importată efectiv
+- Notă: prima rulare a picat la tsc — `Floating` e export default, nu numit; import corectat
+- [ ] Verificare vizuală în browser (pozițiile cardurilor, suprapuneri, Dialog) — rămâne la F2
+- Commit: `b8f5370` (fără push)
 
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]
