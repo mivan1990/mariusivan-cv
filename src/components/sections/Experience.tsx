@@ -69,9 +69,12 @@ export function Experience() {
           <div className="relative md:min-h-[560px]">
             {/* bloc central — static pe mobil, centrat + z-10 pe desktop.
                 Doar compania (mare) + rol/perioada (mic), nimic altceva. */}
-            <div className="md:absolute md:left-1/2 md:top-1/2 md:z-10 md:w-[min(420px,60%)] md:-translate-x-1/2 md:-translate-y-1/2">
+            {/* Latimea e generoasa intentionat: numele companiei e lung si, intr-un
+                container ingust, se rupea in patru randuri si devenea o coloana
+                inalta care domina toata sectiunea. Asa incape pe doua. */}
+            <div className="md:absolute md:left-1/2 md:top-1/2 md:z-10 md:w-[min(680px,66%)] md:-translate-x-1/2 md:-translate-y-1/2">
               <div className="text-center">
-                <div className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
+                <div className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl md:text-[2.75rem] md:leading-[1.1]">
                   {e.company}
                 </div>
                 <div className="mt-2 flex flex-wrap items-center justify-center gap-x-2 text-sm text-muted-foreground">
