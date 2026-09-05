@@ -2,7 +2,7 @@ import { useLanguage } from '@/hooks/useLanguage'
 import { useReveal } from '@/hooks/useReveal'
 import { useCountUp } from '@/hooks/useCountUp'
 import { useTyping } from '@/hooks/useTyping'
-import { useParallax } from '@/hooks/useParallax'
+import Floating, { FloatingElement } from '@/components/ui/parallax-floating'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { Globe, FolderOpen, Download } from 'lucide-react'
@@ -23,16 +23,23 @@ export function Hero() {
   const { typed, done, reduced } = useTyping(t.hero.role)
   // Parallax subtil pe petele decorative: viteze diferite = adancime.
   // Petele raman pe loc daca utilizatorul are prefers-reduced-motion.
-  const blobA = useParallax<HTMLDivElement>(0.04, 40)
-  const blobB = useParallax<HTMLDivElement>(0.09, 55)
+  // Deplasare = mouse * (depth * sensitivity / 20); pe 1440px max = 72 * depth * sensitivity.
+  // sensitivity 0.5: blobA (depth 0.4) = max 14.4px, blobB (depth 0.8) = max 28.8px.
 
   return (
     <section id="hero" className="relative overflow-hidden px-5 pb-16 pt-28 sm:pb-24 sm:pt-36">
       {/* fundal decorativ — raze subtile, fără imagini externe */}
-      <div className="pointer-events-none absolute inset-0 -z-10">
-        <div ref={blobA} className="absolute -left-24 -top-24 h-72 w-72 rounded-full bg-primary/8 blur-3xl" />
-        <div ref={blobB} className="absolute right-0 top-1/3 h-60 w-60 rounded-full bg-primary/6 blur-3xl" />
-      </div>
+      <Floating
+        className="pointer-events-none -z-10"
+        sensitivity={0.5}
+      >
+        <FloatingElement depth={0.4} className="-left-24 -top-24">
+          <div className="h-72 w-72 rounded-full bg-primary/8 blur-3xl" />
+        </FloatingElement>
+        <FloatingElement depth={0.8} className="right-0 top-1/3">
+          <div className="h-60 w-60 rounded-full bg-primary/6 blur-3xl" />
+        </FloatingElement>
+      </Floating>
 
       <div ref={ref} className={cn('reveal mx-auto max-w-6xl', visible && 'is-visible')}>
         <div className="grid items-center gap-12 lg:grid-cols-[1.3fr_1fr]">

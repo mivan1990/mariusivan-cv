@@ -300,5 +300,17 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
   explicit); dacă vrei s-o scoți, `npm uninstall motion` — nu afectează build-ul
 - Commit: `4906ecb` (fără push)
 
+#### 11:35 — Montare `Floating` în Hero (parallax mouse în loc de scroll)
+- [x] `Hero.tsx`: cele două pete decorative sunt acum în `<Floating sensitivity={0.5}>`,
+  fiecare petă într-un `<FloatingElement>`: blob A `depth={0.4}` (max ~14.4px, „mai departe")
+  și blob B `depth={0.8}` (max ~28.8px, „mai aproape"). Formula: deplasare = mouse ×
+  (depth × sensitivity / 20); pe 1440px max = 72 × depth × sensitivity → plafon 30px respectat
+- [x] Scoase importul `useParallax` + cele două apeluri + ref-urile de pe pete (conflict:
+  ambele scriu pe `style.transform`, deci înlocuire, nu combinație). `pointer-events-none`
+  și `-z-10` rămân pe containerul `<Floating>`
+- Notă: `src/hooks/useParallax.ts` **rămâne în proiect, dar e acum nefolosit** (niciun import)
+- [x] `npm run build` — trece: 1634 module, 278.45 kB js (89.32 kB gzip), 20.64 kB css (4.87 kB gzip)
+- Commit: vezi `git log` (fără push)
+
 
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]
