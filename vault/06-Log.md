@@ -271,5 +271,34 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
   butonul „Home" (care duce corect la `scrollY = 0`) și câmpul `role`, identic în ambele limbi.
   Merită reținut: un test care pică nu e automat un bug găsit.
 
+### 2026-09-05
+
+#### 11:11 — Integrare componentă `Floating` (parallax după mouse)
+- [x] Două fișiere sursa, copiate verbatim de la autor: `src/components/ui/parallax-floating.tsx`
+  (`Floating` + `FloatingElement`) și `src/hooks/use-mouse-position-ref.ts` (dependența hook-ului)
+- [x] `npm install motion` (`^13.2.0`) — componenta autorului importa `useAnimationFrame` din `motion/react`
+- [x] **`prefers-reduced-motion`** — folosește hook-ul existent `useReducedMotion` (fără copie):
+  cu reduce activ, elementele sunt resetate la `translate3d(0,0,0)`, nu se rulează nicio buclă
+  și nu se atașează niciun listener (zero calcul per cadru)
+- [x] **Bucla se oprește cu adevărat** (model: `CursorTrail.tsx`) — am verificat în sursa motion
+  13.2.0 că `useAnimationFrame` **nu poate fi oprit conditionat** (se abonează la
+  `frame.update(cb, true)` cu keepAlive și se deabonează doar la unmount). Deci am renunțat la
+  `useAnimationFrame` și am scris bucla cu `requestAnimationFrame` direct + flag `running` +
+  `cancelAnimationFrame`: rulează doar cât timp vreun element e la >0.1px de țintă, apoi se oprește
+  și repornește la mișcarea mouse-ului. Nu am folosit fallback-ul „sari peste calcul" — ăla ar fi
+  lăsat frameloop-ul motion să bată la 60fps în gol
+- [x] Directiva `"use client"` — **nu exista** în fișierul autorului (nu e Next.js), deci nimic de scos
+- [x] **Nu e montată nicaieri** și nu am creat niciun demo — rămâne disponibilă în codebase, nefolosită
+- [x] `npm run build` — trece: 1633 module, 276.71 kB js (**88.73 kB gzip**), 20.64 kB css (4.87 kB gzip)
+- **Cost la bundle: 0.00 kB JS.** Baseline (fără cele 2 fișiere): js 88.73 kB gzip / css 4.81 kB.
+  După `npm install motion` + fișierele: js 88.73 kB gzip / css 4.87 kB. Diferența de JS e zero pentru
+  că componenta nu e importată de nimeni → Vite o tree-shake-uiește complet, iar `motion` nu intră în
+  graf. CSS-ul a crescut +0.06 kB doar pentru că Tailwind scanează clasele din fișierele noi
+  (`absolute`, `will-change-transform` etc.)
+- Notă: pentru că am ales bucla rAF directă, componenta **nu mai importă motion**. Deci `motion` e acum
+  o dependență declarată dar nefolosită (0 kB, tree-shake). O las în `package.json` (a fost cerută
+  explicit); dacă vrei s-o scoți, `npm uninstall motion` — nu afectează build-ul
+- Commit: `4906ecb` (fără push)
+
 
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]
