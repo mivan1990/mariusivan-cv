@@ -326,4 +326,17 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - [ ] Verificare vizuală în browser (pozițiile cardurilor, suprapuneri, Dialog) — rămâne la F2
 - Commit: `b8f5370` (fără push)
 
+#### 13:18 — Experience: fundal dark, centru golit, carduri dense
+- [x] `src/components/sections/Experience.tsx` rescris — singurul fișier atins
+- [x] **Fundal întunecat pe toată secțiunea**: `className="dark bg-background text-foreground"` pe `<Section>` (darkMode `class` → tokenii se redefinesc, toți copiii devin dark indiferent de tema utilizatorului); prop-ul `alt` eliminat (conflict cu fundalul)
+- [x] **Centrul golit**: rămâne doar numele companiei (`text-4xl sm:text-5xl font-bold tracking-tight`, centrat) + sub el rolul și perioada pe o linie mică (`text-sm text-muted-foreground`). Cardul mare cu iconiță, intro și blocul de proiect a dispărut din centru
+- [x] **Text mutat sub zona plutitoare**: fraza de intro (`intro` + `introStrong` îngroșat + `introTail`) + blocul de proiect (`projectHeading`, `projectBody`, `projectBodyStrong`) — bloc centrat `max-w-3xl` sub zona `min-h-[560px]`. Nimic pierdut
+- [x] **Carduri mai mari + dense**: `px-4 py-2.5 text-sm rounded-lg` (erau deja), poziții procentuale variate cu banda centrală (top ~30–65%, left ~25–75%) ținută liberă; depth-uri 0.5–2 (erau 0.3–0.9) → mișcare max ~72px pe 1440px; `<Floating sensitivity={0.5}>` neschimbat; zona `md:min-h-[560px]`
+- [x] **Contrast (regula F3)**: zero `text-primary` pe text citit — rol/perioadă, intro, proiect, heading-urile și pastilele techGroups (`text-primary` → `text-foreground`, tint-ul `bg-primary/8` rămâne ca accent non-text). Primary rămâne doar pe iconițe/puncte decorative
+- [x] Păstrate: Dialog la click, grila mobilă (`md:hidden`), `techGroups` dedesubt, `<Section id="experience">`, `<SectionHeading>`, butoane `<button>` cu focus-visible
+- [x] `npm run build` — trece: 1675 module, 302.97 kB js (97.56 kB gzip), 23.90 kB css (5.28 kB gzip)
+- [ ] Verificare vizuală în browser (poziții carduri, suprapuneri, aspect dark) — rămâne la F2
+- Notă: eyebrow-ul din `SectionHeading` (în `shared.tsx`, neatins) rămâne `text-primary` — e text mic; dacă auditul F3 se aplică strict pe toată pagina, e un candidat de schimbat acolo
+- Commit: `f8ba728` (fără push)
+
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]
