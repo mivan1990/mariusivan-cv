@@ -339,4 +339,16 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - Notă: eyebrow-ul din `SectionHeading` (în `shared.tsx`, neatins) rămâne `text-primary` — e text mic; dacă auditul F3 se aplică strict pe toată pagina, e un candidat de schimbat acolo
 - Commit: `f8ba728` (fără push)
 
+### 2026-09-06
+
+#### 16:40 — Centrul hărții Experience: poză + nume
+- [x] `src/components/sections/Experience.tsx` — blocul central e acum, de sus în jos: **poză**, `personName`, `company`, `role · period`. Înainte era doar compania la 2.75rem
+- [x] **Poza e placeholder**: `public/profile-placeholder.svg` (desen generic, 320×320, fără dependință de rețea). Randată 144px pe desktop, 112px pe mobil, `rounded-full` + `border-border`. `alt=""` cât timp e desen generic — la poza reală se pune alt descriptiv
+- [x] `src/i18n/translations.ts` — cheie nouă `experience.personName` = `Ivan Marius`, în interfață + EN + RO. (Utilizatorul a scris „Ivan Marus"; am corectat typo-ul din nume, dar am păstrat ordinea nume-prenume cerută de el, care diferă de `hero.name` = „Marius Ivan")
+- [x] **Blocul central s-a îngustat de la 680px la 420px** — compania nu mai e cel mai mare element, deci se poate rupe pe două rânduri; rămâne mai mult loc pentru cardurile plutitoare
+- [x] Verificat în Chrome real la 768/1024/1280/1440/1920 + mobil 390: poza se încarcă, zero carduri peste blocul central, zero suprapuneri între carduri, zero erori în consolă, fără scroll orizontal
+- [x] `npm run build` — trece: 303.36 kB js (97.69 kB gzip), 24.01 kB css (5.32 kB gzip)
+- Commit: `6961042` (fără push)
+- Notă: commit-ul `60f9c23` (5 sept, lățirea blocului central la 680px) **nu a fost notat aici** de sesiunea care l-a făcut — regula din AGENTS.md cere și notă în vault, nu doar commit
+
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]
