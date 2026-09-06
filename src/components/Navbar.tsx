@@ -33,9 +33,10 @@ export function Navbar() {
     <header
       className={cn(
         'fixed inset-x-0 top-0 z-50 transition-all duration-300',
+        // peste Hero-ul intunecat, navbar-ul transparent are nevoie de tokenii dark ca textul sa se vada
         scrolled
           ? 'border-b border-border/60 bg-background/80 backdrop-blur-md'
-          : 'bg-transparent'
+          : 'dark bg-transparent text-foreground'
       )}
     >
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">

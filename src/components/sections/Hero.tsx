@@ -3,6 +3,7 @@ import { useReveal } from '@/hooks/useReveal'
 import { useCountUp } from '@/hooks/useCountUp'
 import { useTyping } from '@/hooks/useTyping'
 import Floating, { FloatingElement } from '@/components/ui/parallax-floating'
+import { FloatingPaths } from '@/components/ui/floating-paths'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { Globe, FolderOpen, Download } from 'lucide-react'
@@ -11,7 +12,7 @@ function StatBox({ value, label }: { value: string; label: string }) {
   const { ref, text } = useCountUp(value)
   return (
     <div ref={ref} className="rounded-xl border border-border/70 bg-card/60 px-4 py-3">
-      <div className="font-mono-code text-2xl font-bold text-primary sm:text-3xl">{text}</div>
+      <div className="font-mono-code text-2xl font-bold text-foreground sm:text-3xl">{text}</div>
       <div className="mt-1 text-xs leading-snug text-muted-foreground sm:text-sm">{label}</div>
     </div>
   )
@@ -27,25 +28,29 @@ export function Hero() {
   // sensitivity 0.5: blobA (depth 0.4) = max 14.4px, blobB (depth 0.8) = max 28.8px.
 
   return (
-    <section id="hero" className="relative overflow-hidden px-5 pb-16 pt-28 sm:pb-24 sm:pt-36">
-      {/* fundal decorativ — raze subtile, fără imagini externe */}
+    <section id="hero" className="dark bg-background text-foreground relative overflow-hidden px-5 pb-16 pt-28 sm:pb-24 sm:pt-36">
+      {/* fundal decorativ — linii curbate care se deseneaza lent, fara imagini externe */}
       <Floating
-        className="pointer-events-none -z-10"
+        className="pointer-events-none absolute inset-0 z-0"
         sensitivity={0.5}
       >
-        <FloatingElement depth={0.4} className="-left-24 -top-24">
-          <div className="h-72 w-72 rounded-full bg-primary/8 blur-3xl" />
+        <FloatingElement depth={0.4} className="inset-0 h-full w-full">
+          <div className="h-full w-full text-foreground [mask-image:linear-gradient(to_right,transparent_0%,black_55%)] [-webkit-mask-image:linear-gradient(to_right,transparent_0%,black_55%)]">
+            <FloatingPaths />
+          </div>
         </FloatingElement>
-        <FloatingElement depth={0.8} className="right-0 top-1/3">
-          <div className="h-60 w-60 rounded-full bg-primary/6 blur-3xl" />
+        <FloatingElement depth={0.8} className="inset-0 h-full w-full">
+          <div className="h-full w-full text-foreground opacity-60 [mask-image:linear-gradient(to_right,transparent_0%,black_55%)] [-webkit-mask-image:linear-gradient(to_right,transparent_0%,black_55%)]">
+            <FloatingPaths />
+          </div>
         </FloatingElement>
       </Floating>
 
-      <div ref={ref} className={cn('reveal mx-auto max-w-6xl', visible && 'is-visible')}>
+      <div ref={ref} className={cn('reveal relative z-10 mx-auto max-w-6xl', visible && 'is-visible')}>
         <div className="grid items-center gap-12 lg:grid-cols-[1.3fr_1fr]">
           <div>
             <div className="mb-5 flex items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/8 px-3 py-1 text-xs font-semibold text-primary">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-muted/50 px-3 py-1 text-xs font-semibold text-muted-foreground">
                 <span className="h-1.5 w-1.5 rounded-full bg-primary" />
                 {t.hero.eyebrow}
               </span>
@@ -78,7 +83,7 @@ export function Hero() {
 
             <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
               <span className="text-foreground">{t.hero.tagline}</span>{' '}
-              <span className="font-semibold text-foreground underline decoration-primary/50 decoration-2 underline-offset-4 animate-shimmer">
+              <span className="font-semibold text-foreground underline decoration-foreground/30 decoration-2 underline-offset-4 animate-shimmer">
                 {t.hero.taglineStrong}
               </span>{' '}
               <span className="inline-flex items-center gap-1.5">
