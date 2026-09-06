@@ -35,7 +35,7 @@ export function Skills() {
               {g.items.map((it) => (
                 <span
                   key={it}
-                  className="rounded-lg bg-primary/8 px-2.5 py-1 text-sm font-medium text-primary transition hover:bg-primary/15"
+                  className="rounded-lg bg-muted px-2.5 py-1 text-sm font-medium text-foreground transition hover:bg-muted-foreground/15"
                 >
                   {it}
                 </span>

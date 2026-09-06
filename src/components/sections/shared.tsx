@@ -21,8 +21,8 @@ export function SectionHeading({
   return (
     <div ref={ref} className={cn('reveal mb-10 sm:mb-14', className, visible && 'is-visible')}>
       <div className="mb-3 flex items-center gap-2">
-        <span className="h-px w-8 bg-primary/60" />
-        <span className="font-mono-code text-xs font-semibold uppercase tracking-[0.18em] text-primary">
+        <span className="h-px w-8 bg-foreground/25" />
+        <span className="font-mono-code text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
           {eyebrow}
         </span>
       </div>

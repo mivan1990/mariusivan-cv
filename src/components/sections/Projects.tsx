@@ -61,7 +61,7 @@ function ProjectCard({
           {project.stack.map((s) => (
             <span
               key={s}
-              className="rounded-md bg-primary/8 px-2 py-0.5 text-xs font-medium text-primary"
+              className="rounded-md bg-muted px-2 py-0.5 text-xs font-medium text-foreground"
             >
               {s}
             </span>
