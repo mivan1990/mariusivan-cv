@@ -351,4 +351,17 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - Commit: `6961042` (fără push)
 - Notă: commit-ul `60f9c23` (5 sept, lățirea blocului central la 680px) **nu a fost notat aici** de sesiunea care l-a făcut — regula din AGENTS.md cere și notă în vault, nu doar commit
 
+#### 17:20 — Harta Experience: proiecte cu poze în loc de module
+- [x] Cerința lui Marius: în jurul pozei lui să plutească **poze de proiect** cu numele dedesubt, nu cardurile cu modulele Laravel
+- [x] **6 elemente**: Portfolio XP, CS2 Leaderboard, Fortuna WC2026, Votează Liga 2, FEGBet, Intranet (ultimele trei nu existau nicăieri în CV — le-a dat el acum). Pozele sunt placeholder: `public/projects/*.svg`, câte o nuanță fiecare, ca să se citească ca șase lucruri diferite
+- [x] **Modulele nu s-au pierdut**: coboară sub hartă ca grilă normală pe două coloane, cu textul detaliat vizibil fără click. Deci Dialog-ul dispare din secțiune — `src/components/ui/dialog.tsx` **rămâne în proiect dar nu-l mai importă nimeni**
+- [x] Trei dimensiuni și trei proporții diferite (4/3, 3/4, pătrat) — uniformitatea cardurilor era motivul principal pentru care harta se citea ca listă, nu ca in referință
+- [x] **Sub `lg` pozele se micșorează**: la 768 și 1024 cele mari intrau peste blocul central și una peste alta (măsurat, nu presupus)
+- [x] Verificat în Chrome real la 768/1024/1280/1440/1920 + mobil 390: zero suprapuneri, zero imagini rupte, zero erori, parallax activ, iar cu `prefers-reduced-motion` toate transformările sunt zero
+- [x] **Acoperirea cadrului: 6.5% → 18.9%** (referința lui Marius are 24.7%, măsurat pe pixeli). Asta era cea mai mare diferență față de poză
+- [x] `npm run build` — trece, și **bundle-ul scade**: 97.57 → 89.80 kB gzip, fiindcă Radix Dialog nu mai intră în graf
+- Commit: `5dcdd7f` (fără push)
+- **Cine a scris codul**: taskurile au rulat pe modelul local (Qwen prin hermes), în patru bucăți mici — i18n, cele 6 SVG-uri, rescrierea hărții, apoi corecțiile de layout. Verificarea în browser și măsurătorile sunt făcute separat, nu de model
+- Notă: la taskul cu SVG-urile modelul a scris fișierele în `~/public/projects/` în loc de `public/projects/` din proiect (a folosit cale relativă la home). Le-am mutat manual; a rămas un director gol `~/public` — se șterge cu `rmdir ~/public`
+
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]
