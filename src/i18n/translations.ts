@@ -17,6 +17,11 @@ export interface Responsibility {
   detail: string
 }
 
+interface MapItem {
+  name: string
+  img: string
+}
+
 export interface Project {
   id: string
   name: string
@@ -62,6 +67,7 @@ export interface Translation {
     heading: string
     sub: string
     personName: string
+    mapItems: MapItem[]
     company: string
     role: string
     period: string
@@ -152,6 +158,14 @@ export const translations: Record<Lang, Translation> = {
       heading: 'Experience',
       sub: 'Where I work and what I build.',
       personName: 'Ivan Marius',
+      mapItems: [
+        { name: 'Portfolio XP', img: '/projects/portfolio-xp.svg' },
+        { name: 'CS2 Leaderboard', img: '/projects/cs2-leaderboard.svg' },
+        { name: 'Fortuna WC2026', img: '/projects/fortuna-wc2026.svg' },
+        { name: 'Votează Liga 2', img: '/projects/voteaza-liga2.svg' },
+        { name: 'FEGBet', img: '/projects/fegbet.svg' },
+        { name: 'Intranet', img: '/projects/intranet.svg' },
+      ],
       company: 'FEG Group — Fortuna Entertainment Group',
       role: 'Junior Developer',
       period: 'January 2023 — Present',
@@ -384,6 +398,14 @@ export const translations: Record<Lang, Translation> = {
       heading: 'Experiență',
       sub: 'Unde lucrez și ce construiesc.',
       personName: 'Ivan Marius',
+      mapItems: [
+        { name: 'Portfolio XP', img: '/projects/portfolio-xp.svg' },
+        { name: 'CS2 Leaderboard', img: '/projects/cs2-leaderboard.svg' },
+        { name: 'Fortuna WC2026', img: '/projects/fortuna-wc2026.svg' },
+        { name: 'Votează Liga 2', img: '/projects/voteaza-liga2.svg' },
+        { name: 'FEGBet', img: '/projects/fegbet.svg' },
+        { name: 'Intranet', img: '/projects/intranet.svg' },
+      ],
       company: 'FEG Group — Fortuna Entertainment Group',
       role: 'Junior Developer',
       period: 'Ianuarie 2023 — Prezent',

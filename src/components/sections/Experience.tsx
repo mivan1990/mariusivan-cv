@@ -3,49 +3,33 @@ import { useReveal } from '@/hooks/useReveal'
 import { Section, SectionHeading } from './shared'
 import { Card } from '@/components/ui/card'
 import Floating, { FloatingElement } from '@/components/ui/parallax-floating'
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog'
 import { cn } from '@/lib/utils'
 import { CheckCircle2, Code2 } from 'lucide-react'
 
-// 8 pozitii (top/left procentuale), imprastiate DENS in jurul centrului.
-// Banda centrala (top ~30-65%, left ~25-75%) ramane libera pentru textul central.
-// depth-uri 0.5–2 ca miscarea de parallax sa fie vizibila.
-const FLOATING_CARDS = [
-  { pos: 'top-[4%] left-[10%]', depth: 1.4 },
-  { pos: 'top-[9%] left-[70%]', depth: 0.8 },
-  { pos: 'top-[30%] left-[2%]', depth: 1.8 },
-  { pos: 'top-[34%] left-[84%]', depth: 1.1 },
-  { pos: 'top-[62%] left-[4%]', depth: 2 },
-  { pos: 'top-[70%] left-[80%]', depth: 0.7 },
-  { pos: 'top-[88%] left-[24%]', depth: 1.5 },
-  { pos: 'top-[90%] left-[58%]', depth: 0.9 },
+// 6 pozitii (top/left procentuale), imprastiate in jurul centrului.
+// Pozitiile tin banda centrala libera pentru blocul cu poza.
+// Sub 'lg' pozele sunt mai mici, altfel calca peste blocul central.
+const PROJECT_CARDS = [
+  { pos: 'top-[2%] left-[7%]', box: 'w-32 lg:w-44 aspect-[4/3]', depth: 1.4 },
+  { pos: 'top-[4%] left-[73%]', box: 'w-24 lg:w-36 aspect-[3/4]', depth: 0.8 },
+  { pos: 'top-[46%] left-[1%]', box: 'w-28 lg:w-40 aspect-square', depth: 1.8 },
+  { pos: 'top-[76%] left-[17%]', box: 'w-24 lg:w-32 aspect-square', depth: 1.1 },
+  { pos: 'top-[40%] left-[76%]', box: 'w-24 lg:w-36 aspect-[3/4]', depth: 2 },
+  { pos: 'top-[72%] left-[56%]', box: 'w-32 lg:w-48 aspect-[4/3]', depth: 0.7 },
 ]
 
-const CARD_BUTTON =
-  'rounded-lg border border-border bg-card px-4 py-2.5 text-sm font-medium shadow-sm transition hover:border-primary/40 hover:bg-primary/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background'
-
-function ResponsibilityCard({ title, detail }: { title: string; detail: string }) {
+function ProjectPhoto({ name, img, box }: { name: string; img: string; box: string }) {
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <button type="button" className={CARD_BUTTON}>
-          {title}
-        </button>
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-md">
-        <DialogHeader>
-          <DialogTitle>{title}</DialogTitle>
-          <DialogDescription>{detail}</DialogDescription>
-        </DialogHeader>
-      </DialogContent>
-    </Dialog>
+    <figure className="select-none">
+      <img
+        src={img}
+        alt=""
+        loading="lazy"
+        decoding="async"
+        className={cn('rounded-xl border border-border object-cover shadow-sm', box)}
+      />
+      <figcaption className="mt-2 text-center text-xs font-medium text-foreground">{name}</figcaption>
+    </figure>
   )
 }
 
@@ -61,12 +45,7 @@ export function Experience() {
       <div ref={ref} className={cn('reveal space-y-8', visible && 'is-visible')}>
         {/* responsabilități */}
         <div>
-          <div className="mb-4 flex items-center gap-2">
-            <CheckCircle2 className="h-4 w-4 text-primary" />
-            <h3 className="font-semibold">{e.responsibilitiesHeading}</h3>
-          </div>
-
-          <div className="relative md:min-h-[560px]">
+          <div className="relative md:min-h-[680px]">
             {/* bloc central — static pe mobil, centrat + z-10 pe desktop.
                 Poza, sub ea numele, apoi compania si rolul/perioada.
                 Latimea e mica intentionat (numele companiei se rupe pe doua randuri):
@@ -98,25 +77,39 @@ export function Experience() {
               </div>
             </div>
 
-            {/* harta — carduri plutitoare, doar desktop */}
+            {/* harta — poze plutitoare, doar desktop */}
             <Floating sensitivity={0.5} className="absolute inset-0 hidden md:block">
-              {e.responsibilities.map((r, i) => (
+              {e.mapItems.map((item, i) => (
                 <FloatingElement
-                  key={r.title}
-                  depth={FLOATING_CARDS[i].depth}
-                  className={cn('absolute', FLOATING_CARDS[i].pos)}
+                  key={item.name}
+                  depth={PROJECT_CARDS[i].depth}
+                  className={cn('absolute', PROJECT_CARDS[i].pos)}
                 >
-                  <ResponsibilityCard title={r.title} detail={r.detail} />
+                  <ProjectPhoto name={item.name} img={item.img} box={PROJECT_CARDS[i].box} />
                 </FloatingElement>
               ))}
             </Floating>
 
             {/* mobil — grila normala, nimic nu pluteste */}
-            <div className="mt-8 grid gap-3 sm:grid-cols-2 md:hidden">
-              {e.responsibilities.map((r) => (
-                <ResponsibilityCard key={r.title} title={r.title} detail={r.detail} />
+            <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 md:hidden">
+              {e.mapItems.map((item) => (
+                <ProjectPhoto key={item.name} name={item.name} img={item.img} box="w-full aspect-[4/3]" />
               ))}
             </div>
+          </div>
+
+          {/* responsabilități — grila normala sub harta */}
+          <div className="mt-12 mb-4 flex items-center gap-2">
+            <CheckCircle2 className="h-4 w-4 text-primary" />
+            <h3 className="font-semibold">{e.responsibilitiesHeading}</h3>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {e.responsibilities.map((r) => (
+              <Card key={r.title} className="px-5 py-4">
+                <div className="text-sm font-semibold text-foreground">{r.title}</div>
+                <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{r.detail}</p>
+              </Card>
+            ))}
           </div>
 
           {/* intro + proiect — sub zona plutitoare, bloc centrat */}
