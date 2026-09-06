@@ -364,4 +364,21 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - **Cine a scris codul**: taskurile au rulat pe modelul local (Qwen prin hermes), în patru bucăți mici — i18n, cele 6 SVG-uri, rescrierea hărții, apoi corecțiile de layout. Verificarea în browser și măsurătorile sunt făcute separat, nu de model
 - Notă: la taskul cu SVG-urile modelul a scris fișierele în `~/public/projects/` în loc de `public/projects/` din proiect (a folosit cale relativă la home). Le-am mutat manual; a rămas un director gol `~/public` — se șterge cu `rmdir ~/public`
 
+#### 18:05 — Hero și footer închise la culoare, albastrul redus
+- [x] Cerința: „nu îmi place cum e cu albastru sus și jos în footer" + „vezi pe 21st.dev ce putem lua". Marius a lăsat alegerile pe mine
+- [x] **Diagnostic**, măsurat în cod: `--primary` (indigo `#352CDD`) făcea patru munci deodată — marcă de brand, eyebrow de secțiune, cifră importantă și decor de listă. Cel mai rău arăta jos: **28 de pastile albastre** în Skills, una lângă alta, chiar înainte de footer
+- [x] **Albastrul rămâne doar pe acțiune și identitate**: butonul principal, marca `MI`, punctele decorative și badge-urile de status din Projects. Eyebrow-urile (`shared.tsx`), pastilele din Skills și Projects, cifrele din Hero → neutre
+- [x] **Hero și footer primesc clasa `dark`**, ca Experience. Motivul: banda neagră din mijlocul unei pagini albe arăta a greșeală; cu capetele închise devine intenție
+- [x] **Luat de pe 21st.dev, rescris, nu copiat**:
+  - `FloatingPaths` (după *Floating Paths*, autor Bundui) — 24 de curbe subțiri care se desenează o dată. Originalul folosește framer-motion, pe care proiectul l-a scos intenționat; aici animația e `stroke-dashoffset` din CSS, deci **zero dependințe noi**. Se oprește complet la `prefers-reduced-motion`
+  - footer-ul (după *Large Name Footer*, autor Arihant jain) — numele la 13vw pe toată lățimea, `aria-hidden` fiindcă numele e deja `h1` în Hero
+- [x] **Trei bug-uri prinse testând în browser, nu din cod**:
+  1. Numele din navbar era negru pe negru. Clasa `.dark` redefinește variabilele, dar un element fără clasă de culoare moștenește culoarea deja calculată de pe `body` — deci navbar-ul are nevoie și de `text-foreground`
+  2. Liniile nu se vedeau deloc: `<Floating>` avea `-z-10`, deci stătea **în spatele fundalului propriu al secțiunii** (secțiunea are acum `bg-background`). Trecut pe `z-0` + conținutul pe `relative z-10`
+  3. Liniile treceau peste „Backend & Full-Stack Developer" ca o tăietură. Rezolvat cu `mask-image` care le stinge peste coloana din stânga, plus opacitate scăzută (0.04–0.12)
+- [x] Verificat: fără scroll orizontal (desktop și mobil), zero erori în consolă, `prefers-reduced-motion` oprește animația (`animation: none`, `stroke-dashoffset: 0`), navbar-ul comută corect între transparent-dark și opac-light
+- [x] `npm run build` — trece: 90.12 kB gzip JS (+0.3 kB față de înainte, tot costul componentei noi), 5.55 kB CSS
+- Commit-uri: `1b103f8` (fundal închis + componentele de pe 21st.dev), `dd3ae66` (albastrul) — fără push
+- **Cine a scris codul**: șase taskuri mici pe modelul local (Qwen prin hermes), cu serverul repornit înainte de fiecare. Testarea în browser, diagnosticul celor trei bug-uri și măsurătorile sunt separate, nu de model
+
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]
