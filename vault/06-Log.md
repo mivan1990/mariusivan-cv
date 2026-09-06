@@ -381,4 +381,20 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - Commit-uri: `1b103f8` (fundal închis + componentele de pe 21st.dev), `dd3ae66` (albastrul) — fără push
 - **Cine a scris codul**: șase taskuri mici pe modelul local (Qwen prin hermes), cu serverul repornit înainte de fiecare. Testarea în browser, diagnosticul celor trei bug-uri și măsurătorile sunt separate, nu de model
 
+#### 19:30 — CV-ul devine un singur ecran cu carduri plutitoare
+- [x] Cerința: „cum arată în 21st.dev/@danielpetho/components/parallax-floating, dar cu pozele alea". Marius a ales: **fără navbar, fără hero, fără footer**; butoanele și cifrele din hero **dispar**; conținutul de sub hartă intră **în cardul companiei** (adică în dialogul „Intranet")
+- [x] **Structura nouă**: un singur `<Section id='experience'>` pe toată înălțimea ecranului. În centru poza + numele + compania + rolul; în jur **9 elemente plutitoare**, fiecare buton care deschide propriul Dialog
+  - 6 poze de proiect (Portfolio XP, CS2 Leaderboard, Fortuna WC2026, Votează Liga 2, FEGBet, Intranet)
+  - 3 plăcuțe cu iconiță: Skills, Contact, FAQ
+- [x] **Nimic nu s-a pierdut**: corpurile dialogurilor sunt în `src/components/map/panels.tsx`, portate din componentele de secțiune, nu rescrise. Dialogul „Intranet" ține overview-ul, cele 8 responsabilități și grupele de tehnologii
+- [x] `main.tsx`: rămân doar `<Experience />`, `LanguageToggle` (colț dreapta-sus) și `CursorTrail`
+- [x] **Bug prins în browser**: dialogurile se deschideau ALBE pe pagina neagră. Radix randează dialogul într-un portal atașat la `<body>`, deci în afara containerului cu clasa `dark`. Rezolvat mutând `dark` pe `<html>` în `index.html` — tema e globală acum, site-ul e dark-only
+- [x] **Prima rulare a picat cu `insufficient memory ... during prefill`** (modelul local, task prea mare). Repornit serverul complet și reîmpărțit taskul în bucăți mai mici — a doua rulare a trecut
+- [x] Verificat la 768/1024/1280/1440/1920 + mobil 390: 9 carduri, zero suprapuneri (peste centru sau între ele), zero elemente ieșite din cadru, zero imagini rupte, **pagina exact cât ecranul** (900 = 900), fără scroll orizontal, Tab ajunge pe carduri și Enter deschide dialogul, zero erori în consolă
+- [x] **Acoperirea cadrului: 28.7%** (referința are 24.7% — acum e chiar mai densă decât modelul)
+- [x] `npm run build` — trece: 94.43 kB gzip (crește față de 90.12 fiindcă Radix Dialog reintră în graf)
+- Commit: `597ac88` (fără push)
+- **Rămân nefolosite** (nu le-am șters, tree-shaking le scoate oricum din bundle): `Navbar.tsx`, `Hero.tsx`, `Footer.tsx`, `Projects.tsx`, `Skills.tsx`, `Contact.tsx`, `Faq.tsx` și hook-urile `useTyping`, `useCountUp`, `useParallax`
+- **De discutat cu Marius**: „Download CV" (`window.print()`) era în hero și a dispărut o dată cu el — nu mai există niciun mod de a tipări CV-ul, iar conținutul din dialoguri nu se tipărește
+
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]
