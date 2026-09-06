@@ -1,0 +1,13 @@
+<!-- Placeholder pentru poza de profil din sectiunea Experience.
+     Se inlocuieste cu poza reala (public/profile.jpg) cand e gata. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" width="320" height="320">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#26262f" />
+      <stop offset="1" stop-color="#16161b" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="320" fill="url(#bg)" />
+  <circle cx="160" cy="124" r="54" fill="#3c3c48" />
+  <path d="M160 198c-56 0-101 37-101 82v40h202v-40c0-45-45-82-101-82z" fill="#3c3c48" />
+</svg>

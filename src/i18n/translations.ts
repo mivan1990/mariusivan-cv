@@ -61,6 +61,7 @@ export interface Translation {
   experience: {
     heading: string
     sub: string
+    personName: string
     company: string
     role: string
     period: string
@@ -150,6 +151,7 @@ export const translations: Record<Lang, Translation> = {
     experience: {
       heading: 'Experience',
       sub: 'Where I work and what I build.',
+      personName: 'Ivan Marius',
       company: 'FEG Group — Fortuna Entertainment Group',
       role: 'Junior Developer',
       period: 'January 2023 — Present',
@@ -381,6 +383,7 @@ export const translations: Record<Lang, Translation> = {
     experience: {
       heading: 'Experiență',
       sub: 'Unde lucrez și ce construiesc.',
+      personName: 'Ivan Marius',
       company: 'FEG Group — Fortuna Entertainment Group',
       role: 'Junior Developer',
       period: 'Ianuarie 2023 — Prezent',

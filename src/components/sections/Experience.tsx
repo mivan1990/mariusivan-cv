@@ -68,16 +68,29 @@ export function Experience() {
 
           <div className="relative md:min-h-[560px]">
             {/* bloc central — static pe mobil, centrat + z-10 pe desktop.
-                Doar compania (mare) + rol/perioada (mic), nimic altceva. */}
-            {/* Latimea e generoasa intentionat: numele companiei e lung si, intr-un
-                container ingust, se rupea in patru randuri si devenea o coloana
-                inalta care domina toata sectiunea. Asa incape pe doua. */}
-            <div className="md:absolute md:left-1/2 md:top-1/2 md:z-10 md:w-[min(680px,66%)] md:-translate-x-1/2 md:-translate-y-1/2">
-              <div className="text-center">
-                <div className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl md:text-[2.75rem] md:leading-[1.1]">
+                Poza, sub ea numele, apoi compania si rolul/perioada.
+                Latimea e mica intentionat (numele companiei se rupe pe doua randuri):
+                asa ramane loc pentru cardurile care plutesc in jur. */}
+            <div className="md:absolute md:left-1/2 md:top-1/2 md:z-10 md:w-[min(420px,44%)] md:-translate-x-1/2 md:-translate-y-1/2">
+              <div className="flex flex-col items-center text-center">
+                {/* PLACEHOLDER — inlocuieste cu poza reala si pune un alt descriptiv
+                    (ex. alt={e.personName}). Cat timp e desen generic, alt gol e corect. */}
+                <img
+                  src="/profile-placeholder.svg"
+                  alt=""
+                  width={144}
+                  height={144}
+                  loading="lazy"
+                  decoding="async"
+                  className="h-28 w-28 rounded-full border border-border object-cover sm:h-36 sm:w-36"
+                />
+                <div className="mt-4 text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+                  {e.personName}
+                </div>
+                <div className="mt-2 text-base font-semibold leading-snug text-foreground sm:text-lg">
                   {e.company}
                 </div>
-                <div className="mt-2 flex flex-wrap items-center justify-center gap-x-2 text-sm text-muted-foreground">
+                <div className="mt-1.5 flex flex-wrap items-center justify-center gap-x-2 text-sm text-muted-foreground">
                   <span className="font-medium">{e.role}</span>
                   <span aria-hidden="true">·</span>
                   <span className="font-mono-code text-xs">{e.period}</span>
