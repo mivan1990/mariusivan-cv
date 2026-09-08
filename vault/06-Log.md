@@ -559,4 +559,15 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - Commit: `761148c` (fără push)
 - Notă: călătoria completă durează acum ~20s (4 salturi × 5s). „Skip to the CV" rămâne disponibil tot timpul
 
+#### 20:55 — Warp-ul refăcut ca starfield real, pe canvas
+- [x] Marius: dungile albe nu arătau bine. Aveau dreptate — erau 90 de linii SVG fixe, iar tot stratul era scalat dintr-un keyframe. Toate creșteau în același ritm, din același desen: se citea ca un zoom pe o poză, nu ca deplasare
+- [x] **Căutat pe web cum se face corect.** Toate sursele descriu același algoritm clasic de „starfield flythrough": fiecare stea are **propriul z**, se apropie de cameră în fiecare cadru, se proiectează cu `x * focal / z`, iar dâra e linia dintre poziția de acum câteva cadre și cea curentă. Stelele apropiate lasă dâre lungi și strălucitoare, cele depărtate abia se mișcă
+- [x] `warp.tsx` rescris pe **canvas + requestAnimationFrame**: 420 de stele, focal 320, adâncime 1400, rampă sinus pe cele 5 secunde, deci câmpul accelerează și frânează odată cu camera
+- [x] **O abatere deliberată de la tutoriale**: ele obțin dârele pictând un dreptunghi negru semi-transparent peste cadrul anterior. La noi ar fi construit un voal opac peste câmpul de stele static, care e alt strat dedesubt. Așa că șterg canvas-ul la fiecare cadru și obțin lungimea extrapolând z-ul anterior
+- [x] Verificat în browser: canvas-ul apare doar în timpul saltului (0 înainte, 0 după), la 2.5s are pixeli aprinși cu alfa maximă 255, iar la 4.8s se stinge singur prin rampă. Cu `prefers-reduced-motion` nu se desenează nimic — efectul iese înainte să dimensioneze canvas-ul. Zero erori
+- [x] Șterse din `index.css` regulile `.warp-streaks-*` și keyframes-urile lor, care nu mai sunt folosite
+- [x] `npm run build` — trece
+- Commit: `e3fcf59` (fără push)
+- Surse: slicker.me/javascript/starfield_flythrough.htm, kevs3d.co.uk/dev/warpfield/, sunshine2k.de (efect starfield)
+
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]
