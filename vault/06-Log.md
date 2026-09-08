@@ -441,4 +441,14 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - [x] `npm run build` — trece
 - Commit: `df3c4d1` (fără push)
 
+#### 15:45 — Cardul „Votează Liga 2" primește link către site
+- [x] `url: 'https://voteazaliga2.casapariurilor.ro'` în ambele intrări din `mapItems` (EN + RO). Domeniul rezolvă (172.64.144.205, Cloudflare) — verificat înainte
+- [x] Mecanismul exista deja de la FEGBet (câmpul `url` + butonul randat de `MapCard`), deci a fost doar de legat
+- [x] **Eticheta butonului schimbată**: cheie nouă `projects.visitSite` — „Visit site" / „Vizitează site-ul". Site-urile astea sunt producție, nu demo-uri. Butoanele randate de `ProjectPanel` pentru cele trei proiecte din CV rămân „Live demo", că acolo chiar sunt demo-uri
+- [x] Verificat în Chrome: click pe card = **nu se deschide filă nouă**, se deschide dialogul cu butonul „Visit site" → linkul corect; la fel FEGBet; Portfolio XP neatins (își păstrează Live demo + View repo); pe RO butonul scrie „Vizitează site-ul"; zero erori
+- [x] `npm run build` — trece
+- Commit: `8a47908` (fără push)
+- **Rămâne**: Marius a trimis două logo-uri (scutul Casa Pariurilor LIGA 2 și bannerul roșu „casa pariurilor") ca imagini în chat, nu ca fișiere — nu pot fi salvate din conversație. Trebuie fișierele pe disc, de preferat vectorul oficial; o trasare de mână după PNG ar arăta prost, mai ales emblema FRF din scut
+- **Rămâne**: corpul dialogului zice tot „Coming soon" și pentru Liga 2, și pentru FEGBet — lipsesc textele (rol, status, descriere, stack)
+
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]
