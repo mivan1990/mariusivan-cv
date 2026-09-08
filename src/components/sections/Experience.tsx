@@ -30,7 +30,7 @@ const MAP_ITEMS = [
   { key: 'fortuna-wc2026',  kind: 'photo', pos: 'top-[38%] left-[1%]',  box: 'w-28 lg:w-40 aspect-square', depth: 1.8 },
   { key: 'fegbet',          kind: 'photo', pos: 'top-[34%] left-[78%]', box: 'w-32 lg:w-44 aspect-square', depth: 2 },
   { key: 'contact',         kind: 'tile',  pos: 'top-[70%] left-[8%]',  box: 'w-24 lg:w-32 aspect-square', depth: 1.2 },
-  { key: 'voteaza-liga2',   kind: 'photo', pos: 'top-[76%] left-[30%]', box: 'w-24 lg:w-32 aspect-square', depth: 1.1 },
+  { key: 'voteaza-liga2',   kind: 'photo', pos: 'top-[73%] left-[30%]', box: 'w-24 lg:w-32 aspect-[31/35]', depth: 1.1 },
   { key: 'intranet',        kind: 'photo', pos: 'top-[74%] left-[54%]', box: 'w-32 lg:w-48 aspect-[4/3]',  depth: 0.7 },
   { key: 'faq',             kind: 'tile',  pos: 'top-[72%] left-[80%]', box: 'w-24 lg:w-28 aspect-square', depth: 1.5 },
 ]
@@ -44,11 +44,12 @@ interface MapCardData {
   visual: ReactNode
   panel: ReactNode
   url?: string
+  headerImg?: string
   t: Translation
 }
 
 // Componenta interna MapCard(label, visual, children).
-function MapCard({ label, visual, panel, url, t }: MapCardData) {
+function MapCard({ label, visual, panel, url, headerImg, t }: MapCardData) {
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -61,6 +62,15 @@ function MapCard({ label, visual, panel, url, t }: MapCardData) {
         </button>
       </DialogTrigger>
       <DialogContent className="max-h-[85vh] overflow-y-auto sm:max-w-2xl">
+        {headerImg && (
+          <img
+            src={headerImg}
+            alt=""
+            loading="lazy"
+            decoding="async"
+            className="mb-1 w-full rounded-lg"
+          />
+        )}
         <DialogHeader>
           <DialogTitle>{label}</DialogTitle>
         </DialogHeader>
@@ -106,6 +116,7 @@ export function Experience() {
         ),
         panel: it.key === 'intranet' ? <IntranetPanel /> : <ProjectPanel id={it.key} />,
         url: item?.url,
+        headerImg: item?.headerImg,
         t,
       }
     }
