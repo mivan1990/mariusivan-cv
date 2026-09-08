@@ -547,4 +547,16 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - [x] `npm run build` — trece
 - Commit: `a019a9a` (fără push)
 
+#### 20:30 — Zbor first-person de 5 secunde între planete
+- [x] Marius: „nu este 3D". Avea dreptate, și se vedea în cifre: toate planetele stăteau între z = -1200 și -1450, deci trecerea de la una la alta **nu parcurgea nicio distanță reală** — ținta doar aluneca lateral, la aceeași mărime
+- [x] **Culoar în adâncime**: planetele sunt acum la 4000px una de alta pe axa z. Stând la una, următoarea e departe și mică, iar zborul chiar traversează distanța
+- [x] **Măsurat pe saltul RCS & RDS → EA**: diametrul țintei crește 39 → 44 → 92 → 136 → **149px** în cele 5 secunde (de 3.8 ori), și ajunge exact în centru. Planeta de după rămâne vizibilă ca un punct dincolo de ea, iar traseul punctat fuge în depărtare
+- [x] Zborul: 5000ms pe o curbă care pornește lent, accelerează și frânează la sosire
+- [x] Dungile de warp țin tot zborul (5s în loc de 760ms), cu vârful de opacitate devreme, ca ecranul să nu rămână spălăcit
+- [x] **Planetele deja depășite dispar** (opacitate 0) și nu mai primesc click — în spatele camerei ar apărea uriașe
+- [x] **Panoul urmează camera**: textul se stinge la plecare, se schimbă la 4.5s și reapare la sosire, ca să nu citești despre un loc în care încă n-ai ajuns
+- [x] `npm run build` — trece
+- Commit: `761148c` (fără push)
+- Notă: călătoria completă durează acum ~20s (4 salturi × 5s). „Skip to the CV" rămâne disponibil tot timpul
+
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]
