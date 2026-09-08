@@ -494,4 +494,15 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - Notă: comutatorul de limbă apare pe intro (stânga sus) și pe hartă (dreapta sus), dar nu în timpul călătoriei — acolo colțul e ocupat de „Skip to the CV"
 - Notă: alegerea nu se ține minte între vizite; oricine reintră vede iar întrebarea. Dacă deranjează, se salvează în `localStorage`
 
+#### 18:00 — Deplasare prin spațiu + navigare cu scroll
+- [x] Trecerea dintre opriri era un fade simplu — arăta a slideshow, nu a călătorie. Acum fiecare mutare e un „warp": câmpul de stele se repede pe lângă tine (scalează în afară înainte, se retrage înapoi), iar planeta următoare vine din depărtare, mică și neclară, și se așază
+- [x] **Scroll-ul navighează**: roata în jos = oprirea următoare, în sus = înapoi. La fel săgețile, la fel swipe-ul pe touch; butoanele și indicatorii rotunzi merg mai departe
+- [x] **Lock de 780ms** — o mișcare bruscă de trackpad avansează o oprire, nu patru. Verificat: două scroll-uri rapide una după alta mută tot o singură oprire
+- [x] Rând nou sub indicatori cu indiciul „Scroll to travel" / „Derulează ca să călătorești" (cheie nouă `journey.scrollHint`, EN + RO)
+- [x] Curățenie: `MapCard` nu mai primește tot obiectul de traduceri prin props — cheamă singur `useLanguage()`. Importul `Translation` a rămas nefolosit și a fost scos
+- [x] Verificat în Chrome: scroll jos și sus mută câte o oprire, săgeata dreapta la fel, click pe indicator sare direct, iar sub `prefers-reduced-motion` toate cele trei animații (clipit, warp, sosire) dau `animation: none`. Zero erori
+- [x] `npm run build` — trece
+- Commit: `671b11c` (fără push)
+- Notă de proces: Marius a cerut să vadă live ce face modelul. **Hermes în mod one-shot (`-z`) nu streamează** — am verificat în două feluri: rulat sub pseudo-terminal cu `script` (tot doar răspunsul final) și căutat în `hermes logs agent --component tools` (gol). Deci fereastra de Terminal arată acum altceva, real: fișierele atinse și `git diff --stat` care cresc în timp real, plus activitatea serverului local
+
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]
