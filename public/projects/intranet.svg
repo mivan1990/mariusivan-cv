@@ -1,12 +1,18 @@
-<!-- Placeholder: imagine lipsa. Se inlocuieste cu captura reala a proiectului. -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" width="640" height="640">
+<!-- Sigla proiectului Intranet: „FEG” alb, „Intranet” auriu pe fond navy aproape negru.
+     Proporția 4/3 (1080x810) se potrivește cu caseta cardului (aspect-[4/3]),
+     ca să nu se taie nimic cu object-cover. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 810" width="1080" height="810">
   <defs>
     <linearGradient id="g-intranet" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#2c2f36"/>
-      <stop offset="1" stop-color="#16181c"/>
+      <stop offset="0" stop-color="#0b0c16"/>
+      <stop offset="1" stop-color="#070813"/>
     </linearGradient>
   </defs>
-  <rect width="640" height="640" fill="url(#g-intranet)"/>
-  <circle cx="470" cy="170" r="64" fill="#ffffff" opacity="0.35"/>
-  <polygon points="0,640 210,290 350,470 470,330 640,640" fill="#ffffff" opacity="0.35"/>
+  <rect width="1080" height="810" fill="url(#g-intranet)"/>
+  <text x="540" y="340" text-anchor="middle" dominant-baseline="central"
+        font-family="'Inter', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
+        font-size="210" font-weight="600" letter-spacing="26" fill="#ffffff">FEG</text>
+  <text x="540" y="520" text-anchor="middle" dominant-baseline="central"
+        font-family="'Inter', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
+        font-size="120" font-weight="600" letter-spacing="8" fill="#fabc0a">Intranet</text>
 </svg>
