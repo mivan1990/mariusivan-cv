@@ -21,13 +21,11 @@ import { FloatingPaths } from '@/components/ui/floating-paths'
 import { ExternalLink, HelpCircle, Layers, Mail } from 'lucide-react'
 import type { ReactNode } from 'react'
 
-// 9 elemente pe harta (pozitiile top/left sunt procentuale).
+// 7 elemente pe harta (pozitiile top/left sunt procentuale).
 // Pozitiile tin libera banda centrala unde e blocul cu poza.
 const MAP_ITEMS = [
   { key: 'portfolio-xp',    kind: 'photo', pos: 'top-[1%] left-[6%]',   box: 'w-32 lg:w-44 aspect-[4/3]',  depth: 1.4 },
   { key: 'skills',          kind: 'tile',  pos: 'top-[2%] left-[34%]',  box: 'w-24 lg:w-32 aspect-square', depth: 0.9 },
-  { key: 'cs2-leaderboard', kind: 'photo', pos: 'top-[1%] left-[72%]',  box: 'w-24 lg:w-36 aspect-[3/4]',  depth: 0.8 },
-  { key: 'fortuna-wc2026',  kind: 'photo', pos: 'top-[38%] left-[1%]',  box: 'w-28 lg:w-40 aspect-square', depth: 1.8 },
   { key: 'fegbet',          kind: 'photo', pos: 'top-[34%] left-[78%]', box: 'w-32 lg:w-44 aspect-square', depth: 2 },
   { key: 'contact',         kind: 'tile',  pos: 'top-[70%] left-[8%]',  box: 'w-24 lg:w-32 aspect-square', depth: 1.2 },
   { key: 'voteaza-liga2',   kind: 'photo', pos: 'top-[73%] left-[30%]', box: 'w-24 lg:w-32 aspect-[31/35]', depth: 1.1 },
