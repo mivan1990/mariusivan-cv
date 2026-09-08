@@ -505,4 +505,15 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - Commit: `671b11c` (fără push)
 - Notă de proces: Marius a cerut să vadă live ce face modelul. **Hermes în mod one-shot (`-z`) nu streamează** — am verificat în două feluri: rulat sub pseudo-terminal cu `script` (tot doar răspunsul final) și căutat în `hermes logs agent --component tools` (gol). Deci fereastra de Terminal arată acum altceva, real: fișierele atinse și `git diff --stat` care cresc în timp real, plus activitatea serverului local
 
+#### 18:40 — Călătoria devine spațiu 3D cu toate planetele vizibile
+- [x] Cerința: totul într-un spațiu 3D, cu celelalte joburi vizibile în fundal; click pe o planetă sau pe buton te duce acolo
+- [x] **Fără bibliotecă 3D** — perspectivă și transformări CSS. Bundle-ul crește cu 0.4 kB; three.js ar fi costat ~130 kB gzip peste cei 97 de acum
+- [x] Fișier nou `src/components/journey/space.tsx`: cele 5 planete într-o singură scenă cu `perspective: 1000px`, fiecare buton cu `aria-label`, cea aleasă opacă, restul la 0.45
+- [x] **Prima variantă a fost greșită și s-a văzut doar măsurând**: planetele pe un inel de rază 1500, camera rotindu-se în jur. În browser, doar cea focalizată era pe ecran — celelalte cădeau la x = -352, 1442 și 2870, iar cele de pe partea opusă ajungeau **în fața** camerei, unde perspectiva le umflă. Rotația a dispărut: acum e o constelație compactă (lateral ±420, adâncime 500) și camera doar translatează. Re-măsurat: toate cinci pe ecran, oricare ar fi focalizată
+- [x] **A doua problemă prinsă tot la măsurare**: planeta aleasă ieșea mai mică decât vecinele (88px vs 118px), fiindcă diametrele de bază mergeau de la 150 la 250. Acum stă mai aproape (FOCUS_Z 420 în loc de 700) și diametrele sunt între 175 și 240 — e mereu cea mai mare
+- [x] **Lizibilitate**: panoul de text s-a mutat jos, pe un degradat negru, iar eticheta de sub planeta focalizată a dispărut (numele ei e deja scris mare în panou, se suprapuneau)
+- [x] Verificat în Chrome: 5 planete în scenă, toate vizibile, click pe una din fundal (Euronet) mută călătoria acolo, scroll-ul merge mai departe, zero erori
+- [x] `npm run build` — trece: 98.2 kB gzip
+- Commit: `0238e42` (fără push)
+
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]
