@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useLanguage } from '@/hooks/useLanguage';
 import { cn } from '@/lib/utils';
 import { Starfield } from '@/components/journey/starfield';
-import { Space } from '@/components/journey/space';
+import { Space, bankAngle } from '@/components/journey/space';
 import { WarpStreaks } from '@/components/journey/warp';
 
 interface JourneyProps {
@@ -17,6 +17,7 @@ export function Journey({ onFinish }: JourneyProps) {
   const [panelI, setPanelI] = useState(0); // indexul opririi afisata in panoul de text (se schimba la sosire)
   const [warp, setWarp] = useState<null | 'fwd' | 'back'>(null); // directia activa a warp-ului
   const [dir, setDir] = useState<1 | -1>(1); // ultima directie, pt. animatia de sosire
+  const [bank, setBank] = useState(0); // unghiul de inclinare in viraj (aplicat scenei si dârelor)
   const lockRef = useRef(0); // timestamp-ul ultimei deplasare (o singura pe rand)
   const touchYRef = useRef<number | null>(null); // Y-ul de la touchstart, pt. swipe
 
@@ -31,9 +32,10 @@ export function Journey({ onFinish }: JourneyProps) {
     lockRef.current = now
     setDir(d)
     setWarp(d === 1 ? 'fwd' : 'back')
+    setBank(bankAngle(i, target))
     setI(target) // camera porneste in aceeasi clipa cu warp-ul
     window.setTimeout(() => setPanelI(target), 4500) // textul apare la sosire
-    window.setTimeout(() => setWarp(null), 5000)
+    window.setTimeout(() => { setWarp(null); setBank(0) }, 5000)
   };
 
   // Salt direct la oprirea n (indicatorii rotunzi) — aceeasi logica de warp,
@@ -45,9 +47,10 @@ export function Journey({ onFinish }: JourneyProps) {
     lockRef.current = now
     setDir(n > i ? 1 : -1)
     setWarp(n > i ? 'fwd' : 'back')
+    setBank(bankAngle(i, n))
     setI(n) // camera porneste in aceeasi clipa cu warp-ul
     window.setTimeout(() => setPanelI(n), 4500) // textul apare la sosire
-    window.setTimeout(() => setWarp(null), 5000)
+    window.setTimeout(() => { setWarp(null); setBank(0) }, 5000)
   };
 
   // Navigare cu tastatura: sagetile stanga/dreapta si sus/jos
@@ -84,10 +87,17 @@ export function Journey({ onFinish }: JourneyProps) {
 
       {/* Dungi de warp — montate si demontate la fiecare deplasare, deci
           animatia porneste de la capat de fiecare data */}
-      {warp && <WarpStreaks dir={warp} />}
+      {warp && (
+        <div
+          className={cn('pointer-events-none absolute inset-0', bank !== 0 && 'bank-turn')}
+          style={{ '--bank': `${bank}deg` } as React.CSSProperties}
+        >
+          <WarpStreaks dir={warp} />
+        </div>
+      )}
 
       {/* Scena 3D: cele 5 planete pe un inel, camera se roteste catre oprirea aleasa */}
-      <Space index={i} onSelect={(n) => travelTo(n)} />
+      <Space index={i} bank={bank} onSelect={(n) => travelTo(n)} />
 
       {/* Panoul cu text, mutat jos pe ecran */}
       <div className='pointer-events-none absolute inset-x-0 bottom-0 z-10 px-5 pb-10 bg-gradient-to-t from-black via-black/85 to-transparent pt-24'>

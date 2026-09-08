@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useLanguage } from '@/hooks/useLanguage'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
 import { cn } from '@/lib/utils'
@@ -22,7 +22,14 @@ const BODIES = [
   { x:    0, y:   40, z: -17200, size: 240, bg: 'radial-gradient(circle at 32% 30%, #a5b4fc, #4338ca 55%, #1e1b4b)', glow: '0 0 90px rgba(99,102,246,0.5)' },
 ]
 
-export function Space({ index, onSelect }: { index: number; onSelect: (i: number) => void }) {
+// Cat se inclina camera intrand in viraj: spre dreapta inseamna rotatie inversa a continutului.
+export function bankAngle(from: number, to: number): number {
+  const dx = BODIES[to].x - BODIES[from].x
+  if (dx === 0) return 0
+  return dx > 0 ? -14 : 14
+}
+
+export function Space({ index, bank, onSelect }: { index: number; bank: number; onSelect: (i: number) => void }) {
   const { t } = useLanguage()
   const stops = t.journey.stops
   const reduced = useReducedMotion()
@@ -51,6 +58,13 @@ export function Space({ index, onSelect }: { index: number; onSelect: (i: number
   return (
     // Camera: perspective + perspective-origin 50% 34% = punctul de fixare al scenei
     <div className='pointer-events-none absolute inset-0 [perspective:1000px] [perspective-origin:50%_34%]'>
+      {/* Virajul (bank) sta pe stratul lui, ca sa nu se bata cu transformarea scrisa
+          de mouse pe rig si cu translatia camerei de pe lume — un element poate
+          avea o singura transformare. */}
+      <div
+        className={cn('absolute inset-0 [transform-style:preserve-3d]', bank !== 0 && 'bank-turn')}
+        style={{ '--bank': `${bank}deg` } as React.CSSProperties}
+      >
       {/* „Rig”: se inclina usor dupa mouse (rotateY/rotateX mici), peste glisajul lumii. */}
       <div
         ref={rigRef}
@@ -106,6 +120,7 @@ export function Space({ index, onSelect }: { index: number; onSelect: (i: number
             )
           })}
         </div>
+      </div>
       </div>
     </div>
   )

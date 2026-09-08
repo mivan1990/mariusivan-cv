@@ -197,3 +197,19 @@
     animation: none;
   }
 }
+
+/* virajul (bank) din calatoria printre planete: se apleaca, se tine, se indreapta */
+.bank-turn {
+  animation: bank-turn 5000ms ease-in-out both;
+}
+@keyframes bank-turn {
+  0%   { transform: rotateZ(0deg); }
+  40%  { transform: rotateZ(var(--bank, 0deg)); }
+  70%  { transform: rotateZ(var(--bank, 0deg)); }
+  100% { transform: rotateZ(0deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bank-turn {
+    animation: none;
+  }
+}
