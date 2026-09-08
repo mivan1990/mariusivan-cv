@@ -538,4 +538,13 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - Commit: `a44cf2d` (fără push)
 - Rămâne: la opririle 2 și 4, o planetă din fundal e tăiată parțial de marginea ecranului; rămâne vizibilă și clicabilă. Și constelația se adună într-o parte când e focalizată o planetă de la capăt — normal, dat fiind că întreaga lume se translatează
 
+#### 20:05 — Efect de warp la trecerea între planete
+- [x] Până acum, deplasarea doar scala puțin câmpul de stele — se citea ca o împingere, nu ca un salt
+- [x] Fișier nou `src/components/journey/warp.tsx`: 90 de dungi radiale (SVG `<line>`) care țâșnesc din centru cât timp camera se mută. Înainte scalează în afară, înapoi se reped spre centru — deci direcția se vede fără să citești etichetele
+- [x] Pozițiile sunt deterministe (același truc cu `Math.sin` ca la `starfield.tsx`), deci nimic nu tresare între randări
+- [x] Stratul e montat **doar cât ține warp-ul**, așa că animația repornește de la capăt la fiecare salt. Verificat: 0 dungi înainte, 90 în timpul saltului, 0 după
+- [x] Reduced-motion: `animation: none` și opacitate 0 — verificat în browser cu `reducedMotion: reduce`
+- [x] `npm run build` — trece
+- Commit: `a019a9a` (fără push)
+
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]
