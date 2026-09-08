@@ -19,6 +19,9 @@ const FOCAL = 320; // lungimea focala de proiectie
 const DURATION = 5000; // durata totala a warp-ului, ms
 const TRAIL = 3; // cat de "in urma" e punctul de plecare al darei (in z)
 const SPEED = 30; // viteza maxima de apropiere/departare pe cadru
+// Trebuie sa fie identic cu 'perspective-origin' din space.tsx (50% 34%), altfel stelele
+// tasnesc din alt punct decat cel spre care converg planetele.
+const ORIGIN_Y = 0.34
 
 interface WarpStreaksProps {
   // directia warp-ului: 'fwd' = zbor inainte (stelele se apropie),
@@ -84,7 +87,7 @@ export function WarpStreaks({ dir }: WarpStreaksProps) {
       ctx.clearRect(0, 0, w, h);
 
       const cx = w / 2;
-      const cy = h / 2;
+      const cy = h * ORIGIN_Y;
 
       for (const s of stars) {
         // inainte: se apropie (z scade); inapoi: se departeaza (z creste)
