@@ -105,7 +105,14 @@ export function Space({ index, onSelect }: { index: number; onSelect: (i: number
                 type='button'
                 aria-label={stop.company}
                 onClick={() => onSelect(i)}
-                className='pointer-events-auto absolute relative [transform-style:preserve-3d] focus-visible:outline-none transition-opacity duration-700'
+                // 'absolute' e obligatoriu: fara el butoanele raman in fluxul de layout
+                // (curg una sub alta) si transformarile 3D pornesc din pozitii diferite,
+                // stricandu-i constelatiei. 'relative' NU se pune aici — o clasa 'relative'
+                // in CSS castiga fata de 'absolute' (aceeasi specificitate, regula mai
+                // tarzie in fisier), deci planetele nu mai ies din flux. Eticheta absoluta
+                // din interior nu are nevoie de 'relative': un element position:absolute
+                // e deja bloc de referinta pentru copiii lui absoluti.
+                className='pointer-events-auto absolute [transform-style:preserve-3d] focus-visible:outline-none transition-opacity duration-700'
                 style={{
                   // translate(-50%, -50%) la final: procente relative la propria
                   // marime a butonului (care acum = sfera), centreaza sfera exact
