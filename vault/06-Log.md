@@ -528,4 +528,14 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - Commit: `41fabaa` (fără push)
 - Rămâne: în 3 din 5 poziții ale camerei, o planetă e tăiată parțial de marginea ecranului. Rămâne vizibilă și clicabilă, dar dacă deranjează, se strânge constelația lateral
 
+#### 19:45 — Verificare vizuală pe toate cele 5 opriri, un bug prins
+- [x] Marius a cerut verificare vizuală pe fiecare oprire. Am făcut captură la fiecare și am măsurat unde aterizează planeta focalizată
+- [x] **Bug găsit**: butonul-planetă avea în className **și `absolute`, și `relative`** (`relative` a fost adăugat când eticheta a devenit absolută). `relative` câștigă, deci planetele reveneau în fluxul normal de layout, una sub alta, și abia apoi primeau transformarea 3D — fiecare pornind din altă origine
+- [x] S-a văzut ca drift: parcurgând opririle, planeta focalizată ateriza la x = **720, 836, 966, 1076, 720** în loc de 720 de fiecare dată, iar la ultima oprire cădea peste panoul de text
+- [x] Rezolvat scoțând `relative`: un element `position: absolute` e deja bloc de referință pentru copiii lui absoluți, deci eticheta n-avea nevoie de el
+- [x] Re-măsurat pe toate cele 5 opriri: fiecare planetă focalizată aterizează **exact la (720, 306)**, niciuna nu intră peste panou, zero suprapuneri între planete
+- [x] `npm run build` — trece
+- Commit: `a44cf2d` (fără push)
+- Rămâne: la opririle 2 și 4, o planetă din fundal e tăiată parțial de marginea ecranului; rămâne vizibilă și clicabilă. Și constelația se adună într-o parte când e focalizată o planetă de la capăt — normal, dat fiind că întreaga lume se translatează
+
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]
