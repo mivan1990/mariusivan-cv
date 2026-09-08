@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import { useLanguage } from '@/hooks/useLanguage'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
 import { cn } from '@/lib/utils'
+import { Starfield } from '@/components/journey/starfield'
 
 // Cat de departe de camera sta planeta aleasa (distanta focala).
 // Planeta aleasa trebuie sa fie mereu cea mai mare de pe ecran, de aceea sta mai
@@ -71,6 +72,9 @@ export function Space({ index, bank, onSelect }: { index: number; bank: number; 
         className='absolute inset-0 [transform-style:preserve-3d]'
         style={{ transition: 'transform 220ms ease-out' }}
       >
+        {/* Cerul sta in scena (sub rig), altfel ramane nemiscat cand camera vireaza:
+            primeste si inclinarea de viraj, si privirea de mouse. */}
+        <Starfield />
         {/* „Lumea” gliseaza spre planeta aleasa: negand x, y si z ale ei, planeta ajunge
             exact in centru, la z = -FOCUS_Z, iar restul raman in jur, mai mici.
             Fara rotatie — planetele sunt deja cu fata la camera. */}

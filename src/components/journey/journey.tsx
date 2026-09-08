@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useLanguage } from '@/hooks/useLanguage';
 import { cn } from '@/lib/utils';
-import { Starfield } from '@/components/journey/starfield';
 import { Space, bankAngle } from '@/components/journey/space';
 import { WarpStreaks } from '@/components/journey/warp';
 
@@ -80,11 +79,6 @@ export function Journey({ onFinish }: JourneyProps) {
         if (Math.abs(delta) > 40) travel(delta > 0 ? 1 : -1); // deget in sus = fwd, in jos = back
       }}
     >
-      {/* Fundalul de stele (absolut, in spate) — primeste clasa de warp in functie de directie */}
-      <div className={cn('absolute inset-0', warp === 'fwd' && 'warp-fwd', warp === 'back' && 'warp-back')}>
-        <Starfield />
-      </div>
-
       {/* Dungi de warp — montate si demontate la fiecare deplasare, deci
           animatia porneste de la capat de fiecare data */}
       {warp && (
