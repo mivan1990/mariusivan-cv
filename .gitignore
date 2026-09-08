@@ -41,3 +41,7 @@ temp
 vault/.obsidian/workspace.json
 vault/.obsidian/workspace-mobile.json
 vault/.obsidian/cache
+
+# Artefacte scrise de unelte rulate din radacina proiectului
+outputs/
+.claude/
