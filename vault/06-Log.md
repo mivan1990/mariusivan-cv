@@ -570,4 +570,10 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - Commit: `e3fcf59` (fără push)
 - Surse: slicker.me/javascript/starfield_flythrough.htm, kevs3d.co.uk/dev/warpfield/, sunshine2k.de (efect starfield)
 
+#### 21:10 — Scos traseul punctat
+- [x] Cerința lui Marius. Cele 4 segmente punctate dintre planete au fost șterse din `space.tsx`, împreună cu comentariile despre yaw/pitch care nu mai aveau la ce să se refere — 30 de linii scoase
+- [x] Verificat în browser: zero segmente punctate, cele 5 planete la locul lor, planeta focalizată tot la (720, 306), zero erori
+- [x] `npm run build` — trece
+- Commit: `3acfebb` (fără push)
+
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]
