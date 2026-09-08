@@ -122,3 +122,39 @@
   opacity: 1;
   transform: translateY(0);
 }
+
+/* stelele care clipesc incet in fundalul de spatiu (calatoria printre planete) */
+.star-twinkle {
+  animation: star-blink 4s ease-in-out infinite;
+}
+@keyframes star-blink {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 0.95; }
+}
+
+/* proiectul respecta reduced-motion peste tot: stelele raman statice */
+@media (prefers-reduced-motion: reduce) {
+  .star-twinkle {
+    animation: none;
+  }
+}
+
+/* aparitia blocurilor din ecranele de spatiu (intro + opririle calatoriei) */
+.animate-journey-in {
+  animation: journey-in 420ms ease-out both;
+}
+@keyframes journey-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-journey-in {
+    animation: none;
+  }
+}

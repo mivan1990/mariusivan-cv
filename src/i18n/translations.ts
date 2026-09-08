@@ -38,6 +38,20 @@ export interface Project {
   badgeTone: 'primary' | 'success' | 'info'
 }
 
+export interface JourneyRole {
+  title: string
+  period: string
+}
+
+export interface JourneyStop {
+  id: string
+  company: string
+  location: string
+  span: string
+  roles: JourneyRole[]
+  blurb: string
+}
+
 export interface Translation {
   meta: {
     title: string
@@ -83,6 +97,17 @@ export interface Translation {
     responsibilities: Responsibility[]
     techHeading: string
     techGroups: TechGroup[]
+  }
+  journey: {
+    introTitle: string
+    introText: string
+    start: string
+    skip: string
+    next: string
+    prev: string
+    land: string
+    stopLabel: string
+    stops: JourneyStop[]
   }
   projects: {
     heading: string
@@ -238,6 +263,70 @@ export const translations: Record<Lang, Translation> = {
             'Maatwebsite Excel',
             'Microsoft Graph Mail',
           ],
+        },
+      ],
+    },
+    journey: {
+      introTitle: 'Thirteen years, five stops.',
+      introText: 'Travel through the places I worked, one planet at a time — or go straight to the CV.',
+      start: 'Start the journey',
+      skip: 'Skip to the CV',
+      next: 'Next stop',
+      prev: 'Previous',
+      land: 'Land on the CV',
+      stopLabel: 'Stop',
+      stops: [
+        {
+          id: 'rcs-rds',
+          company: 'RCS & RDS (Contractor)',
+          location: 'Bucharest',
+          span: '2012 — 2013',
+          roles: [{ title: 'IT Technician', period: 'March 2012 - March 2013' }],
+          blurb:
+            'Installed and configured internet, television and landline services in customers homes: cabling, routers and receivers, and on-site support until every connection ran clean.',
+        },
+        {
+          id: 'ea',
+          company: 'Electronic Arts (EA)',
+          location: 'Bucharest',
+          span: '2014 — 2016',
+          roles: [
+            { title: 'Quality Assurance Tester', period: 'March 2014 - March 2015' },
+            { title: 'Quality Assurance Tester II', period: 'March 2015 - August 2016' },
+          ],
+          blurb:
+            'Manual testing on PC and consoles, with detailed bug reports and regression runs on daily builds. As Tester II I became point of contact for one section of the game and handled multiplayer data collection for the servers.',
+        },
+        {
+          id: 'amber',
+          company: 'Amber Studio',
+          location: 'Bucharest',
+          span: '2016 — 2017',
+          roles: [{ title: 'Quality Assurance Tester', period: 'August 2016 - February 2017' }],
+          blurb:
+            'Manual testing on mobile games for iOS and Android — functional, performance and interface defects — plus regression suites on new builds, working closely with the development and design teams.',
+        },
+        {
+          id: 'euronet',
+          company: 'Euronet',
+          location: 'Bucharest',
+          span: '2017 — 2018',
+          roles: [{ title: 'Support Specialist', period: 'March 2017 - June 2018' }],
+          blurb:
+            'Remote support for a network of ATMs: diagnosing operational faults and working with field technicians to keep downtime short.',
+        },
+        {
+          id: 'feg',
+          company: 'FEG — Fortuna Entertainment Group',
+          location: 'Bucharest, Romania',
+          span: '2018 — present',
+          roles: [
+            { title: 'IT Support', period: 'June 2018 - February 2021' },
+            { title: 'Quality Assurance Engineer', period: 'February 2021 - January 2023' },
+            { title: 'Junior Software Developer', period: 'January 2023 - Present' },
+          ],
+          blurb:
+            'Eight years in one company, across three roles: hardware and network support in the betting shops, then QA on web and mobile, then writing the code — Laravel and PHP on the internal Intranet and on voteazaliga2.casapariurilor.ro.',
         },
       ],
     },
@@ -477,6 +566,70 @@ export const translations: Record<Lang, Translation> = {
             'Maatwebsite Excel',
             'Microsoft Graph Mail',
           ],
+        },
+      ],
+    },
+    journey: {
+      introTitle: 'Treisprezece ani, cinci opriri.',
+      introText: 'Călătorește prin locurile în care am lucrat, planetă cu planetă — sau mergi direct la CV.',
+      start: 'Pornește călătoria',
+      skip: 'Sari la CV',
+      next: 'Următoarea oprire',
+      prev: 'Înapoi',
+      land: 'Aterizează pe CV',
+      stopLabel: 'Oprirea',
+      stops: [
+        {
+          id: 'rcs-rds',
+          company: 'RCS & RDS (Contractor)',
+          location: 'București',
+          span: '2012 — 2013',
+          roles: [{ title: 'Tehnician IT', period: 'Martie 2012 - Martie 2013' }],
+          blurb:
+            'Instalam și configuram internet, televiziune și telefonie fixă direct la clienți acasă: cablare, routere și receivere, plus suport la fața locului până când toate conexiunile mergeau curat.',
+        },
+        {
+          id: 'ea',
+          company: 'Electronic Arts (EA)',
+          location: 'București',
+          span: '2014 — 2016',
+          roles: [
+            { title: 'Quality Assurance Tester', period: 'Martie 2014 - Martie 2015' },
+            { title: 'Quality Assurance Tester II', period: 'Martie 2015 - August 2016' },
+          ],
+          blurb:
+            'Testare manuală pe PC și console, cu rapoarte de bug detaliate și regresie pe build-urile zilnice. Ca Tester II am devenit punct de contact pentru o secțiune a jocului și mă ocupam de colectarea datelor de multiplayer pentru servere.',
+        },
+        {
+          id: 'amber',
+          company: 'Amber Studio',
+          location: 'București',
+          span: '2016 — 2017',
+          roles: [{ title: 'Quality Assurance Tester', period: 'August 2016 - Februarie 2017' }],
+          blurb:
+            'Testare manuală pe jocuri mobile iOS și Android — defecte funcționale, de performanță și de interfață — plus suite de regresie pe build-uri noi, împreună cu echipele de development și design.',
+        },
+        {
+          id: 'euronet',
+          company: 'Euronet',
+          location: 'București',
+          span: '2017 — 2018',
+          roles: [{ title: 'Support Specialist', period: 'Martie 2017 - Iunie 2018' }],
+          blurb:
+            'Suport la distanță pentru o rețea de bancomate: diagnosticam defecțiunile și lucram cu tehnicienii din teren ca timpul de nefuncționare să rămână scurt.',
+        },
+        {
+          id: 'feg',
+          company: 'FEG — Fortuna Entertainment Group',
+          location: 'București, România',
+          span: '2018 — prezent',
+          roles: [
+            { title: 'IT Support', period: 'Iunie 2018 - Februarie 2021' },
+            { title: 'Quality Assurance Engineer', period: 'Februarie 2021 - Ianuarie 2023' },
+            { title: 'Junior Software Developer', period: 'Ianuarie 2023 - Prezent' },
+          ],
+          blurb:
+            'Opt ani în aceeași companie, în trei roluri: suport hardware și rețea în agenții, apoi QA pe web și mobil, apoi scrisul codului — Laravel și PHP pe Intranetul intern și pe voteazaliga2.casapariurilor.ro.',
         },
       ],
     },
