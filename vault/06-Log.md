@@ -595,4 +595,12 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - Commit: `4788eae` (fără push)
 - Notă: dacă senzația e inversă (pare că se înclină în partea greșită), e o singură schimbare de semn în `bankAngle`
 
+#### 22:00 — Cerul se rotește odată cu camera
+- [x] Marius: la viraj, stelele din fundal rămâneau pe loc. Cauza: `<Starfield />` era randat în `journey.tsx`, **în afara scenei** — deci nu primea nici înclinarea de viraj, nici privirea de mouse. Cerul părea lipit de ecran, nu de lume
+- [x] `Starfield` a intrat în scenă, ca prim copil al rig-ului de mouse: stratul de bank e deasupra, deci îl înclină, iar mouse-ul îl mișcă odată cu restul
+- [x] Măsurat printr-un viraj: aceleași trei stele se mută de la (-1,576), (466,525), (1163,688) la (55,743), (493,582), (1201,569). Două straturi înclinate în același timp
+- [x] Odată cu asta au dispărut și scalarea veche a câmpului de stele la salt (`.warp-fwd` / `.warp-back`) — canvas-ul de warp face deja ce sugera ea — plus cele două keyframes rămase fără utilizator
+- [x] `npm run build` — trece
+- Commit: `44f0f2f` (fără push)
+
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]
