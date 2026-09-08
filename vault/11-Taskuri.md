@@ -378,7 +378,13 @@ Status: `[ ]` = de făcut, `[x]` = făcut, `[~]` = în curs.
 - [x] `src/components/sections/Experience.tsx` — `MapCardData`/`MapCard` primesc `url`; când e setat, vizualul cardului e împachetat într-un `<a href target=_blank rel=noopener>`
 - Dependențe: B3 (secția Experience)
 - Estimare: 15 min
-- Status: **gata** (2026-09-08). Cardul FEGBet devine o ancora clickabilă care deschide `https://fegbet.fortungame.ro`; celelalte carduri rămân butoane cu dialog. `npm run build` trece.
+- Status: **gata** (2026-09-08). Cardul FEGBet devine o ancoră clickabilă care deschide `https://fegbet.fortungame.ro`; celelalte carduri rămân butoane cu dialog. `npm run build` trece.
+
+### K2. SVG nou pentru cardul FEGBET
+- [x] `public/projects/fegbet.svg` — rescris: banner 1080×660, fundal navy aproape negru (gradient `#0b0c16 → #070813`), „FEG" alb + „BET" auriu `#fabc0a`, font sans-serif semibold cu `letter-spacing:26`, centrat — reproduce referința
+- Dependențe: K1
+- Estimare: 15 min
+- Status: **gata** (2026-09-08). Preview randat cu PIL verificat vizual; `npm run build` trece. Cardul e afișat în casă pătrată cu `object-cover`.
 
 ---
 

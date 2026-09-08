@@ -1,12 +1,18 @@
-<!-- Placeholder: imagine lipsa. Se inlocuieste cu captura reala a proiectului. -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" width="640" height="640">
+<!-- FEGBET — banner de brand
+     Fond: navy aproape negru; "FEG" alb, "BET" auriu
+     Proporție 1.636:1 (1080x660), corespunde referinței
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 660" width="1080" height="660">
   <defs>
     <linearGradient id="g-fegbet" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#372a3d"/>
-      <stop offset="1" stop-color="#1c1420"/>
+      <stop offset="0" stop-color="#0b0c16"/>
+      <stop offset="1" stop-color="#070813"/>
     </linearGradient>
   </defs>
-  <rect width="640" height="640" fill="url(#g-fegbet)"/>
-  <circle cx="470" cy="170" r="64" fill="#ffffff" opacity="0.35"/>
-  <polygon points="0,640 210,290 350,470 470,330 640,640" fill="#ffffff" opacity="0.35"/>
+  <rect width="1080" height="660" fill="url(#g-fegbet)"/>
+  <text x="540" y="330" text-anchor="middle" dominant-baseline="central"
+        font-family="'Inter', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
+        font-size="150" font-weight="600" letter-spacing="26">
+    <tspan fill="#ffffff">FEG</tspan><tspan fill="#fabc0a">BET</tspan>
+  </text>
 </svg>

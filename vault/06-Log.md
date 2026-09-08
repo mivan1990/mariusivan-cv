@@ -407,4 +407,12 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - [x] `npm run build` — trece
 - Notă: nu a fost verificat vizual în browser — click-ul pe cardul FEGBet ar trebui să deschidă `https://fegbet.fortungame.ro` într-o tabă nouă
 
+#### 12:01 — SVG nou pentru cardul FEGBET
+- [x] Cerința: creează un SVG care să arate ca referința (banner FEGBET) și înlocuiește `/projects/fegbet.svg`
+- [x] Analizat referința (108×66, proporție 1.636:1): fundal navy aproape negru `#090A15`, „FEG" alb `#FFFFFF`, „BET" auriu `#FABC0A`, font sans-serif semibold cu spacing larg
+- [x] `public/projects/fegbet.svg` — rescris: canvas 1080×660 (10× referința), gradient subtil `#0b0c16 → #070813`, „FEG" alb + „BET" auriu, `font-size:150 / weight:600 / letter-spacing:26`, centrat
+- [x] Preview randat cu PIL + verificat vizual: aspectul corespunde referinței (fundal navy, FEG alb, BET auriu, centrat)
+- [x] `npm run build` — trece
+- Notă: cardul e afișat în casă pătrată cu `object-cover` — SVG-ul larg e crozit pe laturi, textul rămâne centrat și vizibil
+
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]
