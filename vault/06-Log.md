@@ -471,4 +471,14 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - Commit: `d84b20b` (fără push)
 - Notă: fonturile externe nu se aplică într-un SVG randat ca `<img>`, deci „Inter" cade pe fallback-ul de sistem — la fel ca la FEGBET. Dacă vrei exact Inter, textul trebuie convertit în contururi
 
+#### 16:45 — Scoase cardurile CS2 Leaderboard și Fortuna WC2026
+- [x] Cerința lui Marius. Rămân **7 elemente**: Portfolio XP, Skills, FEGBet, Contact, Votează Liga 2, Intranet, FAQ — fiecare cu aceleași `pos`, `box` și `depth`, nimic rearanjat
+- [x] Șterse și din `mapItems` (EN + RO), plus placeholder-ele `public/projects/cs2-leaderboard.svg` și `fortuna-wc2026.svg`, care nu mai erau folosite
+- [x] **`projects.items` rămâne intact** — descrierile, stack-ul și linkurile celor două proiecte sunt tot acolo, deci un card se poate întoarce oricând
+- [x] Verificat la 768/1024/1280/1440/1920: zero suprapuneri, nimic ieșit din cadru, pagina tot exact cât ecranul, zero erori
+- [x] `npm run build` — trece
+- Commit: `c9e6459` (fără push)
+- **De discutat**: cele două proiecte nu mai apar **nicăieri** pe site — secțiunea Projects a dispărut la rescrierea în ecran unic, deci harta era singurul loc unde se vedeau. Datele stau degeaba în `translations.ts`
+- **De discutat**: acoperirea cadrului scade de la 28.7% la **21.8%**, iar colțul dreapta-sus rămâne gol — pozițiile au fost gândite pentru nouă elemente. Dacă vrei, redistribui cele 7 ca să reechilibrez harta
+
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]
