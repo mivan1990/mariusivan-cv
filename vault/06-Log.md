@@ -434,4 +434,11 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - Commit: `f1d65cc` (fără push)
 - Notă: SVG-ul cere `font-family: Inter`, dar fonturile externe nu se aplică într-un SVG randat ca `<img>` — se folosește fallback-ul de sistem. Diferența e mică, dar dacă vrei exact Inter, textul trebuie convertit în contururi
 
+#### 15:20 — Bannerul FEGBET devine pătrat
+- [x] Marius a cerut SVG-ul pătrat imediat după varianta 16/10. Regula care a rezolvat tăierea rămâne aceeași — `object-cover` lasă sursa neatinsă doar când raportul ei e identic cu al casetei — deci a mers și caseta: canvas 1080×1080 cu textul recentrat (`x=540 y=540`), card `w-32 lg:w-44 aspect-square`
+- [x] Verificat în Chrome: raport casetă **1** = raport sursă **1**, FEGBET se citește întreg și e centrat pe ambele axe
+- [x] Cardul e mai înalt decât varianta 16/10, deci re-verificat la 768/1024/1280/1440/1920: zero suprapuneri, nimic ieșit din cadru, pagina tot exact cât ecranul, zero erori
+- [x] `npm run build` — trece
+- Commit: `df3c4d1` (fără push)
+
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]
