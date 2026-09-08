@@ -67,36 +67,6 @@ export function Space({ index, onSelect }: { index: number; onSelect: (i: number
             transition: 'transform 5000ms cubic-bezier(0.45, 0, 0.2, 1)',
           }}
         >
-          {/* Traseul punctat intre planete: 4 segmente, generate din perechi consecutive. */}
-          {Array.from({ length: BODIES.length - 1 }, (_, i) => {
-            const a = BODIES[i]
-            const b = BODIES[i + 1]
-            const dx = b.x - a.x
-            const dy = b.y - a.y
-            const dz = b.z - a.z
-            const len = Math.sqrt(dx * dx + dy * dy + dz * dz)
-            // yaw foloseste -dz: in CSS, z creste spre observator, deci o deplasare
-            // spre adancime (dz negativ) inseamna rotatie pozitiva in jurul lui Y.
-            const yaw = (Math.atan2(-dz, dx) * 180) / Math.PI
-            const pitch = (Math.asin(dy / len) * 180) / Math.PI
-            return (
-              <div
-                key={i}
-                aria-hidden='true'
-                className='pointer-events-none absolute h-px origin-left [transform-style:preserve-3d]'
-                style={{
-                  width: len,
-                  // Ordinea conteaza: mai intai originea in prima planeta, apoi rotatiile
-                  // (yaw, apoi pitch). 'origin-left' pune originea transformarii la capatul
-                  // din stanga al barei — asa capatul cade fix pe prima planeta, iar bara se
-                  // intinde singura spre a doua. Fara ea, rotatiile s-ar face in jurul
-                  // CENTRULUI barei (transform-origin implicit), mutandu-le ambele capete.
-                  transform: `translate3d(${a.x}px, ${a.y}px, ${a.z}px) rotateY(${yaw}deg) rotateZ(${pitch}deg)`,
-                  backgroundImage: 'repeating-linear-gradient(to right, rgba(255,255,255,0.5) 0 5px, transparent 5px 16px)',
-                }}
-              />
-            )
-          })}
           {stops.map((stop, i) => {
             const b = BODIES[i]
             return (
