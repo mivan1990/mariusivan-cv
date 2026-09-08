@@ -371,6 +371,17 @@ Status: `[ ]` = de făcut, `[x]` = făcut, `[~]` = în curs.
 
 ---
 
+## Faza K — Îmbunătățiri de conținut
+
+### K1. Ancora de redirect pe cardul FEGBet
+- [x] `src/i18n/translations.ts` — adaugă câmpul opțional `url` în `MapItem`; intrările FEGBet (EN + RO) au `url: 'https://fegbet.fortungame.ro'`
+- [x] `src/components/sections/Experience.tsx` — `MapCardData`/`MapCard` primesc `url`; când e setat, vizualul cardului e împachetat într-un `<a href target=_blank rel=noopener>`
+- Dependențe: B3 (secția Experience)
+- Estimare: 15 min
+- Status: **gata** (2026-09-08). Cardul FEGBet devine o ancora clickabilă care deschide `https://fegbet.fortungame.ro`; celelalte carduri rămân butoane cu dialog. `npm run build` trece.
+
+---
+
 ## Rezumat
 
 | Fază | Taskuri | Estimare totală |

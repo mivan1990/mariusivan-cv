@@ -20,6 +20,7 @@ export interface Responsibility {
 interface MapItem {
   name: string
   img: string
+  url?: string
 }
 
 export interface Project {
@@ -163,7 +164,7 @@ export const translations: Record<Lang, Translation> = {
         { name: 'CS2 Leaderboard', img: '/projects/cs2-leaderboard.svg' },
         { name: 'Fortuna WC2026', img: '/projects/fortuna-wc2026.svg' },
         { name: 'Votează Liga 2', img: '/projects/voteaza-liga2.svg' },
-        { name: 'FEGBet', img: '/projects/fegbet.svg' },
+        { name: 'FEGBet', img: '/projects/fegbet.svg', url: 'https://fegbet.fortungame.ro' },
         { name: 'Intranet', img: '/projects/intranet.svg' },
       ],
       company: 'FEG Group — Fortuna Entertainment Group',
@@ -403,7 +404,7 @@ export const translations: Record<Lang, Translation> = {
         { name: 'CS2 Leaderboard', img: '/projects/cs2-leaderboard.svg' },
         { name: 'Fortuna WC2026', img: '/projects/fortuna-wc2026.svg' },
         { name: 'Votează Liga 2', img: '/projects/voteaza-liga2.svg' },
-        { name: 'FEGBet', img: '/projects/fegbet.svg' },
+        { name: 'FEGBet', img: '/projects/fegbet.svg', url: 'https://fegbet.fortungame.ro' },
         { name: 'Intranet', img: '/projects/intranet.svg' },
       ],
       company: 'FEG Group — Fortuna Entertainment Group',

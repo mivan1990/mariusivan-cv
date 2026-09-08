@@ -36,15 +36,17 @@ const MAP_ITEMS = [
 
 type MapItem = (typeof MAP_ITEMS)[number]
 
-// Un card pregatit: eticheta, vizualul (poza/tile) si continutul dialogului.
+// Un card pregatit: eticheta, vizualul (poza/tile), continutul dialogului
+// si (optional) o url — cardul devine o ancora clickabila catre site.
 interface MapCardData {
   label: string
   visual: ReactNode
   panel: ReactNode
+  url?: string
 }
 
 // Componenta interna MapCard(label, visual, children).
-function MapCard({ label, visual, panel }: MapCardData) {
+function MapCard({ label, visual, panel, url }: MapCardData) {
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -52,7 +54,13 @@ function MapCard({ label, visual, panel }: MapCardData) {
           type="button"
           className="block rounded-xl text-left transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         >
-          {visual}
+          {url ? (
+            <a href={url} target="_blank" rel="noopener" className="block">
+              {visual}
+            </a>
+          ) : (
+            visual
+          )}
           <span className="mt-2 block text-center text-xs font-medium text-foreground">{label}</span>
         </button>
       </DialogTrigger>
@@ -88,6 +96,7 @@ export function Experience() {
           />
         ),
         panel: it.key === 'intranet' ? <IntranetPanel /> : <ProjectPanel id={it.key} />,
+        url: item?.url,
       }
     }
 

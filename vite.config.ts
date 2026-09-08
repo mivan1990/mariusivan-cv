@@ -17,6 +17,8 @@ export default defineConfig({
     sourcemap: false,
   },
   server: {
-    port: 5173,
+    // 5173 ramane portul obisnuit pentru `npm run dev`; PORT il suprascrie
+    // cand serverul e pornit de altcineva (preview-ul agentului) si 5173 e ocupat.
+    port: Number(process.env.PORT) || 5173,
   },
 })

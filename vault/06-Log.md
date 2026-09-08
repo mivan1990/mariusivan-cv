@@ -395,6 +395,16 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - [x] `npm run build` — trece: 94.43 kB gzip (crește față de 90.12 fiindcă Radix Dialog reintră în graf)
 - Commit: `597ac88` (fără push)
 - **Rămân nefolosite** (nu le-am șters, tree-shaking le scoate oricum din bundle): `Navbar.tsx`, `Hero.tsx`, `Footer.tsx`, `Projects.tsx`, `Skills.tsx`, `Contact.tsx`, `Faq.tsx` și hook-urile `useTyping`, `useCountUp`, `useParallax`
-- **De discutat cu Marius**: „Download CV" (`window.print()`) era în hero și a dispărut o dată cu el — nu mai există niciun mod de a tipări CV-ul, iar conținutul din dialoguri nu se tipărește
+- **De discutat cu Marius:** „Download CV" (`window.print()`) era în hero și a dispărut o dată cu el — nu mai există niciun mod de a tipări CV-ul, iar conținutul din dialoguri nu se tipărește
+
+### 2026-09-08
+
+#### 12:00 — Ancora de redirect pe cardul FEGBet
+- [x] Cerința: adaugă pe cardul FEGBet o ancoră cu redirect către `https://fegbet.fortungame.ro`
+- [x] `src/i18n/translations.ts` — interfața `MapItem` primește câmpul opțional `url`; cele două intrări FEGBet (EN + RO) au `url: 'https://fegbet.fortungame.ro'`
+- [x] `src/components/sections/Experience.tsx` — `MapCardData` și `MapCard` primesc câmpul `url`; când e setat, vizualul cardului (SVG-ul de proiect) e împachetat într-un `<a href target=_blank rel=noopener>`, deci cardul devine o ancoră clickabilă care deschide site-ul FEGBet
+- [x] Doar cardul FEGBet devine clickabil; celelalte carduri (Portfolio XP, CS2 Leaderboard, Fortuna WC2026, Votează Liga 2, Intranet) rămân butoane care deschid propriul Dialog
+- [x] `npm run build` — trece
+- Notă: nu a fost verificat vizual în browser — click-ul pe cardul FEGBet ar trebui să deschidă `https://fegbet.fortungame.ro` într-o tabă nouă
 
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]
