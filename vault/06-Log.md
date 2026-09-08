@@ -451,4 +451,16 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - **Rămâne**: Marius a trimis două logo-uri (scutul Casa Pariurilor LIGA 2 și bannerul roșu „casa pariurilor") ca imagini în chat, nu ca fișiere — nu pot fi salvate din conversație. Trebuie fișierele pe disc, de preferat vectorul oficial; o trasare de mână după PNG ar arăta prost, mai ales emblema FRF din scut
 - **Rămâne**: corpul dialogului zice tot „Coming soon" și pentru Liga 2, și pentru FEGBet — lipsesc textele (rol, status, descriere, stack)
 
+#### 16:05 — Logo-urile oficiale pe cardul „Votează Liga 2"
+- [x] Marius a trimis cele două logo-uri ca imagini în chat (nu se pot scrie pe disc) și a dat acordul să le iau de pe site. Luate de pe `voteazaliga2.casapariurilor.ro`: scutul LIGA 2 (`/own/casa/logos/liga2.png`, 310×350) și bannerul „casa pariurilor" (`/own/casa/logos/Logo_Sport_Bullet.png`, 1500×601), puse în `public/projects/`
+- [x] **Site-ul nu servește SVG** — am încercat și `.svg` pentru ambele, 404. Deci sunt PNG-urile publicate de ei. Un vector fidel trebuie luat de la cine are originalul; o trasare de mână după PNG ar arăta prost, mai ales emblema FRF din scut
+- [x] Scutul intră pe card, iar caseta devine `aspect-[31/35]` — exact raportul imaginii, deci `object-cover` nu taie nimic (aceeași regulă care a reparat FEGBET)
+- [x] Câmp nou `headerImg` în `MapItem` + în `MapCardData`: bannerul se randează în capul dialogului, pe toată lățimea, la proporția lui (fără `object-cover`, fără înălțime fixă)
+- [x] **Corecție prinsă la măsurare**: scutul e mai înalt decât pătratul pe care l-a înlocuit și ieșea ~10px sub marginea hărții la 1024px și mai sus. Cardul a urcat de la `top-[76%]` la `top-[73%]`
+- [x] Verificat la 768/1024/1280/1440/1920: raport casetă 0.886 = raport sursă 0.886, imagini încărcate, zero suprapuneri, nimic ieșit din cadru, pagina tot exact cât ecranul, zero erori sau request-uri eșuate
+- [x] Șters placeholder-ul `public/projects/voteaza-liga2.svg`, nu-l mai folosește nimeni
+- [x] `npm run build` — trece
+- Commit: `674038e` (fără push)
+- Notă: bannerul din dialog e destul de mare (622×249 într-un dialog de 672). Arată bine cât timp textul lipsește; când intră descrierea, dacă dezechilibrează, se rezolvă cu `max-h-28 object-contain`
+
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]
