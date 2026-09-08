@@ -88,6 +88,7 @@ export interface Translation {
     sub: string
     items: Project[]
     liveDemo: string
+    visitSite: string
     viewRepo: string
     comingSoon: string
   }
@@ -163,7 +164,7 @@ export const translations: Record<Lang, Translation> = {
         { name: 'Portfolio XP', img: '/projects/portfolio-xp.svg' },
         { name: 'CS2 Leaderboard', img: '/projects/cs2-leaderboard.svg' },
         { name: 'Fortuna WC2026', img: '/projects/fortuna-wc2026.svg' },
-        { name: 'Votează Liga 2', img: '/projects/voteaza-liga2.svg' },
+        { name: 'Votează Liga 2', img: '/projects/voteaza-liga2.svg', url: 'https://voteazaliga2.casapariurilor.ro' },
         { name: 'FEGBet', img: '/projects/fegbet.svg', url: 'https://fegbet.fortunagame.ro' },
         { name: 'Intranet', img: '/projects/intranet.svg' },
       ],
@@ -288,6 +289,7 @@ export const translations: Record<Lang, Translation> = {
         },
       ],
       liveDemo: 'Live demo',
+      visitSite: 'Visit site',
       viewRepo: 'View repo',
       comingSoon: 'Coming soon',
     },
@@ -403,7 +405,7 @@ export const translations: Record<Lang, Translation> = {
         { name: 'Portfolio XP', img: '/projects/portfolio-xp.svg' },
         { name: 'CS2 Leaderboard', img: '/projects/cs2-leaderboard.svg' },
         { name: 'Fortuna WC2026', img: '/projects/fortuna-wc2026.svg' },
-        { name: 'Votează Liga 2', img: '/projects/voteaza-liga2.svg' },
+        { name: 'Votează Liga 2', img: '/projects/voteaza-liga2.svg', url: 'https://voteazaliga2.casapariurilor.ro' },
         { name: 'FEGBet', img: '/projects/fegbet.svg', url: 'https://fegbet.fortunagame.ro' },
         { name: 'Intranet', img: '/projects/intranet.svg' },
       ],
@@ -528,6 +530,7 @@ export const translations: Record<Lang, Translation> = {
         },
       ],
       liveDemo: 'Demo live',
+      visitSite: 'Vizitează site-ul',
       viewRepo: 'Vezi repo-ul',
       comingSoon: 'Curând',
     },
