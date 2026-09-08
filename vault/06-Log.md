@@ -463,4 +463,12 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - Commit: `674038e` (fără push)
 - Notă: bannerul din dialog e destul de mare (622×249 într-un dialog de 672). Arată bine cât timp textul lipsește; când intră descrierea, dacă dezechilibrează, se rezolvă cu `max-h-28 object-contain`
 
+#### 16:25 — Siglă pentru cardul Intranet
+- [x] `public/projects/intranet.svg` — nu mai e placeholder-ul generic (munte + soare): „FEG" alb pe primul rând, „Intranet" auriu (`#fabc0a`) dedesubt, pe același gradient navy ca bannerul FEGBET, ca cele două proiecte FEG să arate înrudite
+- [x] Canvas 1080×810, adică exact 4/3 — raportul casetei cardului (`w-32 lg:w-48 aspect-[4/3]`), deci `object-cover` nu taie nimic. Nicio schimbare de layout, cardul rămâne unde era
+- [x] Verificat la 768/1280/1440: raport casetă 1.333 = raport sursă 1.333, imaginea se încarcă, zero suprapuneri, nimic ieșit din cadru, pagina tot exact cât ecranul, zero erori
+- [x] `npm run build` — trece
+- Commit: `d84b20b` (fără push)
+- Notă: fonturile externe nu se aplică într-un SVG randat ca `<img>`, deci „Inter" cade pe fallback-ul de sistem — la fel ca la FEGBET. Dacă vrei exact Inter, textul trebuie convertit în contururi
+
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]
