@@ -415,4 +415,14 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - [x] `npm run build` — trece
 - Notă: cardul e afișat în casă pătrată cu `object-cover` — SVG-ul larg e crozit pe laturi, textul rămâne centrat și vizibil
 
+#### 14:35 — Cardul FEGBet: dialog cu buton „Live demo", nu redirect
+- [x] **Ce era greșit** (verificat în browser, nu presupus): vizualul cardului era împachetat într-un `<a target=_blank>` pus **înăuntrul butonului** care e `DialogTrigger`. Un click făcea două lucruri deodată — măsurat: filele treceau de la 1 la 2 **și** se deschidea dialogul în spate. În plus, `<a>` în interiorul unui `<button>` e HTML invalid, iar FEGBet era singurul card care naviga în loc să deschidă
+- [x] `Experience.tsx` — ancora scoasă din buton; când un card are `url`, dialogul lui afișează la final un link „Live demo" (`ExternalLink` + `t.projects.liveDemo`, `rel=noreferrer`), în același stil cu butoanele pe care `ProjectPanel` le randează deja pentru proiectele cu link
+- [x] **Domeniul era greșit**: `fegbet.fortungame.ro` nu rezolvă în DNS; `fegbet.fortunagame.ro` rezolvă la `92.86.6.118` — lipsea un „a" din „fortuna". Corectat în ambele intrări (EN + RO)
+- [x] Verificat în Chrome: zero ancore în butoane, click = filele rămân 1 și se deschide doar dialogul, butonul are `href=https://fegbet.fortunagame.ro`, `rel=noreferrer`, `target=_blank`; cardul Portfolio XP e neatins (își păstrează cele două linkuri din `ProjectPanel`); zero erori sau avertismente în consolă
+- [x] `npm run build` — trece: 94.48 kB gzip
+- Commit: `9e6fef7` (fără push)
+- Notă: Qwen a trebuit să paseze `t` prin `MapCardData` ca să ajungă la `t.projects.liveDemo` în dialog. Merge, dar mai curat ar fi ca `MapCard` să cheme singur `useLanguage()` — de curățat la o trecere viitoare
+- **Rămâne deschis**: corpul dialogului zice „Coming soon", fiindcă FEGBet n-are intrare în `t.projects.items`. Trebuie textul de la Marius (rol, status, descriere, stack). Și bannerul e tot tăiat: SVG-ul e 1080×660, cardul e `aspect-[3/4]` cu `object-cover`, deci se citește „EGBE"
+
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]
