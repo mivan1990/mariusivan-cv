@@ -481,4 +481,17 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - **De discutat**: cele două proiecte nu mai apar **nicăieri** pe site — secțiunea Projects a dispărut la rescrierea în ecran unic, deci harta era singurul loc unde se vedeau. Datele stau degeaba în `translations.ts`
 - **De discutat**: acoperirea cadrului scade de la 28.7% la **21.8%**, iar colțul dreapta-sus rămâne gol — pozițiile au fost gândite pentru nouă elemente. Dacă vrei, redistribui cele 7 ca să reechilibrez harta
 
+#### 17:30 — Ecran de intrare + călătoria printre planete
+- [x] Cerința: la intrarea pe pagină, un ecran cu fade care întreabă dacă vrei „journey" sau skip. Skip → harta de acum. Journey → călătorie printre planete, unde planetele sunt locurile de muncă, cu un buton spre următorul
+- [x] **Deciziile lui Marius**: ordine cronologică (RCS & RDS 2012 → EA → Amber → Euronet → FEG), la final aterizezi pe hartă, **o planetă per companie** (FEG arată toate cele 3 roluri, EA ambele)
+- [x] **Datele** vin din PDF-ul de profil LinkedIn (`~/Downloads/Profile (1).pdf`), extras cu `pypdf` într-un venv temporar — nu era instalat niciun cititor de PDF pe mașină. Textele sunt condensate și traduse, și stau în `translations.ts` ca tot restul, în EN + RO
+- [x] **Fișiere noi**: `src/components/journey/starfield.tsx` (220 de cercuri SVG pe poziții deterministe — fără `Math.random` în render, altfel stelele sar la fiecare re-randare; un sfert clipesc pe keyframe CSS), `journey.tsx` (planeta + textul + controalele + indicatorii), `intro.tsx` (întrebarea)
+- [x] `main.tsx` — App e acum o mașină cu trei ecrane: `intro` → `journey` → `cv`, cu fade de 320ms între ele
+- [x] **Reduced motion**: clipitul stelelor, sosirea fiecărei opriri și fade-ul dintre ecrane sunt toate oprite sub `prefers-reduced-motion`
+- [x] Verificat în Chrome, parcurgând tot fluxul: intro → 5 opriri în ordinea corectă, cu companiile, perioadele și rolurile exacte → aterizare pe hartă cu cele 7 carduri. 220 de stele, 55 care clipesc, zero erori în consolă
+- [x] `npm run build` — trece
+- Commit: `3cca3e5` (fără push)
+- Notă: comutatorul de limbă apare pe intro (stânga sus) și pe hartă (dreapta sus), dar nu în timpul călătoriei — acolo colțul e ocupat de „Skip to the CV"
+- Notă: alegerea nu se ține minte între vizite; oricine reintră vede iar întrebarea. Dacă deranjează, se salvează în `localStorage`
+
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]
