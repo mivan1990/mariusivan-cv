@@ -1,5 +1,4 @@
 import { useLanguage } from '@/hooks/useLanguage'
-import type { Translation } from '@/i18n/translations'
 import { Section } from './shared'
 import Floating, { FloatingElement } from '@/components/ui/parallax-floating'
 import {
@@ -43,11 +42,11 @@ interface MapCardData {
   panel: ReactNode
   url?: string
   headerImg?: string
-  t: Translation
 }
 
 // Componenta interna MapCard(label, visual, children).
-function MapCard({ label, visual, panel, url, headerImg, t }: MapCardData) {
+function MapCard({ label, visual, panel, url, headerImg }: MapCardData) {
+  const { t } = useLanguage()
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -115,7 +114,6 @@ export function Experience() {
         panel: it.key === 'intranet' ? <IntranetPanel /> : <ProjectPanel id={it.key} />,
         url: item?.url,
         headerImg: item?.headerImg,
-        t,
       }
     }
 
@@ -133,7 +131,6 @@ export function Experience() {
         </div>
       ),
       panel,
-      t,
     }
   }
 

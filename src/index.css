@@ -158,3 +158,42 @@
     animation: none;
   }
 }
+
+/* deplasarea prin spatiu: warp-ul fundalului (fwd = zoom in, back = zoom out) */
+.warp-fwd {
+  animation: warp-fwd 760ms ease-in-out both;
+}
+@keyframes warp-fwd {
+  0% { transform: scale(1); opacity: 1 }
+  45% { transform: scale(1.6); opacity: 0.3 }
+  100% { transform: scale(1); opacity: 1 }
+}
+.warp-back {
+  animation: warp-back 760ms ease-in-out both;
+}
+@keyframes warp-back {
+  0% { transform: scale(1); opacity: 1 }
+  45% { transform: scale(0.65); opacity: 0.3 }
+  100% { transform: scale(1); opacity: 1 }
+}
+
+/* sosirea pe planeta noua, in functie de directia de calatorie */
+.arrive-fwd {
+  animation: arrive-fwd 620ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+@keyframes arrive-fwd {
+  from { opacity: 0; transform: scale(0.35); filter: blur(8px) }
+  to { opacity: 1; transform: none; filter: none }
+}
+.arrive-back {
+  animation: arrive-back 620ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+@keyframes arrive-back {
+  from { opacity: 0; transform: scale(1.6); filter: blur(8px) }
+  to { opacity: 1; transform: none; filter: none }
+}
+@media (prefers-reduced-motion: reduce) {
+  .warp-fwd, .warp-back, .arrive-fwd, .arrive-back {
+    animation: none;
+  }
+}

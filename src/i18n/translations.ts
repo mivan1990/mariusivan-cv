@@ -107,6 +107,7 @@ export interface Translation {
     prev: string
     land: string
     stopLabel: string
+    scrollHint: string
     stops: JourneyStop[]
   }
   projects: {
@@ -275,6 +276,7 @@ export const translations: Record<Lang, Translation> = {
       prev: 'Previous',
       land: 'Land on the CV',
       stopLabel: 'Stop',
+      scrollHint: 'Scroll to travel',
       stops: [
         {
           id: 'rcs-rds',
@@ -578,6 +580,7 @@ export const translations: Record<Lang, Translation> = {
       prev: 'Înapoi',
       land: 'Aterizează pe CV',
       stopLabel: 'Oprirea',
+      scrollHint: 'Derulează ca să călătorești',
       stops: [
         {
           id: 'rcs-rds',
