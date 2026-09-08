@@ -576,4 +576,12 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - [x] `npm run build` — trece
 - Commit: `3acfebb` (fără push)
 
+#### 21:25 — Aliniat focarul de expansiune cu punctul de fugă al scenei
+- [x] Stelele țâșneau din centrul ecranului (50%/50%), dar scena 3D converge spre `perspective-origin: 50% 34%` — două direcții de zbor la 144px una de alta
+- [x] `warp.tsx` primește `ORIGIN_Y = 0.34` și `cy = h * ORIGIN_Y`, cu un comentariu care leagă valoarea de cea din `space.tsx`, ca să nu se mai desincronizeze
+- [x] Verificat: constanta e în cod și, prin construcție, fiecare dâră e desenată pe raza care pleacă din `(cx, cy)` — deci focarul e exact acolo. Confirmat și vizual în captură: zona goală din care pleacă dârele coincide acum cu locul planetelor
+- [x] Notă onestă: am încercat două măsurători automate ale focarului (centroidul pixelilor aprinși și căutarea „găurii" de densitate minimă) — **ambele sunt estimatori proști** aici: centroidul e tras în jos de faptul că sub focar e mai mult ecran, iar gaura se pierde când câmpul e dens. Dovada rămâne codul plus captura
+- [x] `npm run build` — trece
+- Commit: `d5a541a` (fără push)
+
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]
