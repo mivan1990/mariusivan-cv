@@ -28,7 +28,7 @@ const MAP_ITEMS = [
   { key: 'skills',          kind: 'tile',  pos: 'top-[2%] left-[34%]',  box: 'w-24 lg:w-32 aspect-square', depth: 0.9 },
   { key: 'cs2-leaderboard', kind: 'photo', pos: 'top-[1%] left-[72%]',  box: 'w-24 lg:w-36 aspect-[3/4]',  depth: 0.8 },
   { key: 'fortuna-wc2026',  kind: 'photo', pos: 'top-[38%] left-[1%]',  box: 'w-28 lg:w-40 aspect-square', depth: 1.8 },
-  { key: 'fegbet',          kind: 'photo', pos: 'top-[34%] left-[78%]', box: 'w-32 lg:w-44 aspect-[16/10]', depth: 2 },
+  { key: 'fegbet',          kind: 'photo', pos: 'top-[34%] left-[78%]', box: 'w-32 lg:w-44 aspect-square', depth: 2 },
   { key: 'contact',         kind: 'tile',  pos: 'top-[70%] left-[8%]',  box: 'w-24 lg:w-32 aspect-square', depth: 1.2 },
   { key: 'voteaza-liga2',   kind: 'photo', pos: 'top-[76%] left-[30%]', box: 'w-24 lg:w-32 aspect-square', depth: 1.1 },
   { key: 'intranet',        kind: 'photo', pos: 'top-[74%] left-[54%]', box: 'w-32 lg:w-48 aspect-[4/3]',  depth: 0.7 },
