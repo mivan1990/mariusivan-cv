@@ -584,4 +584,15 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - [x] `npm run build` — trece
 - Commit: `d5a541a` (fără push)
 
+#### 21:45 — Camera se înclină în viraj, ca un avion
+- [x] Cerința: la curba spre planetă să se încline într-o parte, nu să meargă drept orizontal
+- [x] Rotire de **14°** spre partea în care virează, ținută prin mijlocul traversării și îndreptată la sosire. Semnul urmează o cabină de avion: viraj spre dreapta = conținutul se rotește invers acelor de ceas
+- [x] Înclinarea stă pe **stratul ei**, între perspectivă și rig-ul de mouse — un element poate avea o singură transformare, iar celelalte două erau deja luate de privirea cu mouse-ul și de translația camerei
+- [x] **Prima încercare a înclinat doar scena 3D și ecranul tot drept părea**: dârele de warp sunt desenate de un canvas randat în `journey.tsx`, în afara scenei, deci rămâneau orizontale în timp ce planetele se înclinau sub ele. Unghiul vine acum din `journey.tsx` (care conduce zborul) și se aplică pe amândouă straturile
+- [x] Măsurat în mijlocul virajului: **două straturi înclinate, ambele la -14°**, canvas-ul dârelor printre ele. Înainte și după zbor: zero straturi înclinate
+- [x] `space.tsx` exportă `bankAngle(from, to)`, ca tabelul de poziții să nu fie duplicat în două fișiere
+- [x] `npm run build` — trece
+- Commit: `4788eae` (fără push)
+- Notă: dacă senzația e inversă (pare că se înclină în partea greșită), e o singură schimbare de semn în `bankAngle`
+
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]
