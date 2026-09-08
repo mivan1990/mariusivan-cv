@@ -516,4 +516,16 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - [x] `npm run build` — trece: 98.2 kB gzip
 - Commit: `0238e42` (fără push)
 
+#### 19:15 — Camera urmărește mouse-ul, traseu punctat între planete
+- [x] **Privire cu mouse-ul**: un strat „rig" între perspectivă și lume se înclină până la 12° pe orizontală și 8° pe verticală. Scrie direct pe element într-un `requestAnimationFrame`, fără state — altfel s-ar re-randa tot arborele la fiecare pixel de mișcare. Oprit complet sub `prefers-reduced-motion` (verificat: transformarea rămâne nulă)
+- [x] **Traseul**: 4 bare punctate, fiecare așezată pe o planetă și rotită spre următoarea — `yaw = atan2(-dz, dx)`, `pitch = asin(dy/len)`
+- [x] **Trei bug-uri, toate prinse măsurând sau uitându-mă la captură, niciunul din citit codul:**
+  1. Bara se rotea în jurul centrului ei, deci ambele capete plecau de lângă planete. Rezolvat cu `transform-origin` la capătul din stânga și fără `translateX(len/2)`
+  2. Planetele aveau clasele Tailwind `-translate-x-1/2 -translate-y-1/2`, dar **transformarea inline le suprascrie complet** — deci fiecare planetă stătea după colțul ei stânga-sus, iar cea focalizată nu era niciodată centrată. Centrarea a intrat în transformarea inline, iar eticheta e acum absolută, ca să rămână cutia exact cât sfera
+  3. Măsurat în toate cele 5 poziții ale camerei: EA se suprapunea peste Euronet și Amber peste FEG **de fiecare dată** (40px separare laterală), iar intervalul de adâncime de 450 depășea FOCUS_Z (420), împingând planeta cea mai apropiată aproape în fața camerei. Constelație refăcută: minim 288px separare laterală, adâncime pe 250. Re-măsurat: zero suprapuneri în oricare poziție
+- [x] Verificat: 5 planete în cadru, click pe una din fundal mută camera, scroll-ul merge, zero erori
+- [x] `npm run build` — trece: 98.5 kB gzip
+- Commit: `41fabaa` (fără push)
+- Rămâne: în 3 din 5 poziții ale camerei, o planetă e tăiată parțial de marginea ecranului. Rămâne vizibilă și clicabilă, dar dacă deranjează, se strânge constelația lateral
+
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]
