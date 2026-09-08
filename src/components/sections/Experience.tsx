@@ -1,4 +1,5 @@
 import { useLanguage } from '@/hooks/useLanguage'
+import type { Translation } from '@/i18n/translations'
 import { Section } from './shared'
 import Floating, { FloatingElement } from '@/components/ui/parallax-floating'
 import {
@@ -17,7 +18,7 @@ import {
 } from '@/components/map/panels'
 import { cn } from '@/lib/utils'
 import { FloatingPaths } from '@/components/ui/floating-paths'
-import { HelpCircle, Layers, Mail } from 'lucide-react'
+import { ExternalLink, HelpCircle, Layers, Mail } from 'lucide-react'
 import type { ReactNode } from 'react'
 
 // 9 elemente pe harta (pozitiile top/left sunt procentuale).
@@ -43,10 +44,11 @@ interface MapCardData {
   visual: ReactNode
   panel: ReactNode
   url?: string
+  t: Translation
 }
 
 // Componenta interna MapCard(label, visual, children).
-function MapCard({ label, visual, panel, url }: MapCardData) {
+function MapCard({ label, visual, panel, url, t }: MapCardData) {
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -54,13 +56,7 @@ function MapCard({ label, visual, panel, url }: MapCardData) {
           type="button"
           className="block rounded-xl text-left transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         >
-          {url ? (
-            <a href={url} target="_blank" rel="noopener" className="block">
-              {visual}
-            </a>
-          ) : (
-            visual
-          )}
+          {visual}
           <span className="mt-2 block text-center text-xs font-medium text-foreground">{label}</span>
         </button>
       </DialogTrigger>
@@ -69,6 +65,19 @@ function MapCard({ label, visual, panel, url }: MapCardData) {
           <DialogTitle>{label}</DialogTitle>
         </DialogHeader>
         {panel}
+        {url && (
+          <div className="mt-5 flex flex-wrap gap-2">
+            <a
+              href={url}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-border px-3 py-2 text-sm font-medium transition hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            >
+              <ExternalLink className="h-4 w-4" />
+              {t.projects.liveDemo}
+            </a>
+          </div>
+        )}
       </DialogContent>
     </Dialog>
   )
@@ -97,6 +106,7 @@ export function Experience() {
         ),
         panel: it.key === 'intranet' ? <IntranetPanel /> : <ProjectPanel id={it.key} />,
         url: item?.url,
+        t,
       }
     }
 
@@ -114,6 +124,7 @@ export function Experience() {
         </div>
       ),
       panel,
+      t,
     }
   }
 
