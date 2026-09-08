@@ -425,4 +425,13 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - Notă: Qwen a trebuit să paseze `t` prin `MapCardData` ca să ajungă la `t.projects.liveDemo` în dialog. Merge, dar mai curat ar fi ca `MapCard` să cheme singur `useLanguage()` — de curățat la o trecere viitoare
 - **Rămâne deschis**: corpul dialogului zice „Coming soon", fiindcă FEGBet n-are intrare în `t.projects.items`. Trebuie textul de la Marius (rol, status, descriere, stack). Și bannerul e tot tăiat: SVG-ul e 1080×660, cardul e `aspect-[3/4]` cu `object-cover`, deci se citește „EGBE"
 
+#### 15:05 — Bannerul FEGBET nu mai e tăiat
+- [x] **Simptom**: pe card se citea „EGBE" — fără F și fără T. Marius a crezut că textul nu e centrat în SVG; nu era asta: textul **era** centrat, dar SVG-ul era lat (1080×660, raport 1.64) iar caseta cardului înaltă (`aspect-[3/4]`, 144×192 măsurat). `object-cover` lasă sursa neatinsă **doar** când raportul ei e identic cu al casetei; altfel taie — aici lateralele
+- [x] Ambele aduse la **16/10**: `public/projects/fegbet.svg` devine 1080×675 cu textul recentrat (`x=540 y=337.5`), iar cardul devine `w-32 lg:w-44 aspect-[16/10]`
+- [x] Verificat în Chrome: raport casetă **1.6** = raport sursă **1.6**, deci zero tăiere; pe card se citește FEGBET întreg
+- [x] Cardul trece din portret în peisaj, deci am re-verificat harta la 768/1024/1280/1440/1920: zero suprapuneri peste centru sau între carduri, nimic ieșit din cadru, pagina tot exact cât ecranul, zero erori
+- [x] `npm run build` — trece
+- Commit: `f1d65cc` (fără push)
+- Notă: SVG-ul cere `font-family: Inter`, dar fonturile externe nu se aplică într-un SVG randat ca `<img>` — se folosește fallback-ul de sistem. Diferența e mică, dar dacă vrei exact Inter, textul trebuie convertit în contururi
+
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]
