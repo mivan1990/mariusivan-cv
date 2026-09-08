@@ -3,6 +3,7 @@ import { useLanguage } from '@/hooks/useLanguage';
 import { cn } from '@/lib/utils';
 import { Starfield } from '@/components/journey/starfield';
 import { Space } from '@/components/journey/space';
+import { WarpStreaks } from '@/components/journey/warp';
 
 interface JourneyProps {
   // Cheiam la final (butonul de la ultima oprire sau butonul de iesire)
@@ -76,6 +77,10 @@ export function Journey({ onFinish }: JourneyProps) {
       <div className={cn('absolute inset-0', warp === 'fwd' && 'warp-fwd', warp === 'back' && 'warp-back')}>
         <Starfield />
       </div>
+
+      {/* Dungi de warp — montate si demontate la fiecare deplasare, deci
+          animatia porneste de la capat de fiecare data */}
+      {warp && <WarpStreaks dir={warp} />}
 
       {/* Scena 3D: cele 5 planete pe un inel, camera se roteste catre oprirea aleasa */}
       <Space index={i} onSelect={(n) => travelTo(n)} />
