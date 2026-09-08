@@ -13,37 +13,41 @@ interface JourneyProps {
 // Ecranul de "calatorie" prin cariera — o oprire = o planeta
 export function Journey({ onFinish }: JourneyProps) {
   const { t } = useLanguage();
-  const [i, setI] = useState(0); // indexul opririi curente
+  const [i, setI] = useState(0); // indexul opririi curente (conduce camera si scena)
+  const [panelI, setPanelI] = useState(0); // indexul opririi afisata in panoul de text (se schimba la sosire)
   const [warp, setWarp] = useState<null | 'fwd' | 'back'>(null); // directia activa a warp-ului
   const [dir, setDir] = useState<1 | -1>(1); // ultima directie, pt. animatia de sosire
   const lockRef = useRef(0); // timestamp-ul ultimei deplasare (o singura pe rand)
   const touchYRef = useRef<number | null>(null); // Y-ul de la touchstart, pt. swipe
 
-  // O singura functie de navigare: porneste warp-ul, schimba planeta in
-  // mijlocul lui, apoi elibereaza. Lock pe 780ms impiedica deplasari inlantuite.
+  // O singura functie de navigare: camera pleaca imediat, textul se schimba
+  // spre finalul zborului, iar warp-ul se stinge la final. Lock pe 5200ms
+  // impiedica deplasari inlantuite.
   const travel = (d: 1 | -1) => {
     const now = Date.now();
-    if (warp || now - lockRef.current < 780) return // o singura deplasare pe rand
+    if (warp || now - lockRef.current < 5200) return // o singura deplasare pe rand
     const target = i + d;
     if (target < 0 || target >= t.journey.stops.length) return
     lockRef.current = now
     setDir(d)
     setWarp(d === 1 ? 'fwd' : 'back')
-    window.setTimeout(() => setI(target), 260) // schimba planeta in mijlocul warp-ului
-    window.setTimeout(() => setWarp(null), 760)
+    setI(target) // camera porneste in aceeasi clipa cu warp-ul
+    window.setTimeout(() => setPanelI(target), 4500) // textul apare la sosire
+    window.setTimeout(() => setWarp(null), 5000)
   };
 
   // Salt direct la oprirea n (indicatorii rotunzi) — aceeasi logica de warp,
   // cu directia dedusa din pozitia curenta
   const travelTo = (n: number) => {
     const now = Date.now();
-    if (warp || now - lockRef.current < 780) return // o singura deplasare pe rand
+    if (warp || now - lockRef.current < 5200) return // o singura deplasare pe rand
     if (n === i || n < 0 || n >= t.journey.stops.length) return
     lockRef.current = now
     setDir(n > i ? 1 : -1)
     setWarp(n > i ? 'fwd' : 'back')
-    window.setTimeout(() => setI(n), 260)
-    window.setTimeout(() => setWarp(null), 760)
+    setI(n) // camera porneste in aceeasi clipa cu warp-ul
+    window.setTimeout(() => setPanelI(n), 4500) // textul apare la sosire
+    window.setTimeout(() => setWarp(null), 5000)
   };
 
   // Navigare cu tastatura: sagetile stanga/dreapta si sus/jos
@@ -56,7 +60,7 @@ export function Journey({ onFinish }: JourneyProps) {
     return () => window.removeEventListener('keydown', onKey);
   });
 
-  const stop = t.journey.stops[i];
+  const stop = t.journey.stops[panelI];
   const isLast = i === t.journey.stops.length - 1;
 
   return (
@@ -87,7 +91,12 @@ export function Journey({ onFinish }: JourneyProps) {
 
       {/* Panoul cu text, mutat jos pe ecran */}
       <div className='pointer-events-none absolute inset-x-0 bottom-0 z-10 px-5 pb-10 bg-gradient-to-t from-black via-black/85 to-transparent pt-24'>
-        <div className='pointer-events-auto mx-auto max-w-2xl text-center'>
+        <div
+          className={cn(
+            'pointer-events-auto mx-auto max-w-2xl text-center transition-opacity duration-500 motion-reduce:transition-none',
+            warp ? 'opacity-0' : 'opacity-100',
+          )}
+        >
           {/* key pe stop.id => re-montare la fiecare schimbare, declanseaza animatia de sosire */}
           <div
             key={stop.id}

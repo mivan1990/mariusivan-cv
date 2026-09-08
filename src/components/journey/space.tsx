@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { useLanguage } from '@/hooks/useLanguage'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
+import { cn } from '@/lib/utils'
 
 // Cat de departe de camera sta planeta aleasa (distanta focala).
 // Planeta aleasa trebuie sa fie mereu cea mai mare de pe ecran, de aceea sta mai
@@ -9,17 +10,16 @@ const FOCUS_Z = 420
 
 // Fara inel si fara rotatie: inelul de 1500px era mult mai lat decat ecranul, iar
 // rotatia aducea planetele de pe partea opusa IN FATA camerei, unde se umflau si
-// zboarau lateral (afar de cadru). Acum planetele stau intr-o constelatie compacta,
-// la adancimi diferite, iar camera doar GLISEAZA (translateaza) spre cea aleasa.
-// Pozitiile sunt alese ca planetele sa nu se suprapuna in nicio pozitie a camerei
-// si ca intervalul de adancime sa ramana sub FOCUS_Z, altfel planeta cea mai
-// apropiata trece in fata camerei.
+// zboarau lateral (afar de cadru). Acum planetele stau pe un culoar in adancime,
+// la 4000px una de alta, ca zborul sa acopere distanta reala si planeta tinta sa
+// creasca vizibil. Planetele deja depasite sunt ascunse (opacitate 0), deci nu
+// pot aparea uriase in fata camerei.
 const BODIES = [
-  { x: -420, y: -120, z: -1200, size: 165, bg: 'radial-gradient(circle at 32% 30%, #7dd3fc, #0e7490 55%, #082f49)', glow: '0 0 60px rgba(56,189,248,0.45)' },
-  { x: -180, y:  190, z: -1350, size: 185, bg: 'radial-gradient(circle at 32% 30%, #fdba74, #c2410c 55%, #431407)', glow: '0 0 70px rgba(249,115,22,0.45)' },
-  { x:   60, y: -180, z: -1250, size: 155, bg: 'radial-gradient(circle at 32% 30%, #fde68a, #b45309 55%, #451a03)', glow: '0 0 55px rgba(245,158,11,0.45)' },
-  { x:  330, y:  150, z: -1450, size: 175, bg: 'radial-gradient(circle at 32% 30%, #c4b5fd, #6d28d9 55%, #2e1065)', glow: '0 0 65px rgba(139,92,246,0.45)' },
-  { x:  430, y: -120, z: -1300, size: 205, bg: 'radial-gradient(circle at 32% 30%, #a5b4fc, #4338ca 55%, #1e1b4b)', glow: '0 0 80px rgba(99,102,246,0.5)' },
+  { x: -220, y: -110, z:  -1200, size: 200, bg: 'radial-gradient(circle at 32% 30%, #7dd3fc, #0e7490 55%, #082f49)', glow: '0 0 70px rgba(56,189,248,0.45)' },
+  { x:  260, y:  130, z:  -5200, size: 210, bg: 'radial-gradient(circle at 32% 30%, #fdba74, #c2410c 55%, #431407)', glow: '0 0 75px rgba(249,115,22,0.45)' },
+  { x: -280, y:  120, z:  -9200, size: 195, bg: 'radial-gradient(circle at 32% 30%, #fde68a, #b45309 55%, #451a03)', glow: '0 0 70px rgba(245,158,11,0.45)' },
+  { x:  240, y: -140, z: -13200, size: 205, bg: 'radial-gradient(circle at 32% 30%, #c4b5fd, #6d28d9 55%, #2e1065)', glow: '0 0 75px rgba(139,92,246,0.45)' },
+  { x:    0, y:   40, z: -17200, size: 240, bg: 'radial-gradient(circle at 32% 30%, #a5b4fc, #4338ca 55%, #1e1b4b)', glow: '0 0 90px rgba(99,102,246,0.5)' },
 ]
 
 export function Space({ index, onSelect }: { index: number; onSelect: (i: number) => void }) {
@@ -64,7 +64,7 @@ export function Space({ index, onSelect }: { index: number; onSelect: (i: number
           className='absolute left-1/2 top-[34%] [transform-style:preserve-3d]'
           style={{
             transform: `translate3d(${-BODIES[index].x}px, ${-BODIES[index].y}px, ${-BODIES[index].z - FOCUS_Z}px)`,
-            transition: 'transform 1400ms cubic-bezier(0.22, 0.61, 0.36, 1)',
+            transition: 'transform 5000ms cubic-bezier(0.45, 0, 0.2, 1)',
           }}
         >
           {/* Traseul punctat intre planete: 4 segmente, generate din perechi consecutive. */}
@@ -112,13 +112,16 @@ export function Space({ index, onSelect }: { index: number; onSelect: (i: number
                 // tarzie in fisier), deci planetele nu mai ies din flux. Eticheta absoluta
                 // din interior nu are nevoie de 'relative': un element position:absolute
                 // e deja bloc de referinta pentru copiii lui absoluti.
-                className='pointer-events-auto absolute [transform-style:preserve-3d] focus-visible:outline-none transition-opacity duration-700'
+                className={cn(
+                  'pointer-events-auto absolute [transform-style:preserve-3d] focus-visible:outline-none transition-opacity duration-700',
+                  i < index && 'pointer-events-none',
+                )}
                 style={{
                   // translate(-50%, -50%) la final: procente relative la propria
                   // marime a butonului (care acum = sfera), centreaza sfera exact
                   // pe punctul din constelatie.
                   transform: `translate3d(${b.x}px, ${b.y}px, ${b.z}px) translate(-50%, -50%)`,
-                  opacity: i === index ? 1 : 0.45,
+                  opacity: i < index ? 0 : i === index ? 1 : 0.75,
                 }}
               >
                 <div
