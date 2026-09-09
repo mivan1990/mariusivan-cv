@@ -83,7 +83,7 @@ export function Journey({ onFinish }: JourneyProps) {
           animatia porneste de la capat de fiecare data */}
       {warp && (
         <div
-          className={cn('pointer-events-none absolute inset-0', bank !== 0 && 'bank-turn')}
+          className={cn('pointer-events-none absolute -inset-[20%]', bank !== 0 && 'bank-turn')}
           style={{ '--bank': `${bank}deg` } as React.CSSProperties}
         >
           <WarpStreaks dir={warp} />

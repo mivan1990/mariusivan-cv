@@ -13,7 +13,8 @@ import { useReducedMotion } from '@/hooks/useReducedMotion';
 //   ca sa ramana transparent si sa lasa vizibile stelele din spate;
 // - viteza urmeaza o rampa sinus 0 -> 1 -> 0: accelereaza, apoi franeaza.
 
-const STARS = 420; // numarul de stele din camp
+const STARS = 820; // numarul de stele din camp; ales pentru suprafata canvas-ului, care e mai
+// mare decat ecranul din cauza overscan-ului (vezi OVERSCAN); la 420 densitatea pe ecran se injumatatea
 const DEPTH = 1400; // adancimea maxima a campului (z)
 const FOCAL = 320; // lungimea focala de proiectie
 const DURATION = 5000; // durata totala a warp-ului, ms
@@ -22,6 +23,8 @@ const SPEED = 30; // viteza maxima de apropiere/departare pe cadru
 // Trebuie sa fie identic cu 'perspective-origin' din space.tsx (50% 34%), altfel stelele
 // tasnesc din alt punct decat cel spre care converg planetele.
 const ORIGIN_Y = 0.34
+// Cat depaseste canvas-ul ecranul, pe fiecare latura (vezi journey.tsx)
+const OVERSCAN = 0.2
 
 interface WarpStreaksProps {
   // directia warp-ului: 'fwd' = zbor inainte (stelele se apropie),
@@ -87,7 +90,9 @@ export function WarpStreaks({ dir }: WarpStreaksProps) {
       ctx.clearRect(0, 0, w, h);
 
       const cx = w / 2;
-      const cy = h * ORIGIN_Y;
+      // ORIGIN_Y e masurat fata de ECRAN; canvas-ul e mai mare, deci fractia se recalculeaza:
+      // (OVERSCAN + ORIGIN_Y) / (1 + 2 * OVERSCAN)
+      const cy = h * ((OVERSCAN + ORIGIN_Y) / (1 + 2 * OVERSCAN));
 
       for (const s of stars) {
         // inainte: se apropie (z scade); inapoi: se departeaza (z creste)

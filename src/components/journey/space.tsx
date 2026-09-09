@@ -74,7 +74,10 @@ export function Space({ index, bank, onSelect }: { index: number; bank: number; 
       >
         {/* Cerul sta in scena (sub rig), altfel ramane nemiscat cand camera vireaza:
             primeste si inclinarea de viraj, si privirea de mouse. */}
-        <Starfield />
+        {/* Cerul e mai mare decat ecranul, ca la inclinare colturile sa nu ramana goale. */}
+        <div className='pointer-events-none absolute -inset-[20%]'>
+          <Starfield />
+        </div>
         {/* „Lumea” gliseaza spre planeta aleasa: negand x, y si z ale ei, planeta ajunge
             exact in centru, la z = -FOCUS_Z, iar restul raman in jur, mai mici.
             Fara rotatie — planetele sunt deja cu fata la camera. */}
