@@ -614,4 +614,14 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - [x] `npm run build` — trece
 - Commit: `1e12acf` (fără push)
 
+#### 09:45 — Planeta intră în focus înainte de sosire
+- [x] Cerința: focusul să fie pe planetă cu câteva secunde înainte de a ajunge. Înainte, camera închidea distanța până în ultima clipă, iar panoul se schimba abia la 4.5s dintr-un zbor de 5s — planeta era subiect pentru o fracțiune de secundă
+- [x] **Curba zborului e acum încărcată la început**: `cubic-bezier(0.16, 0.85, 0.25, 1)`. Cea mai mare parte a distanței se acoperă în primele două secunde, restul e o așezare lină
+- [x] **Panoul se schimbă la 2.6s** în loc de 4.5s, deci numele și perioadele stau pe ecran ultimele 2.4 secunde ale apropierii
+- [x] Înclinarea se îndreaptă mai devreme: keyframes 30%/60% în loc de 40%/70%
+- [x] Măsurat pe saltul spre EA: **26%** din mărimea finală la plecare, **70%** la 1.6s, **85%** la 2.4s, **93%** la 3.0s, ajunsă la 4s
+- [x] **Atenție la măsurătoare**: `getBoundingClientRect` pe un element rotit dă cutia aliniată la axe, care e cu ~21% mai mare la înclinarea de 14°. Cifrele de mai sus sunt corectate cu factorul ăsta; fără corecție păreau o depășire de 112%, care nu există
+- [x] `npm run build` — trece
+- Commit: `859e518` (fără push)
+
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]
