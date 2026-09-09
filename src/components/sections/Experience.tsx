@@ -24,13 +24,13 @@ import type { ReactNode } from 'react'
 // Pozitiile sunt imprastiate intentionat, la inaltimi diferite, ca harta sa nu
 // se citeasca a grila; banda centrala ramane libera pentru blocul cu poza.
 const MAP_ITEMS = [
-  { key: 'portfolio-xp',    kind: 'photo', pos: 'top-[2%] left-[4%]',   box: 'w-32 lg:w-44 aspect-[4/3]',  depth: 1.4 },
-  { key: 'skills',          kind: 'tile',  pos: 'top-[8%] left-[28%]',  box: 'w-24 lg:w-32 aspect-square', depth: 0.9 },
-  { key: 'fegbet',          kind: 'photo', pos: 'top-[6%] left-[72%]',  box: 'w-32 lg:w-44 aspect-square', depth: 2 },
-  { key: 'contact',         kind: 'tile',  pos: 'top-[38%] left-[3%]',  box: 'w-24 lg:w-32 aspect-square', depth: 1.2 },
-  { key: 'voteaza-liga2',   kind: 'photo', pos: 'top-[72%] left-[18%]', box: 'w-24 lg:w-32 aspect-[31/35]', depth: 1.1 },
-  { key: 'intranet',        kind: 'photo', pos: 'top-[73%] left-[50%]', box: 'w-32 lg:w-48 aspect-[4/3]',  depth: 0.7 },
-  { key: 'faq',             kind: 'tile',  pos: 'top-[46%] left-[84%]', box: 'w-24 lg:w-28 aspect-square', depth: 1.5 },
+  { key: 'portfolio-xp',  kind: 'photo', pos: 'top-[1%] left-[2%] md:top-[2%] md:left-[4%]',    box: 'w-20 aspect-[4/3] md:w-32 lg:w-44',      depth: 1.4 },
+  { key: 'skills',        kind: 'tile',  pos: 'top-[4%] left-[44%] md:top-[8%] md:left-[28%]',  box: 'w-14 aspect-square md:w-24 lg:w-32',     depth: 0.9 },
+  { key: 'fegbet',        kind: 'photo', pos: 'top-[12%] left-[72%] md:top-[6%] md:left-[72%]', box: 'w-20 aspect-square md:w-32 lg:w-44',     depth: 2 },
+  { key: 'contact',       kind: 'tile',  pos: 'top-[36%] left-[0%] md:top-[38%] md:left-[3%]',  box: 'w-14 aspect-square md:w-24 lg:w-32',     depth: 1.2 },
+  { key: 'voteaza-liga2', kind: 'photo', pos: 'top-[70%] left-[4%] md:top-[72%] md:left-[18%]', box: 'w-16 aspect-[31/35] md:w-24 lg:w-32',    depth: 1.1 },
+  { key: 'intranet',      kind: 'photo', pos: 'top-[74%] left-[42%] md:top-[73%] md:left-[50%]',box: 'w-20 aspect-[4/3] md:w-32 lg:w-48',      depth: 0.7 },
+  { key: 'faq',           kind: 'tile',  pos: 'top-[52%] left-[80%] md:top-[46%] md:left-[84%]',box: 'w-14 aspect-square md:w-24 lg:w-28',     depth: 1.5 },
 ]
 
 type MapItem = (typeof MAP_ITEMS)[number]
@@ -56,7 +56,7 @@ function MapCard({ label, visual, panel, url, headerImg }: MapCardData) {
           className="block rounded-xl text-left transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         >
           {visual}
-          <span className="mt-2 block text-center text-xs font-medium text-foreground">{label}</span>
+          <span className="mt-1.5 block text-center text-[10px] font-medium leading-tight text-foreground md:mt-2 md:text-xs">{label}</span>
         </button>
       </DialogTrigger>
       <DialogContent className="max-h-[85vh] overflow-y-auto sm:max-w-2xl">
@@ -137,7 +137,7 @@ export function Experience() {
 
   return (
     <Section id="experience" className="bg-background text-foreground">
-      <div className="relative md:min-h-[680px]">
+      <div className="relative min-h-[560px] md:min-h-[680px]">
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0 hidden text-foreground opacity-40 md:block">
           <FloatingPaths />
         </div>
@@ -145,7 +145,7 @@ export function Experience() {
             Poza, sub ea numele, apoi compania si rolul/perioada.
             Latimea e mica intentionat (numele companiei se rupe pe doua randuri):
             asa ramane loc pentru cardurile care plutesc in jur. */}
-        <div className="md:absolute md:left-1/2 md:top-1/2 md:z-10 md:w-[min(420px,44%)] md:-translate-x-1/2 md:-translate-y-1/2">
+        <div className="absolute left-1/2 top-1/2 z-10 w-[min(190px,58%)] -translate-x-1/2 -translate-y-1/2 md:w-[min(420px,44%)]">
           <div className="flex flex-col items-center text-center">
             {/* PLACEHOLDER — inlocuieste cu poza reala si pune un alt descriptiv
                 (ex. alt={e.personName}). Cat timp e desen generic, alt gol e corect. */}
@@ -156,15 +156,15 @@ export function Experience() {
               height={144}
               loading="lazy"
               decoding="async"
-              className="h-28 w-28 rounded-full border border-border object-cover sm:h-36 sm:w-36"
+              className="h-20 w-20 rounded-full border border-border object-cover md:h-28 md:w-28 lg:h-36 lg:w-36"
             />
-            <div className="mt-4 text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+            <div className="mt-3 text-lg font-bold tracking-tight text-foreground md:mt-4 md:text-2xl lg:text-3xl">
               {e.personName}
             </div>
-            <div className="mt-2 text-base font-semibold leading-snug text-foreground sm:text-lg">
+            <div className="mt-1.5 text-xs font-semibold leading-snug text-foreground md:mt-2 md:text-base lg:text-lg">
               {e.company}
             </div>
-            <div className="mt-1.5 flex flex-wrap items-center justify-center gap-x-2 text-sm text-muted-foreground">
+            <div className="mt-1.5 flex flex-wrap items-center justify-center gap-x-2 text-[11px] text-muted-foreground md:text-sm">
               <span className="font-medium">{e.role}</span>
               <span aria-hidden="true">·</span>
               <span className="font-mono-code text-xs">{e.period}</span>
@@ -173,7 +173,7 @@ export function Experience() {
         </div>
 
         {/* harta — elemente plutitoare, doar desktop */}
-        <Floating sensitivity={0.5} className="absolute inset-0 z-10 hidden md:block">
+        <Floating sensitivity={0.5} className="absolute inset-0 z-10">
           {MAP_ITEMS.map((it) => (
             <FloatingElement key={it.key} depth={it.depth} className={cn('absolute', it.pos)}>
               <MapCard {...makeCard(it, it.box)} />
@@ -181,12 +181,6 @@ export function Experience() {
           ))}
         </Floating>
 
-        {/* mobil — grila normala, nimic nu pluteste */}
-        <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 md:hidden">
-          {MAP_ITEMS.map((it) => (
-            <MapCard key={it.key} {...makeCard(it, 'w-full aspect-[4/3]')} />
-          ))}
-        </div>
       </div>
     </Section>
   )
