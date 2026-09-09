@@ -633,4 +633,14 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - [x] `npm run build` — trece
 - Commit: `84f0aa7` (fără push)
 
+#### 10:50 — Harta împrăștiată și pe telefon
+- [x] Lămurire: „grila" pe care o văzuse Marius **nu era o regresie** — era fallback-ul de sub `md`, pus intenționat la rescrierea în ecran unic. El era pe telefon
+- [x] Cerința: să arate ca pe desktop și pe mobil. Harta plutitoare rulează acum la **orice lățime**: aceleași 7 carduri, același portret în centru, micșorate și repoziționate prin prefixe `md:`, nu printr-o a doua componentă
+- [x] Pe telefon: carduri de **56-80px** (față de 96-176 pe desktop), blocul central **190px** lățime în loc de 420, etichetele la 10px. Grila de fallback a fost ștearsă
+- [x] **Trei coliziuni ieșite la măsurare** pe 360/390/430: blocul central era destul de lat cât să stea peste el FEGBet, Contact și FAQ; după ce FEGBet a urcat, a căzut peste Skills; Skills a trebuit mutat la stânga
+- [x] Verificat după: nimic peste portret, zero suprapuneri, nimic ieșit din cadru, fără scroll orizontal, pagina exact cât ecranul, la toate trei lățimile
+- [x] `npm run build` — trece
+- Commit: `bb86baf` (fără push)
+- Notă: sub blocul de jos rămâne spațiu gol pe ecranele înalte; harta are `min-h-[560px]` pe mobil. Dacă deranjează, se poate întinde
+
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]
