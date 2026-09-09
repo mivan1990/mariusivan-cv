@@ -186,8 +186,9 @@
 }
 @keyframes bank-turn {
   0%   { transform: rotateZ(0deg); }
+  14%  { transform: rotateZ(var(--bank, 0deg)); }
   30%  { transform: rotateZ(var(--bank, 0deg)); }
-  60%  { transform: rotateZ(var(--bank, 0deg)); }
+  46%  { transform: rotateZ(0deg); }
   100% { transform: rotateZ(0deg); }
 }
 @media (prefers-reduced-motion: reduce) {
