@@ -86,7 +86,13 @@ export function Space({ index, bank, onSelect }: { index: number; bank: number; 
           className='absolute left-1/2 top-[34%] [transform-style:preserve-3d]'
           style={{
             transform: `translate3d(${-BODIES[index].x}px, ${-BODIES[index].y}px, ${-BODIES[index].z - FOCUS_Z}px)`,
-            transition: 'transform 5000ms cubic-bezier(0.05, 0.95, 0.12, 1)',
+            // Pornire lenta, accelerare intre 12% si 36% din zbor, frânare pana la
+            // 46% (adica 2.3s) unde e deja 93% din drum, apoi o asezare foarte lenta.
+            // 'linear()' cere Chrome 113+, Safari 17.2+, Firefox 112+; pe browsere
+            // mai vechi se ignora si se foloseste easing-ul implicit, deci
+            // degradarea e blanda.
+            transition:
+              'transform 5000ms linear(0, 0.015 6%, 0.06 12%, 0.16 18%, 0.32 24%, 0.52 30%, 0.70 36%, 0.84 41%, 0.93 46%, 0.965 55%, 0.985 70%, 1)',
           }}
         >
           {stops.map((stop, i) => {

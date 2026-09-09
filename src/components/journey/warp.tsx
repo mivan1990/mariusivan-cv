@@ -81,8 +81,8 @@ export function WarpStreaks({ dir }: WarpStreaksProps) {
 
     const frame = (now: number) => {
       const t = Math.min(1, (now - start) / DURATION);
-      // rampa sinus 0 -> 1 -> 0: accelereaza in prima jumatate, franeaza in a doua
-      const ramp = Math.sin(Math.PI * t);
+      // dârele urmeaza viteza reala: varf pe la 1.5s, stinse pe la 3s, cand camera a ajuns
+      const ramp = Math.sin(Math.PI * Math.min(1, t / 0.6));
       const speed = SPEED * ramp;
 
       // IMPORTANT: stergem canvas-ul (transparent), NU pictam un dreptunghi
