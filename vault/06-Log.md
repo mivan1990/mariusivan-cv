@@ -703,4 +703,17 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - [x] `npm run build` — trece
 - Commit: `3e7b337` (fără push)
 
+#### 14:20 — Planetele din fundal se răsfiră, iar următoarea devine de apăsat
+- [x] Plângerea era că planetele din fundal „nu prea se văd". Nu erau șterse — erau **ascunse**: măsurat pe toate cele 20 de perechi cameră/planetă, **18 aveau spațiu negativ** față de sfera focalizată, până la **-92px**
+- [x] Două cauze, ambele geometrice. Prima: distanța dintre opriri era 4000px, iar scara CSS e `P/(P+d)`, deci o vecină ieșea 39px față de 141px cât are cea focalizată. Acum distanța e **2200** și oprirea următoare iese la **54–66px**
+- [x] A doua: pozițiile alternau stânga-dreapta, ceea ce aduce oprirea de la **două** salturi distanță înapoi în dreptul camerei, fix în spatele sferei focalizate. Acum x crește monoton — culoarul e o curbă lină și toate celelalte se desfășoară în evantai într-o parte
+- [x] Cele cinci poziții nu sunt alese din ochi: o căutare le-a fixat astfel încât din **orice** oprire nicio planetă să nu atingă alta și toate să rămână într-o casetă de **330×120** în jurul punctului de focus. Lățimea vine de la telefon, înălțimea de la panoul de text — cu o casetă mai înaltă, planeta următoare ateriza peste titlu. Caseta **nu poate fi asimetrică**: dacă j e cu 120px deasupra lui i, atunci i e cu exact 120px sub j
+- [x] Ca oprirea următoare să se citească drept ceva de apăsat: stă la **0.92** opacitate față de 0.5 cât au cele de după ea, iar orice planetă se aprinde complet la hover. Opacitatea a trecut pe o variabilă CSS — un stil inline ar fi bătut regula de `:hover`
+- [x] Etichetele nu se mai micșorează cu distanța (se randau la **2–3px** înălțime). Se vede doar numele opririi următoare, fiindcă cinci etichete la mărime constantă se calcă una pe alta; restul apar la hover. Eticheta se ancorează spre exteriorul cadrului, altfel intra sub sfera focalizată și se citea „mber Studio"
+- [x] Zona de apăsare depășește sfera cu 35% pe fiecare latură: ținte de **53–253px**. Sfera singură era sub pragul de 44px pentru degete pe telefon
+- [x] Scena se scalează acum cu fereastra (`width/1180`, `height/980`, prag 0.58), fiindcă constelația e desenată în pixeli ficși: fără asta, planetele exterioare ieșeau din cadru pe telefon și intrau peste panou pe un ecran scund
+- [x] Măsurat la 1280×800, pe toate cele cinci opriri: toate planetele în cadru, niciuna peste panou, spații de **16–96px**, focalizată 112–138px, următoarea 44–54px. La 390×844 următoarea are 31px, țintă de 53px, cu numele lizibil
+- [x] `npm run build` — trece
+- Commit: `280ceca` (fără push)
+
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]
