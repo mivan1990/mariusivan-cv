@@ -33,7 +33,7 @@ export function Journey({ onFinish }: JourneyProps) {
     setWarp(d === 1 ? 'fwd' : 'back')
     setBank(bankAngle(i, target))
     setI(target) // camera porneste in aceeasi clipa cu warp-ul
-    window.setTimeout(() => setPanelI(target), 4500) // textul apare la sosire
+    window.setTimeout(() => setPanelI(target), 2600) // textul apare devreme, planeta e deja in focus
     window.setTimeout(() => { setWarp(null); setBank(0) }, 5000)
   };
 
@@ -48,7 +48,7 @@ export function Journey({ onFinish }: JourneyProps) {
     setWarp(n > i ? 'fwd' : 'back')
     setBank(bankAngle(i, n))
     setI(n) // camera porneste in aceeasi clipa cu warp-ul
-    window.setTimeout(() => setPanelI(n), 4500) // textul apare la sosire
+    window.setTimeout(() => setPanelI(n), 2600) // textul apare devreme, planeta e deja in focus
     window.setTimeout(() => { setWarp(null); setBank(0) }, 5000)
   };
 

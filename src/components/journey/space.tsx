@@ -80,12 +80,14 @@ export function Space({ index, bank, onSelect }: { index: number; bank: number; 
         </div>
         {/* „Lumea” gliseaza spre planeta aleasa: negand x, y si z ale ei, planeta ajunge
             exact in centru, la z = -FOCUS_Z, iar restul raman in jur, mai mici.
-            Fara rotatie — planetele sunt deja cu fata la camera. */}
+            Fara rotatie — planetele sunt deja cu fata la camera.
+            Curba acopera distanta devreme (primele 2s), iar restul timpului doar se
+            aseaza incet, ca planeta sa fie in focus inainte de sosire. */}
         <div
           className='absolute left-1/2 top-[34%] [transform-style:preserve-3d]'
           style={{
             transform: `translate3d(${-BODIES[index].x}px, ${-BODIES[index].y}px, ${-BODIES[index].z - FOCUS_Z}px)`,
-            transition: 'transform 5000ms cubic-bezier(0.45, 0, 0.2, 1)',
+            transition: 'transform 5000ms cubic-bezier(0.16, 0.85, 0.25, 1)',
           }}
         >
           {stops.map((stop, i) => {
