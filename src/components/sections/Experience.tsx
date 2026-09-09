@@ -21,15 +21,16 @@ import { ExternalLink, HelpCircle, Layers, Mail } from 'lucide-react'
 import type { ReactNode } from 'react'
 
 // 7 elemente pe harta (pozitiile top/left sunt procentuale).
-// Pozitiile tin libera banda centrala unde e blocul cu poza.
+// Pozitiile sunt imprastiate intentionat, la inaltimi diferite, ca harta sa nu
+// se citeasca a grila; banda centrala ramane libera pentru blocul cu poza.
 const MAP_ITEMS = [
-  { key: 'portfolio-xp',    kind: 'photo', pos: 'top-[1%] left-[6%]',   box: 'w-32 lg:w-44 aspect-[4/3]',  depth: 1.4 },
-  { key: 'skills',          kind: 'tile',  pos: 'top-[2%] left-[34%]',  box: 'w-24 lg:w-32 aspect-square', depth: 0.9 },
-  { key: 'fegbet',          kind: 'photo', pos: 'top-[34%] left-[78%]', box: 'w-32 lg:w-44 aspect-square', depth: 2 },
-  { key: 'contact',         kind: 'tile',  pos: 'top-[70%] left-[8%]',  box: 'w-24 lg:w-32 aspect-square', depth: 1.2 },
-  { key: 'voteaza-liga2',   kind: 'photo', pos: 'top-[73%] left-[30%]', box: 'w-24 lg:w-32 aspect-[31/35]', depth: 1.1 },
-  { key: 'intranet',        kind: 'photo', pos: 'top-[74%] left-[54%]', box: 'w-32 lg:w-48 aspect-[4/3]',  depth: 0.7 },
-  { key: 'faq',             kind: 'tile',  pos: 'top-[72%] left-[80%]', box: 'w-24 lg:w-28 aspect-square', depth: 1.5 },
+  { key: 'portfolio-xp',    kind: 'photo', pos: 'top-[2%] left-[4%]',   box: 'w-32 lg:w-44 aspect-[4/3]',  depth: 1.4 },
+  { key: 'skills',          kind: 'tile',  pos: 'top-[8%] left-[28%]',  box: 'w-24 lg:w-32 aspect-square', depth: 0.9 },
+  { key: 'fegbet',          kind: 'photo', pos: 'top-[6%] left-[72%]',  box: 'w-32 lg:w-44 aspect-square', depth: 2 },
+  { key: 'contact',         kind: 'tile',  pos: 'top-[38%] left-[3%]',  box: 'w-24 lg:w-32 aspect-square', depth: 1.2 },
+  { key: 'voteaza-liga2',   kind: 'photo', pos: 'top-[72%] left-[18%]', box: 'w-24 lg:w-32 aspect-[31/35]', depth: 1.1 },
+  { key: 'intranet',        kind: 'photo', pos: 'top-[73%] left-[50%]', box: 'w-32 lg:w-48 aspect-[4/3]',  depth: 0.7 },
+  { key: 'faq',             kind: 'tile',  pos: 'top-[46%] left-[84%]', box: 'w-24 lg:w-28 aspect-square', depth: 1.5 },
 ]
 
 type MapItem = (typeof MAP_ITEMS)[number]
