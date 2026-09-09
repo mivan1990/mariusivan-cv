@@ -693,4 +693,14 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - [x] `npm run build` — trece
 - Commit: `bd9f742` (fără push)
 
+#### 13:35 — Sigla FEG adevărată, și culorile reale de brand
+- [x] `feg.eu` publică logotipul **fără dreptunghi**, deja alb — intră direct ca patru path-uri, fără curățare
+- [x] Surpriză: identitatea FEG e **#4540FF**, indigo, nu verdele pe care îl ghicisem din brandul de pariuri Fortuna. Culoarea o are chiar în `logo-feg.svg`, pe dreptunghiul din spatele literelor
+- [x] Asta punea FEG lângă albastrul Digi (#002bff), așa că Euronet s-a mutat de pe bleumarinul ales de mine pe **#00b7b0**, turcoazul care e tot în sigla lor. Trei albastruri reci pe același culoar au devenit un albastru, un indigo și un turcoaz — toate culorile adevărate ale companiilor
+- [x] Marca acceptă acum mai multe path-uri, iar caseta se calculează din **proporția ei**: potrivită pe ~48% din lățimea sferei ca monogramele, cu înălțimea plafonată la 40%. Fără plafon, o siglă pătrată ca EA ar fi ieșit de trei ori mai înaltă decât logotipul FEG, care e lat de 2.7 ori cât e de înalt
+- [x] Măsurat: mărcile cad la **48–51%** din lățimea sferei pe tot setul, EA la 40% unde intervine plafonul
+- [x] Pe parcurs am urmărit un punct violet din capturi până la [[CursorTrail]] — urma de cursor, parcată unde a fost ultima dată mouse-ul. În capturile automate mouse-ul nu se mișcă, de-aia stă în aer. Nu e defect
+- [x] `npm run build` — trece
+- Commit: `3e7b337` (fără push)
+
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]
