@@ -200,3 +200,20 @@
     animation: none;
   }
 }
+
+/* Planetele nefocalizate se aprind la hover, ca sa se vada ca sunt de apasat.
+   Opacitatea vine dintr-o variabila scrisa de React: un `style` inline ar bate
+   orice clasa, deci :hover n-ar mai fi avut ce sa suprascrie. */
+.planet {
+  opacity: var(--planet-op, 1);
+}
+.planet:hover {
+  opacity: 1;
+}
+/* Numele planetelor departate apare la trecerea cu mouse-ul. */
+.planet-label {
+  transition: opacity 200ms ease;
+}
+.planet:hover .planet-label {
+  opacity: 1;
+}

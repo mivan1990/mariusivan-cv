@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useLanguage } from '@/hooks/useLanguage'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
 import { cn } from '@/lib/utils'
@@ -17,6 +17,18 @@ const TURN = `transform ${TURN_MS}ms ${TURN_EASE}`
 
 // Cate copii ale campului de stele sunt puse cap la cap pe orizontala.
 const SKY_TILES = 4
+
+// Distanta dintre doua opriri. Scara CSS e P / (P + d), cu P = 1000: la 4000 o
+// planeta vecina iesea de 39px si cadea IN SPATELE celei focalizate, care are
+// 141px. Masurat pe toate cele 20 de perechi, 18 aveau spatiu liber negativ.
+const SPACING = 2200
+
+// Curba de zbor: pornire lenta, accelerare intre 12% si 36%, franare pana la 46%
+// (adica 2.3s) unde e deja 93% din drum, apoi o asezare foarte lenta.
+// 'linear()' cere Chrome 113+, Safari 17.2+, Firefox 112+; pe browsere mai vechi
+// se ignora si se foloseste easing-ul implicit, deci degradarea e blanda.
+const FLIGHT_EASE = 'linear(0, 0.015 6%, 0.06 12%, 0.16 18%, 0.32 24%, 0.52 30%, 0.70 36%, 0.84 41%, 0.93 46%, 0.965 55%, 0.985 70%, 1)'
+const FLIGHT = `5000ms ${FLIGHT_EASE}`
 
 // Fara inel si fara rotatie: inelul de 1500px era mult mai lat decat ecranul, iar
 // rotatia aducea planetele de pe partea opusa IN FATA camerei, unde se umflau si
@@ -50,18 +62,31 @@ const FEG_MARK = [
 const BODIES: {
   x: number; y: number; z: number; size: number; bg: string; glow: string; ring: string; years: number; mark: Mark
 }[] = [
+  // x-ul creste monoton: culoarul e o curba lina, nu un zigzag. Cu pozitii care
+  // alterneaza stanga-dreapta, vecinele la DOUA opriri distanta ajung din nou in
+  // dreptul camerei si se ascund in spatele planetei focalizate; pe arc, toate
+  // celelalte se desfasoara in evantai intr-o parte.
+  //
+  // Cifrele nu sunt alese din ochi: sunt rezultatul unei cautari care cere ca, din
+  // ORICE oprire, nicio planeta sa nu atinga pe alta si toate sa ramana intr-o
+  // caseta de 330x120 in jurul punctului de focus. Latimea e data de telefon,
+  // inaltimea de panoul de text, care ocupa jumatatea de jos a ecranului — cu o
+  // caseta mai inalta, planeta urmatoare ateriza fix peste titlu. Caseta nu poate
+  // fi asimetrica: daca planeta j e cu 120px deasupra lui i, atunci i e cu exact
+  // 120px sub j, deci limita de jos o fixeaza si pe cea de sus.
+  // Ies +11px spatiu liber in cel mai strans caz, fata de -92px inainte.
   // RCS & RDS — albastrul Digi (#002bff, din sigla lor)
-  { x: -220, y: -110, z:  -1200, size: 200, bg: 'radial-gradient(circle at 32% 30%, #a5c8ff, #0033ff 55%, #030a2e)', glow: '0 0 70px rgba(59,90,255,0.45)',  ring: 'rgba(147,180,255,0.5)',  years: 1,    mark: { text: 'RDS' } },
+  { x:  -720, y:  -20, z:  -1200, size: 200, bg: 'radial-gradient(circle at 32% 30%, #a5c8ff, #0033ff 55%, #030a2e)', glow: '0 0 70px rgba(59,90,255,0.45)',  ring: 'rgba(147,180,255,0.5)',  years: 1,    mark: { text: 'RDS' } },
   // Electronic Arts — rosu
-  { x:  260, y:  130, z:  -5200, size: 210, bg: 'radial-gradient(circle at 32% 30%, #fca5a5, #b91c1c 55%, #3f0a0a)', glow: '0 0 75px rgba(239,68,68,0.45)',   ring: 'rgba(252,165,165,0.5)', years: 2.4,  mark: { paths: EA_MARK, box: '0 0 24 24' } },
+  { x:  -340, y:  310, z:  -3400, size: 210, bg: 'radial-gradient(circle at 32% 30%, #fca5a5, #b91c1c 55%, #3f0a0a)', glow: '0 0 75px rgba(239,68,68,0.45)',   ring: 'rgba(252,165,165,0.5)', years: 2.4,  mark: { paths: EA_MARK, box: '0 0 24 24' } },
   // Amber Studio — chihlimbar, ca numele
-  { x: -280, y:  120, z:  -9200, size: 195, bg: 'radial-gradient(circle at 32% 30%, #fdba74, #c2410c 55%, #431407)', glow: '0 0 70px rgba(249,115,22,0.45)',  ring: 'rgba(253,186,116,0.5)', years: 0.5,  mark: { text: 'AMBER' } },
+  { x:   -20, y:  -20, z:  -5600, size: 195, bg: 'radial-gradient(circle at 32% 30%, #fdba74, #c2410c 55%, #431407)', glow: '0 0 70px rgba(249,115,22,0.45)',  ring: 'rgba(253,186,116,0.5)', years: 0.5,  mark: { text: 'AMBER' } },
   // Euronet — turcoazul din sigla (#00b7b0). Bleumarinul lor (#243f90) ar fi fost
   // al treilea albastru din culoar; turcoazul e tot al lor si separa limpede
-  { x:  240, y: -140, z: -13200, size: 205, bg: 'radial-gradient(circle at 32% 30%, #99f6e4, #00b7b0 55%, #042f2e)', glow: '0 0 75px rgba(0,183,176,0.45)',   ring: 'rgba(153,246,228,0.5)', years: 1.25, mark: { text: 'EURONET' } },
+  { x:  1030, y: -220, z:  -7800, size: 205, bg: 'radial-gradient(circle at 32% 30%, #99f6e4, #00b7b0 55%, #042f2e)', glow: '0 0 75px rgba(0,183,176,0.45)',   ring: 'rgba(153,246,228,0.5)', years: 1.25, mark: { text: 'EURONET' } },
   // FEG — indigoul din sigla lor (#4540ff). Digi (#002bff) e albastru pur, asta e
   // impins spre violet; oricum stau la capetele opuse ale culoarului
-  { x:    0, y:   40, z: -17200, size: 240, bg: 'radial-gradient(circle at 32% 30%, #c4b5fd, #4540ff 55%, #170f4d)', glow: '0 0 90px rgba(90,80,255,0.5)',    ring: 'rgba(196,181,253,0.5)', years: 8.25, mark: { paths: FEG_MARK, box: '0 0 84 31' } },
+  { x:  1780, y:   80, z: -10000, size: 240, bg: 'radial-gradient(circle at 32% 30%, #c4b5fd, #4540ff 55%, #170f4d)', glow: '0 0 90px rgba(90,80,255,0.5)',    ring: 'rgba(196,181,253,0.5)', years: 8.25, mark: { paths: FEG_MARK, box: '0 0 84 31' } },
 ]
 
 // Monogramele se potrivesc pe LATIME, nu pe corp de litera: altfel „EA” ar fi de
@@ -73,6 +98,19 @@ const markFontSize = (size: number, chars: number) => Math.min((0.48 * size) / (
 // Siluetele se potrivesc tot pe latime (~48% din sfera), ca monogramele, dar cu
 // inaltimea plafonata la 40%: fara plafon, o sigla patrata precum „EA” ar iesi de
 // trei ori mai inalta decat logotipul FEG, care e lat de 2.7 ori cat e de inalt.
+// Constelatia e desenata in pixeli ficsi, nu in unitati de ecran: pe un telefon
+// planetele de la margine ar iesi din cadru, iar pe un ecran scund ar intra peste
+// panoul de text. Micsoram intreaga scena, cu origine in punctul de focus ca sa nu
+// se mute nimic din loc. Latimea tine planetele in cadru (pragul de 0.58 le tine si
+// pe un ecran de 390px), inaltimea le tine deasupra panoului.
+const sceneFit = (width: number, height: number) =>
+  Math.min(1, Math.max(0.58, Math.min(width / 1180, height / 980)))
+
+// Etichetele sunt interfata, nu geometrie: le anulam micsorarea de perspectiva,
+// ca sa se citeasca la fel de la orice distanta. Fara asta, o eticheta la doua
+// opriri distanta se randeaza la 2-3px inaltime — masurat, nu presupus.
+const labelScale = (steps: number) => (1000 + FOCUS_Z + steps * SPACING) / 1000
+
 const markSize = (size: number, box: string) => {
   const [, , bw, bh] = box.split(' ').map(Number)
   const width = Math.min(0.48 * size, (0.4 * size * bw) / bh)
@@ -109,6 +147,16 @@ export function Space({ index, bank, yaw, onSelect }: SpaceProps) {
   const reduced = useReducedMotion()
   const rigRef = useRef<HTMLDivElement>(null)
   const reversed = yaw !== 0
+  // Pasul spre „urmatoarea” oprire: intors, urmatoarea e cea dinainte.
+  const step = reversed ? -1 : 1
+  const [fit, setFit] = useState(1)
+
+  useEffect(() => {
+    const measure = () => setFit(sceneFit(window.innerWidth, window.innerHeight))
+    measure()
+    window.addEventListener('resize', measure)
+    return () => window.removeEventListener('resize', measure)
+  }, [])
 
   // Camera se inclina dupa mouse: scriem direct pe element (fara state, ca sa nu
   // se re-randeze la fiecare pixel), cu rAF ca sa prindem doar ultimul eveniment.
@@ -131,7 +179,11 @@ export function Space({ index, bank, yaw, onSelect }: SpaceProps) {
   }, [reduced])
 
   return (
-    // Camera: perspective + perspective-origin 50% 34% = punctul de fixare al scenei
+    <div
+      className='pointer-events-none absolute inset-0'
+      style={{ transform: `scale(${fit})`, transformOrigin: '50% 34%' }}
+    >
+    {/* Camera: perspective + perspective-origin 50% 34% = punctul de fixare al scenei */}
     <div className='pointer-events-none absolute inset-0 [perspective:1000px] [perspective-origin:50%_34%]'>
       {/* Virajul (bank) sta pe stratul lui, ca sa nu se bata cu transformarea scrisa
           de mouse pe rig si cu translatia camerei de pe lume — un element poate
@@ -201,13 +253,7 @@ export function Space({ index, bank, yaw, onSelect }: SpaceProps) {
           className='absolute left-0 top-0 [transform-style:preserve-3d]'
           style={{
             transform: `translate3d(0, 0, ${-BODIES[index].z}px)`,
-            // Pornire lenta, accelerare intre 12% si 36% din zbor, frânare pana la
-            // 46% (adica 2.3s) unde e deja 93% din drum, apoi o asezare foarte lenta.
-            // 'linear()' cere Chrome 113+, Safari 17.2+, Firefox 112+; pe browsere
-            // mai vechi se ignora si se foloseste easing-ul implicit, deci
-            // degradarea e blanda.
-            transition:
-              'transform 5000ms linear(0, 0.015 6%, 0.06 12%, 0.16 18%, 0.32 24%, 0.52 30%, 0.70 36%, 0.84 41%, 0.93 46%, 0.965 55%, 0.985 70%, 1)',
+            transition: `transform ${FLIGHT}`,
           }}
         >
           {stops.map((stop, i) => {
@@ -215,6 +261,14 @@ export function Space({ index, bank, yaw, onSelect }: SpaceProps) {
             // Planetele ramase in spate se sting. Care sunt „in spate” depinde de
             // orientarea camerei: intors, opririle urmatoare sunt cele din urma.
             const behind = reversed ? i > index : i < index
+            const isNext = i === index + step
+            const steps = Math.abs(i - index)
+            // In ce parte de ecran cade planeta fata de cea focalizata. Eticheta se
+            // ancoreaza spre exteriorul cadrului: centrata sub o planeta lipita de
+            // marginea celei focalizate, ii intra pe sub sfera si se taie
+            // („mber Studio” in loc de „Amber Studio”), fiindca planeta departata
+            // se deseneaza in spate.
+            const toTheRight = b.x >= BODIES[index].x
             return (
               <button
                 key={i}
@@ -229,7 +283,7 @@ export function Space({ index, bank, yaw, onSelect }: SpaceProps) {
                 // din interior nu are nevoie de 'relative': un element position:absolute
                 // e deja bloc de referinta pentru copiii lui absoluti.
                 className={cn(
-                  'pointer-events-auto absolute [transform-style:preserve-3d] focus-visible:outline-none',
+                  'planet pointer-events-auto absolute [transform-style:preserve-3d] focus-visible:outline-none',
                   behind && 'pointer-events-none',
                 )}
                 style={{
@@ -242,13 +296,22 @@ export function Space({ index, bank, yaw, onSelect }: SpaceProps) {
                   // deci cele doua rotatii se anuleaza in fiecare cadru, nu doar la capete.
                   transform: `translate3d(${b.x}px, ${b.y}px, ${b.z}px) translate(-50%, -50%) rotateY(${-yaw}deg)`,
                   transition: `${TURN}, opacity 700ms ease`,
-                  opacity: behind ? 0 : i === index ? 1 : 0.75,
+                  // Opacitatea sta pe o variabila, nu direct pe element: un stil
+                  // inline bate orice clasa, deci :hover n-ar mai avea ce sa
+                  // suprascrie. Urmatoarea oprire e vizibil mai aprinsa decat
+                  // cele de dupa ea — asta e cea pe care poti da click acum.
+                  ['--planet-op' as string]: behind ? 0 : i === index ? 1 : isNext ? 0.92 : 0.5,
                 }}
               >
                 <div
                   style={{ width: b.size, height: b.size, background: b.bg, boxShadow: b.glow }}
                   className='rounded-full'
                 />
+                {/* Zona de apasare, mai mare decat sfera: pe telefon planeta
+                    urmatoare are vreo 40px, sub pragul de 44px pentru degete.
+                    E copil al butonului, deci extinde tinta lui fara sa-i schimbe
+                    cutia — cutia da centrarea prin translate(-50%, -50%). */}
+                <span aria-hidden='true' className='absolute -inset-[35%]' />
                 {/* Inelul de vechime: cu cat mai multi ani, cu atat mai gros —
                     opt ani la FEG au alta greutate decat sase luni la Amber.
                     Grosimea e in px pe sfera de baza, deci se micsoreaza odata cu
@@ -283,7 +346,30 @@ export function Space({ index, bank, yaw, onSelect }: SpaceProps) {
                 {/* Eticheta de sub sfera: doar pentru planetele nefocalizate — numele
                     planetei alese e deja scris mare in panoul de jos.
                     E absoluta ca sa nu afecteze marimea cutiei butonului (doar sfera). */}
-                {i !== index && <div className='absolute left-1/2 top-full mt-3 -translate-x-1/2 whitespace-nowrap text-center text-xs font-medium text-white/70'>{stop.company}</div>}
+                {i !== index && (
+                  <div
+                    className={cn(
+                      'planet-label absolute left-1/2 top-full whitespace-nowrap text-center text-xs font-medium text-white/70',
+                      // Numele scris ramane doar pe oprirea urmatoare — cea pe care
+                      // poti da click acum. Cinci etichete la marime constanta se
+                      // calca una pe alta, fiindca planetele departate se string pe
+                      // ecran. Restul se arata la hover.
+                      isNext ? 'opacity-100' : 'opacity-0',
+                    )}
+                    style={{
+                      // scale anuleaza perspectiva; translateY se aplica INAINTE
+                      // de scale, deci distanta pana la sfera se scrie tot in
+                      // unitati de lume (12 * k) ca sa iasa 12px pe ecran.
+                      transform: `translateX(${toTheRight ? '-10%' : '-90%'}) translateY(${12 * labelScale(steps)}px) scale(${labelScale(steps)})`,
+                      transformOrigin: `top ${toTheRight ? 'left' : 'right'}`,
+                      // Aceeasi durata si curba ca zborul: la plecare distantele
+                      // se schimba, iar fara tranzitie eticheta ar sari brusc.
+                      transition: `transform ${FLIGHT}`,
+                    }}
+                  >
+                    {stop.company}
+                  </div>
+                )}
               </button>
             )
           })}
@@ -293,6 +379,7 @@ export function Space({ index, bank, yaw, onSelect }: SpaceProps) {
         </div>
       </div>
       </div>
+    </div>
     </div>
   )
 }
