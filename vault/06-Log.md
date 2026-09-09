@@ -603,4 +603,15 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - [x] `npm run build` — trece
 - Commit: `44f0f2f` (fără push)
 
+### 2026-09-09
+
+#### 09:20 — Warp-ul nu mai are muchie vizibilă la înclinare
+- [x] Marius: la viraj se vedea muchia dreptunghiulară a efectului, iar colțurile rămâneau goale. Corect — canvas-ul dârelor și câmpul de stele aveau exact dimensiunea ecranului; rotit cu 14°, un dreptunghi cât ecranul **nu mai acoperă ecranul**
+- [x] Ambele straturi depășesc acum ecranul cu **20% pe fiecare latură**: un cadru 1440×900 rotit cu 14° are nevoie de ~1.36× înălțime ca să rămână acoperit, iar 20% pe parte dă 1.4×
+- [x] Măsurat în mijlocul virajului: canvas-ul se întinde de la (-410,-405) la (1851,1305) și **toate cele patru colțuri ale ecranului cad înăuntru**
+- [x] **Centrul proiecției a trebuit mutat odată cu el**: `ORIGIN_Y` e măsurat față de ecran, deci pe un canvas mai mare fracția devine `(OVERSCAN + ORIGIN_Y) / (1 + 2 * OVERSCAN)`. Fără asta, stelele ar fi țâșnit dintr-un punct cu 74px sub cel spre care converg planetele
+- [x] **Numărul de stele: 420 → 820.** Canvas-ul acoperă acum de 1.96 ori suprafața de dinainte, deci vechiul număr înjumătățea densitatea văzută pe ecran
+- [x] `npm run build` — trece
+- Commit: `1e12acf` (fără push)
+
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]
