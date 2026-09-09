@@ -659,4 +659,12 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - [x] `npm run build` — trece
 - Commit: `e23c1fd` (fără push)
 
+#### 12:05 — Planeta următoare intră în centru în prima secundă
+- [x] Cerința: după prima secundă, planeta următoare să stea în mijlocul ecranului, în punctul de focus
+- [x] Translația camerei e tăiată în **două straturi**, fiindcă un element are o singură transformare, iar axele au acum ritmuri diferite: „ochirea" (x, y) se termină în **1s**, adâncimea (z) rămâne pe profilul de 5s. Translațiile comută, deci compunerea dă exact aceeași poziție ca `translate3d` pe trei axe
+- [x] Înclinarea se îndreaptă acum la **1.3s** (26% din zbor), nu la 2.3s — altfel avionul zbura strâmb pe linie dreaptă, după ce virajul se terminase
+- [x] Măsurat la 1440×900 pe trei salturi (EA, Amber, Euronet): **40–46px** lângă focus la 300ms, **1–3px** la 700ms, **≤5px** la 1s (restul e rotația de viraj), **exact 0** de la 1.4s încolo. Planeta crește 47px → 148px, deci apropierea se vede după ce e deja centrată
+- [x] `npm run build` — trece
+- Commit: `9e34ed1` (fără push)
+
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]
