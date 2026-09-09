@@ -651,4 +651,12 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - [x] `npm run build` — trece
 - Commit: `34588f8` (fără push)
 
+#### 11:45 — Profil de viteză în S între planete
+- [x] Cerința: viteza mică la plecare, crește, apoi încetinește. Măsurat pe poziția reală a camerei: **5 %/s** la 0.2s, 25 la 0.9s, 56 la 1.4s, vârf **62 %/s** pe la 1.9s, 45 la 2.3s, 8.6 la 3s, 0.8 la final
+- [x] O curbă `cubic-bezier` nu poate face și pornire lentă, și 93% din drum la 46% din timp — sunt cerințe care se bat cap în cap pe patru puncte de control. Curba e acum `linear()` cu puncte explicite, care lasă forma să fie desenată exact
+- [x] `linear()` cere Chrome 113+, Safari 17.2+, Firefox 112+; pe browsere mai vechi se ignoră și se folosește easing-ul implicit — degradare blândă, notată și în cod
+- [x] Dârele urmează acum **viteza reală**, nu ceasul: rampa e `sin(π · min(1, t/0.6))`, deci vârf pe la 1.5s și stinse pe la 3s, când camera a ajuns
+- [x] `npm run build` — trece
+- Commit: `e23c1fd` (fără push)
+
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]
