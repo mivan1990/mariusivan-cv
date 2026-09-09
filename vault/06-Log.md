@@ -681,4 +681,16 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - [x] `npm run build` — trece
 - Commit: `c75c120` (fără push)
 
+#### 13:10 — Planetele primesc marca, culoarea și vechimea companiei
+- [x] Întrebarea era ce punem în loc de planete pentru fiecare job. Argumentul care a decis: etichetele de sub planetele depărtate se randează la **2–3px înălțime**, deci identificarea trebuie să stea pe **formă**, nu pe text
+- [x] Am căutat sigle curate pentru toate cinci. Rezultat real: **doar EA** are simbol de sine stătător și liber (Simple Icons, CC0). Digi publică doar wordmark, Amber Studio nu-și trimite sigla în HTML, iar marca pătrată a Euronet — extrasă din logo-ul lor corporate — se citește ca un glif oarecare când e singură pe sferă. Am pus-o, m-am uitat la ea, am scos-o
+- [x] Deci: **EA cu simbolul real, restul monograme** în mono-ul din CV (`RDS`, `AMBER`, `EURONET`, `FEG`). Monogramele se potrivesc pe **lățime**, nu pe corp de literă — altfel „EA" ar fi de două ori mai lat decât „AMBER" la același `font-size`
+- [x] Culorile vin din branduri: albastru Digi (**#002bff**, luat din SVG-ul lor), roșu EA, chihlimbar Amber, bleumarin Euronet împins spre oțel ca să nu se confunde cu albastrul Digi în același cadru, verde Fortuna
+- [x] Inelul de vechime: grosimea = anii petrecuți acolo, în paleta planetei, nu alb — alb la raza aia arată a inel de selecție dintr-o interfață, nu a corp ceresc. **10.5px** pentru cei opt ani de la FEG față de **2px** pentru cele șase luni de la Amber
+- [x] Măsurat la 390×844: sferă 21/39/137px → marcă 11×5, 15×15, 68×18. Sigla EA se citește încă pe o sferă de 39px; monograma de pe sfera de 21px e doar un indiciu, dar acolo nimic nu ar merge mai bine
+- [x] Cutiile butoanelor n-au fost afectate (inelul și marca sunt absolute), deci măsurătorile de zbor rămân valabile
+- [x] Rămâne de decis: marca FEG e o monogramă făcută de noi, nu sigla Fortuna
+- [x] `npm run build` — trece
+- Commit: `bd9f742` (fără push)
+
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]
