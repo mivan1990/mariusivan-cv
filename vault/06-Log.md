@@ -624,4 +624,13 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - [x] `npm run build` — trece
 - Commit: `859e518` (fără push)
 
+#### 10:15 — Cardurile de pe hartă, împrăștiate din nou
+- [x] Marius: ecranul de după „Land on the CV" arată a grilă, vrea cum era inițial. Avea dreptate: după ce am scos CS2 Leaderboard și Fortuna WC2026, cele 7 rămase erau aliniate în **două rânduri** — două sus la `top-[1%]`/`top-[2%]`, patru jos între `top-[70%]` și `top-[74%]` — iar colțul dreapta-sus rămăsese gol
+- [x] Poziții noi: cele 7 stau acum la **șase înălțimi diferite** și ocupă și colțul care era gol
+- [x] Verificat la 768/1024/1280/1440/1920: zero suprapuneri peste blocul central sau între carduri, nimic ieșit din cadru, pagina tot exact cât ecranul
+- [x] **Acoperirea urcă de la 21.8% la 25.5%** la 1024px
+- [x] O coliziune prinsă la măsurare: la 768px cardul Intranet atingea blocul central cu 7px — coborât de la `top-[70%]` la `top-[73%]`
+- [x] `npm run build` — trece
+- Commit: `84f0aa7` (fără push)
+
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]
