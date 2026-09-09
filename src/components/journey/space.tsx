@@ -81,11 +81,26 @@ export function Space({ index, bank, onSelect }: { index: number; bank: number; 
         {/* „Lumea” gliseaza spre planeta aleasa: negand x, y si z ale ei, planeta ajunge
             exact in centru, la z = -FOCUS_Z, iar restul raman in jur, mai mici.
             Fara rotatie — planetele sunt deja cu fata la camera.
-            // La 2.3s camera e practic ajunsa; ce ramane e o asezare foarte lenta. */}
+
+            Miscarea e taiata in doua straturi, fiindca un element are o singura
+            transformare si aici ne trebuie doua ritmuri diferite:
+              1. „ochirea” (x, y) — se termina in prima secunda, ca planeta tinta sa
+                 stea in punctul de fuga (50% / 34%) tot restul zborului;
+              2. „adancimea” (z) — dureaza 5s, cu pornire lenta si franare.
+            Translatiile comuta intre ele, deci compunerea celor doua straturi da
+            exact aceeasi pozitie ca o singura translatie pe toate trei axele. */}
         <div
           className='absolute left-1/2 top-[34%] [transform-style:preserve-3d]'
           style={{
-            transform: `translate3d(${-BODIES[index].x}px, ${-BODIES[index].y}px, ${-BODIES[index].z - FOCUS_Z}px)`,
+            transform: `translate3d(${-BODIES[index].x}px, ${-BODIES[index].y}px, 0)`,
+            // Vireaza si se aseaza pe tinta pana la 1s (cat tine si inclinarea).
+            transition: 'transform 1000ms cubic-bezier(0.34, 0, 0.12, 1)',
+          }}
+        >
+        <div
+          className='absolute left-0 top-0 [transform-style:preserve-3d]'
+          style={{
+            transform: `translate3d(0, 0, ${-BODIES[index].z - FOCUS_Z}px)`,
             // Pornire lenta, accelerare intre 12% si 36% din zbor, frânare pana la
             // 46% (adica 2.3s) unde e deja 93% din drum, apoi o asezare foarte lenta.
             // 'linear()' cere Chrome 113+, Safari 17.2+, Firefox 112+; pe browsere
@@ -133,6 +148,7 @@ export function Space({ index, bank, onSelect }: { index: number; bank: number; 
               </button>
             )
           })}
+        </div>
         </div>
       </div>
       </div>

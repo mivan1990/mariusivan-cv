@@ -184,11 +184,15 @@
 .bank-turn {
   animation: bank-turn 5000ms ease-in-out both;
 }
+/* Rolul urmeaza virajul propriu-zis: acesta se termina la 1s (stratul de „ochire”
+   din space.tsx), deci avionul intra in inclinare pana la 0.35s, o tine cat se
+   schimba directia si revine la orizontala pana la ~1.3s. Daca ar tine inclinarea
+   pana la 2.3s ar zbura stramb in linie dreapta. */
 @keyframes bank-turn {
   0%   { transform: rotateZ(0deg); }
-  14%  { transform: rotateZ(var(--bank, 0deg)); }
-  30%  { transform: rotateZ(var(--bank, 0deg)); }
-  46%  { transform: rotateZ(0deg); }
+  7%   { transform: rotateZ(var(--bank, 0deg)); }
+  16%  { transform: rotateZ(var(--bank, 0deg)); }
+  26%  { transform: rotateZ(0deg); }
   100% { transform: rotateZ(0deg); }
 }
 @media (prefers-reduced-motion: reduce) {
