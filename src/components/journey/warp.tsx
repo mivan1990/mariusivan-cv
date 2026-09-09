@@ -2,8 +2,11 @@ import { useEffect, useRef } from 'react';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 
 // Efect de starfield/warp pe canvas: fiecare stea are propriul z (adancime),
-// se apropie (fwd) sau se indeparteaza (back) de camera in fiecare cadru si
-// se proiecteaza in 2D cu 'x * FOCAL / z'. Dara (streak) e linia dintre
+// se apropie de camera in fiecare cadru si se proiecteaza in 2D cu
+// 'x * FOCAL / z'. Nu exista varianta „inapoi”: la mersul spre o oprire
+// anterioara camera se intoarce 180° (vezi space.tsx) si zboara tot cu fata,
+// deci dârele merg mereu in acelasi sens. Dâre care se departeaza se citesc
+// ca mers cu spatele, exact ce nu vrem. Dara (streak) e linia dintre
 // pozitia stelei de acum cateva cadre (zPrev) si pozitia curenta — asa
 // apare senzatia de viteza. Un SVG static scalat cu CSS arata doar ca un
 // desen care se mareste, nu ca un zbor.
@@ -19,20 +22,14 @@ const DEPTH = 1400; // adancimea maxima a campului (z)
 const FOCAL = 320; // lungimea focala de proiectie
 const DURATION = 5000; // durata totala a warp-ului, ms
 const TRAIL = 3; // cat de "in urma" e punctul de plecare al darei (in z)
-const SPEED = 30; // viteza maxima de apropiere/departare pe cadru
+const SPEED = 30; // viteza maxima de apropiere pe cadru
 // Trebuie sa fie identic cu 'perspective-origin' din space.tsx (50% 34%), altfel stelele
 // tasnesc din alt punct decat cel spre care converg planetele.
 const ORIGIN_Y = 0.34
 // Cat depaseste canvas-ul ecranul, pe fiecare latura (vezi journey.tsx)
 const OVERSCAN = 0.2
 
-interface WarpStreaksProps {
-  // directia warp-ului: 'fwd' = zbor inainte (stelele se apropie),
-  // 'back' = inapoi (stelele se indeparteaza)
-  dir: 'fwd' | 'back';
-}
-
-export function WarpStreaks({ dir }: WarpStreaksProps) {
+export function WarpStreaks() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const reduced = useReducedMotion();
 
@@ -95,27 +92,16 @@ export function WarpStreaks({ dir }: WarpStreaksProps) {
       const cy = h * ((OVERSCAN + ORIGIN_Y) / (1 + 2 * OVERSCAN));
 
       for (const s of stars) {
-        // inainte: se apropie (z scade); inapoi: se departeaza (z creste)
-        if (dir === 'fwd') {
-          s.z -= speed;
-          if (s.z < 20) {
-            // a trecut de camera: o re-sparam departe, pe o pozitie noua
-            s.x = (Math.random() - 0.5) * 2 * w;
-            s.y = (Math.random() - 0.5) * 2 * h;
-            s.z = DEPTH;
-          }
-        } else {
-          s.z += speed;
-          if (s.z > DEPTH) {
-            // a plecat din camp: o aducem inapoi, aproape
-            s.x = (Math.random() - 0.5) * 2 * w;
-            s.y = (Math.random() - 0.5) * 2 * h;
-            s.z = 20;
-          }
+        s.z -= speed; // stelele se apropie
+        if (s.z < 20) {
+          // a trecut de camera: o re-sparam departe, pe o pozitie noua
+          s.x = (Math.random() - 0.5) * 2 * w;
+          s.y = (Math.random() - 0.5) * 2 * h;
+          s.z = DEPTH;
         }
 
         // pozitia de acum cateva cadre (inapoi pe axa z) — de aici porneste dara
-        const zPrev = dir === 'fwd' ? s.z + speed * TRAIL : s.z - speed * TRAIL;
+        const zPrev = s.z + speed * TRAIL;
         if (zPrev < 20) continue; // saram peste: altfel dare ar iesi uriasa
 
         // proiectie perspective: 'x * FOCAL / z' fata de centrul canvas-ului
@@ -144,7 +130,7 @@ export function WarpStreaks({ dir }: WarpStreaksProps) {
       cancelAnimationFrame(raf);
       window.removeEventListener('resize', onResize);
     };
-  }, [dir, reduced]);
+  }, [reduced]);
 
   return (
     <canvas

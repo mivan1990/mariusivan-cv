@@ -12,22 +12,32 @@ const rand = (n: number) => {
   return x - Math.floor(x);
 };
 
-// Numarul total de stele din fundal
+// Numarul implicit de stele din fundal
 const STAR_COUNT = 220;
 
-export function Starfield() {
+interface StarfieldProps {
+  // Cate stele are campul. Cand cerul e format din mai multe dale puse cap la
+  // cap (vezi space.tsx), fiecare dala primeste mai putine, ca densitatea pe
+  // ecran sa ramana aceeasi.
+  count?: number;
+  // Deplaseaza generatorul, ca doua dale alaturate sa nu arate acelasi desen.
+  seed?: number;
+}
+
+export function Starfield({ count = STAR_COUNT, seed = 0 }: StarfieldProps) {
   // Fiecare stea: pozitie, raza si opacitate derivate din indexul ei,
   // cu offset-uri diferite ca valorile sa nu fie corelate
-  const stars = Array.from({ length: STAR_COUNT }, (_, i) => {
+  const stars = Array.from({ length: count }, (_, n) => {
+    const i = n + seed;
     const cx = rand(i) * 1000; // pozitie pe orizontala, 0..1000
     const cy = rand(i + 1000) * 1000; // pozitie pe verticala, 0..1000
     const r = 0.6 + rand(i + 2000) * (2.2 - 0.6); // raza intre 0.6 si 2.2
     const opacity = 0.15 + rand(i + 4000) * (0.9 - 0.15); // opacitate 0.15..0.9
-    const twinkle = i % 4 === 0; // o stea din patru clipseste
+    const twinkle = n % 4 === 0; // o stea din patru clipseste
 
     return (
       <circle
-        key={i}
+        key={n}
         cx={cx.toFixed(2)}
         cy={cy.toFixed(2)}
         r={r.toFixed(2)}

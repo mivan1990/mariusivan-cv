@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useLanguage } from '@/hooks/useLanguage';
 import { cn } from '@/lib/utils';
-import { Space, bankAngle } from '@/components/journey/space';
+import { Space, bankAngle, turnSide } from '@/components/journey/space';
 import { WarpStreaks } from '@/components/journey/warp';
 
 interface JourneyProps {
@@ -14,43 +14,41 @@ export function Journey({ onFinish }: JourneyProps) {
   const { t } = useLanguage();
   const [i, setI] = useState(0); // indexul opririi curente (conduce camera si scena)
   const [panelI, setPanelI] = useState(0); // indexul opririi afisata in panoul de text (se schimba la sosire)
-  const [warp, setWarp] = useState<null | 'fwd' | 'back'>(null); // directia activa a warp-ului
+  const [warp, setWarp] = useState(false); // warp in desfasurare (dârele sunt montate)
   const [dir, setDir] = useState<1 | -1>(1); // ultima directie, pt. animatia de sosire
   const [bank, setBank] = useState(0); // unghiul de inclinare in viraj (aplicat scenei si dârelor)
+  const [yaw, setYaw] = useState(0); // orientarea camerei: 0 = spre opririle urmatoare, ±180 = intoarsa
   const lockRef = useRef(0); // timestamp-ul ultimei deplasare (o singura pe rand)
   const touchYRef = useRef<number | null>(null); // Y-ul de la touchstart, pt. swipe
 
   // O singura functie de navigare: camera pleaca imediat, textul se schimba
   // spre finalul zborului, iar warp-ul se stinge la final. Lock pe 5200ms
   // impiedica deplasari inlantuite.
-  const travel = (d: 1 | -1) => {
+  //
+  // „Inapoi” nu inseamna mers cu spatele: camera se intoarce 180° si zboara tot
+  // cu fata. Intoarcerea se face o singura data, cand se schimba sensul — doua
+  // opriri inapoi la rand inseamna zbor drept, nu inca o piruetă.
+  const go = (target: number, d: 1 | -1) => {
     const now = Date.now();
     if (warp || now - lockRef.current < 5200) return // o singura deplasare pe rand
-    const target = i + d;
-    if (target < 0 || target >= t.journey.stops.length) return
+    if (target === i || target < 0 || target >= t.journey.stops.length) return
+    const nextYaw = d === -1 ? (yaw !== 0 ? yaw : 180 * turnSide(i, target)) : 0
+    const turning = nextYaw !== yaw
     lockRef.current = now
     setDir(d)
-    setWarp(d === 1 ? 'fwd' : 'back')
-    setBank(bankAngle(i, target))
+    setWarp(true)
+    setBank(bankAngle(i, target, { reversed: nextYaw !== 0, turning }))
+    setYaw(nextYaw)
     setI(target) // camera porneste in aceeasi clipa cu warp-ul
     window.setTimeout(() => setPanelI(target), 2200) // textul apare devreme, planeta e deja in focus
-    window.setTimeout(() => { setWarp(null); setBank(0) }, 5000)
+    window.setTimeout(() => { setWarp(false); setBank(0) }, 5000)
   };
 
-  // Salt direct la oprirea n (indicatorii rotunzi) — aceeasi logica de warp,
+  const travel = (d: 1 | -1) => go(i + d, d);
+
+  // Salt direct la oprirea n (indicatorii rotunzi) — aceeasi logica de zbor,
   // cu directia dedusa din pozitia curenta
-  const travelTo = (n: number) => {
-    const now = Date.now();
-    if (warp || now - lockRef.current < 5200) return // o singura deplasare pe rand
-    if (n === i || n < 0 || n >= t.journey.stops.length) return
-    lockRef.current = now
-    setDir(n > i ? 1 : -1)
-    setWarp(n > i ? 'fwd' : 'back')
-    setBank(bankAngle(i, n))
-    setI(n) // camera porneste in aceeasi clipa cu warp-ul
-    window.setTimeout(() => setPanelI(n), 2200) // textul apare devreme, planeta e deja in focus
-    window.setTimeout(() => { setWarp(null); setBank(0) }, 5000)
-  };
+  const travelTo = (n: number) => go(n, n > i ? 1 : -1);
 
   // Navigare cu tastatura: sagetile stanga/dreapta si sus/jos
   useEffect(() => {
@@ -86,12 +84,12 @@ export function Journey({ onFinish }: JourneyProps) {
           className={cn('pointer-events-none absolute -inset-[20%]', bank !== 0 && 'bank-turn')}
           style={{ '--bank': `${bank}deg` } as React.CSSProperties}
         >
-          <WarpStreaks dir={warp} />
+          <WarpStreaks />
         </div>
       )}
 
-      {/* Scena 3D: cele 5 planete pe un inel, camera se roteste catre oprirea aleasa */}
-      <Space index={i} bank={bank} onSelect={(n) => travelTo(n)} />
+      {/* Scena 3D: cele 5 planete pe un culoar in adancime, camera zboara spre oprirea aleasa */}
+      <Space index={i} bank={bank} yaw={yaw} onSelect={(n) => travelTo(n)} />
 
       {/* Panoul cu text, mutat jos pe ecran */}
       <div className='pointer-events-none absolute inset-x-0 bottom-0 z-10 px-5 pb-10 bg-gradient-to-t from-black via-black/85 to-transparent pt-24'>
