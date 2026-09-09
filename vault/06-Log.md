@@ -667,4 +667,18 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - [x] `npm run build` — trece
 - Commit: `9e34ed1` (fără push)
 
+#### 12:35 — Înapoi înseamnă întoarcere, nu mers cu spatele
+- [x] Cerința: la mersul spre o oprire anterioară camera nu mai dă cu spatele — se întoarce 180° și zboară tot cu fața, iar întoarcerea se vede
+- [x] Retragerea `FOCUS_Z` a ieșit din translația lumii pe stratul ei, **deasupra** virajului: e un decalaj în spațiul camerei, așa că dinăuntrul rotației o întoarcere de 180° ar fi aruncat planeta focalizată fix în spatele camerei
+- [x] Axa de rotație trece exact prin punctul unde aterizează ținta (50% pe orizontală, z = 0), deci starea finală e identică cu a unui zbor normal — se schimbă doar drumul până acolo
+- [x] Planetele se contra-rotesc cu același unghi și aceeași curbă, altfel sferele și etichetele s-ar citi în oglindă
+- [x] Întoarcerea se face **o singură dată**, când se schimbă sensul: două opriri înapoi la rând înseamnă zbor drept. „În spate" devine, când ești întors, opririle de după
+- [x] Cerul nu poate participa la o rotație de 180° — un panou plat dispare pe muchie, la 90°. Rămâne cu fața la cameră și traduce virajul într-o **panoramare** orizontală, lat de patru ecrane ca să nu se vadă marginea (verificat: acoperă ecranul pe tot parcursul panoramării, și pe 1440×900 și pe 390×844)
+- [x] Înclinarea e 24° la întoarcere în loc de 14°, și își schimbă semnul cât timp zborul e întors (stânga și dreapta lumii apar invers pe ecran)
+- [x] `WarpStreaks` a pierdut modul `back`: dâre care se depărtează se citesc chiar ca mers cu spatele. Acum zburăm mereu cu fața, deci există un singur sens
+- [x] Măsurat la 1440×900: viraj 0° → 28° → 144° → 180° în prima secundă; ținta centrată la 1s și exact pe focus de la 1.4s, crescând 57px → 148px; înclinare 6 → 24 → 24 → 0 până la 1.3s; a doua oprire înapoi ține 180°, fără a doua piruetă; înainte revine la 0°. Etichetele verificate cu range-uri: prima literă rămâne la stânga ultimei
+- [x] Zborurile înainte au ieșit **la fel ca înainte de restructurare** (aceleași cifre), deci retragerea camerei pe strat separat nu a schimbat nimic la ele
+- [x] `npm run build` — trece
+- Commit: `c75c120` (fără push)
+
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]
