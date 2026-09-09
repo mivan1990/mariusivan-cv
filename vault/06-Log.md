@@ -643,4 +643,12 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - Commit: `bb86baf` (fără push)
 - Notă: sub blocul de jos rămâne spațiu gol pe ecranele înalte; harta are `min-h-[560px]` pe mobil. Dacă deranjează, se poate întinde
 
+#### 11:20 — Focusul pe planeta următoare la secunda 2.30
+- [x] Zborul rămâne de 5 secunde, dar tot ce înseamnă „am ajuns" se mută la **2.3s**: curba camerei devine `cubic-bezier(0.05, 0.95, 0.12, 1)`, panoul se schimbă la 2.2s, iar înclinarea se îndreaptă la 46% din zbor în loc de 70%
+- [x] Măsurat pe saltul spre EA, cu cutia corectată pentru rotație: la **2.30s** planeta e la **93%** din mărimea finală, ecranul e drept (**-0.1°**), iar numele și perioadele sunt deja pe el
+- [x] Restul de 2.7s e o așezare lentă de la 93% la 100% — vreo cinci pixeli de rază, care se citește ca o plutire spre planetă, nu ca drum rămas
+- [x] A fost nevoie de două reglaje: prima încercare (`cubic-bezier(0.1, 0.92, 0.2, 1)`, text la 2.3s, înclinare până la 70%) dădea la 2.30s doar 89% și ecranul încă înclinat 13.2°
+- [x] `npm run build` — trece
+- Commit: `34588f8` (fără push)
+
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]
