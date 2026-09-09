@@ -28,14 +28,21 @@ const SKY_TILES = 4
 // de sub planetele departate se randeaza la 2-3px inaltime, deci ilizibile — un
 // semn se recunoaste dupa FORMA, nu dupa text, si de aceea supravietuieste
 // micsorarii mult mai bine.
-type Mark = { text: string } | { path: string; box: string }
+type Mark = { text: string } | { paths: string[]; box: string }
 
-// Silueta „EA” vine din Simple Icons (CC0) — e singurul dintre cele cinci care
-// are un simbol de sine statator si recognoscibil. Restul primesc monograme in
-// mono-ul din CV: Digi are doar wordmark, Amber nu publica sigla in HTML, iar
-// marca patrata a Euronet, scoasa din logo-ul lor, se citeste ca un glif oarecare
-// atunci cand e singura pe sfera — numele scris spune mai mult decat ea.
-const EA_MARK = 'M16.635 6.162l-5.928 9.377H4.24l1.508-2.3h4.024l1.474-2.335H2.264L.79 13.239h2.156L0 17.84h12.072l4.563-7.259 1.652 2.66h-1.401l-1.473 2.299h4.347l1.473 2.3H24zm-11.461.107L3.7 8.604l9.52-.035 1.474-2.3z'
+// Doua dintre cele cinci au sigla adevarata: „EA” din Simple Icons (CC0) si
+// logotipul FEG de pe feg.eu, varianta fara dreptunghi — deja alba, exact ce ne
+// trebuie. Restul primesc monograme in mono-ul din CV: Digi are doar wordmark,
+// Amber nu publica sigla in HTML, iar marca patrata a Euronet, scoasa din logo-ul
+// lor, se citeste ca un glif oarecare atunci cand e singura pe sfera — numele
+// scris spune mai mult decat ea.
+const EA_MARK = ['M16.635 6.162l-5.928 9.377H4.24l1.508-2.3h4.024l1.474-2.335H2.264L.79 13.239h2.156L0 17.84h12.072l4.563-7.259 1.652 2.66h-1.401l-1.473 2.299h4.347l1.473 2.3H24zm-11.461.107L3.7 8.604l9.52-.035 1.474-2.3z']
+const FEG_MARK = [
+  'M0 11.3857V30.6404H8.90486V18.4239H18.9302V11.3857H0Z',
+  'M23.1515 0.0600586H0V7.09822H23.1515V0.0600586Z',
+  'M27.3444 0V0.159247V7.04101V11.3748V23.5885V30.2684V30.6295H36.2492H50.4988V23.5885H36.2492V18.413H46.2774V11.3748H36.1585V7.04101H50.4988V0H27.3444Z',
+  'M83.3956 7.06957V0.0285645H68.8798C67.8442 0.0825948 66.7911 0.111032 65.7497 0.182124C65.4016 0.204874 65.0534 0.233311 64.7082 0.270279C63.6492 0.352746 62.5873 0.588774 61.581 0.964142C61.2475 1.08927 60.9169 1.22861 60.5981 1.38501C60.2412 1.55279 59.8989 1.74047 59.5742 1.94806C56.9238 3.76235 55.6337 5.6335 54.9053 7.65822C54.7327 8.13596 54.68 8.61086 54.5952 9.02604C54.3436 10.2716 54.2617 11.1076 54.2617 11.1076C54.1418 12.0546 54.0803 13.047 54.0803 14.085C54.0803 19.4823 55.4933 23.6398 58.3134 26.5546C61.1363 29.4694 65.1324 30.9282 70.3045 30.9282C75.0144 30.9282 79.3381 30.2742 83.2698 28.9661V11.3892H68.7891V18.1913H74.7774V23.3014C73.6453 23.5545 72.4049 23.6825 71.0622 23.6825C68.599 23.6825 66.7121 22.8834 65.4074 21.2824C64.0998 19.6842 63.4445 17.3609 63.4445 14.3125C63.4445 13.1437 63.5586 12.0802 63.7516 11.1133C64.4947 7.39091 68.5668 7.07241 68.8798 7.0781H83.3956V7.06957Z',
+]
 
 // Indexul din BODIES corespunde indexului din t.journey.stops.
 // 'years' = cati ani a durat oprirea; da grosimea inelului, deci vechimea se
@@ -46,14 +53,15 @@ const BODIES: {
   // RCS & RDS — albastrul Digi (#002bff, din sigla lor)
   { x: -220, y: -110, z:  -1200, size: 200, bg: 'radial-gradient(circle at 32% 30%, #a5c8ff, #0033ff 55%, #030a2e)', glow: '0 0 70px rgba(59,90,255,0.45)',  ring: 'rgba(147,180,255,0.5)',  years: 1,    mark: { text: 'RDS' } },
   // Electronic Arts — rosu
-  { x:  260, y:  130, z:  -5200, size: 210, bg: 'radial-gradient(circle at 32% 30%, #fca5a5, #b91c1c 55%, #3f0a0a)', glow: '0 0 75px rgba(239,68,68,0.45)',   ring: 'rgba(252,165,165,0.5)', years: 2.4,  mark: { path: EA_MARK, box: '0 0 24 24' } },
+  { x:  260, y:  130, z:  -5200, size: 210, bg: 'radial-gradient(circle at 32% 30%, #fca5a5, #b91c1c 55%, #3f0a0a)', glow: '0 0 75px rgba(239,68,68,0.45)',   ring: 'rgba(252,165,165,0.5)', years: 2.4,  mark: { paths: EA_MARK, box: '0 0 24 24' } },
   // Amber Studio — chihlimbar, ca numele
   { x: -280, y:  120, z:  -9200, size: 195, bg: 'radial-gradient(circle at 32% 30%, #fdba74, #c2410c 55%, #431407)', glow: '0 0 70px rgba(249,115,22,0.45)',  ring: 'rgba(253,186,116,0.5)', years: 0.5,  mark: { text: 'AMBER' } },
-  // Euronet — bleumarinul din sigla (#243f90), impins spre otel ca sa nu se
-  // confunde cu albastrul Digi, care e vizibil in acelasi cadru
-  { x:  240, y: -140, z: -13200, size: 205, bg: 'radial-gradient(circle at 32% 30%, #c7d2fe, #3b4c99 55%, #0d1226)', glow: '0 0 75px rgba(99,124,200,0.45)',  ring: 'rgba(199,210,254,0.5)', years: 1.25, mark: { text: 'EURONET' } },
-  // FEG / Fortuna — verde
-  { x:    0, y:   40, z: -17200, size: 240, bg: 'radial-gradient(circle at 32% 30%, #86efac, #047857 55%, #052e16)', glow: '0 0 90px rgba(16,185,129,0.5)',   ring: 'rgba(134,239,172,0.5)', years: 8.25, mark: { text: 'FEG' } },
+  // Euronet — turcoazul din sigla (#00b7b0). Bleumarinul lor (#243f90) ar fi fost
+  // al treilea albastru din culoar; turcoazul e tot al lor si separa limpede
+  { x:  240, y: -140, z: -13200, size: 205, bg: 'radial-gradient(circle at 32% 30%, #99f6e4, #00b7b0 55%, #042f2e)', glow: '0 0 75px rgba(0,183,176,0.45)',   ring: 'rgba(153,246,228,0.5)', years: 1.25, mark: { text: 'EURONET' } },
+  // FEG — indigoul din sigla lor (#4540ff). Digi (#002bff) e albastru pur, asta e
+  // impins spre violet; oricum stau la capetele opuse ale culoarului
+  { x:    0, y:   40, z: -17200, size: 240, bg: 'radial-gradient(circle at 32% 30%, #c4b5fd, #4540ff 55%, #170f4d)', glow: '0 0 90px rgba(90,80,255,0.5)',    ring: 'rgba(196,181,253,0.5)', years: 8.25, mark: { paths: FEG_MARK, box: '0 0 84 31' } },
 ]
 
 // Monogramele se potrivesc pe LATIME, nu pe corp de litera: altfel „EA” ar fi de
@@ -61,6 +69,15 @@ const BODIES: {
 // 0.14em spatiere, deci ~0.74em pe caracter; tinta e ~48% din diametrul sferei.
 // Plafonul opreste marcile de doua litere sa devina enorme.
 const markFontSize = (size: number, chars: number) => Math.min((0.48 * size) / (0.74 * chars), 0.22 * size)
+
+// Siluetele se potrivesc tot pe latime (~48% din sfera), ca monogramele, dar cu
+// inaltimea plafonata la 40%: fara plafon, o sigla patrata precum „EA” ar iesi de
+// trei ori mai inalta decat logotipul FEG, care e lat de 2.7 ori cat e de inalt.
+const markSize = (size: number, box: string) => {
+  const [, , bw, bh] = box.split(' ').map(Number)
+  const width = Math.min(0.48 * size, (0.4 * size * bw) / bh)
+  return { width, height: (width * bh) / bw }
+}
 
 // In ce parte a lumii se afla tinta: +1 dreapta, -1 stanga. Da si sensul
 // intoarcerii de 180°, ca virajul sa se faca spre planeta, nu in partea opusa.
@@ -249,9 +266,9 @@ export function Space({ index, bank, yaw, onSelect }: SpaceProps) {
                     cu fata la camera (vezi rotateY de mai sus), deci nu mai are
                     nevoie de nimic in plus ca sa stea drept. */}
                 <div className='pointer-events-none absolute inset-0 flex items-center justify-center'>
-                  {'path' in b.mark ? (
-                    <svg viewBox={b.mark.box} aria-hidden='true' fill='#ffffff' style={{ width: b.size * 0.4, height: b.size * 0.4 }} className='drop-shadow'>
-                      <path d={b.mark.path} />
+                  {'paths' in b.mark ? (
+                    <svg viewBox={b.mark.box} aria-hidden='true' fill='#ffffff' style={markSize(b.size, b.mark.box)} className='drop-shadow'>
+                      {b.mark.paths.map((d, n) => <path key={n} d={d} />)}
                     </svg>
                   ) : (
                     <span
