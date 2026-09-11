@@ -146,6 +146,7 @@ export function Space({ index, bank, yaw, onSelect }: SpaceProps) {
   const stops = t.journey.stops
   const reduced = useReducedMotion()
   const rigRef = useRef<HTMLDivElement>(null)
+  const skyRef = useRef<HTMLDivElement>(null)
   const reversed = yaw !== 0
   // Pasul spre „urmatoarea” oprire: intors, urmatoarea e cea dinainte.
   const step = reversed ? -1 : 1
@@ -172,6 +173,14 @@ export function Space({ index, bank, yaw, onSelect }: SpaceProps) {
           rigRef.current.style.transform =
             `rotateY(${(nx * 12).toFixed(2)}deg) rotateX(${(-ny * 8).toFixed(2)}deg)`
         }
+        // Cerul nu mai sta in scena 3D, deci nu mai prinde rotatia rig-ului: ii
+        // dam in schimb o deplasare mica, in sens invers cursorului. Pe un fundal
+        // de stele se citeste la fel — o rotatie de 12° pe un panou plat oricum nu
+        // producea decat o distorsiune pe care nu o vede nimeni.
+        if (skyRef.current) {
+          skyRef.current.style.transform =
+            `translate(${(-nx * 24).toFixed(1)}px, ${(-ny * 16).toFixed(1)}px)`
+        }
       })
     }
     window.addEventListener('mousemove', onMove, { passive: true })
@@ -183,29 +192,32 @@ export function Space({ index, bank, yaw, onSelect }: SpaceProps) {
       className='pointer-events-none absolute inset-0'
       style={{ transform: `scale(${fit})`, transformOrigin: '50% 34%' }}
     >
-    {/* Camera: perspective + perspective-origin 50% 34% = punctul de fixare al scenei */}
-    <div className='pointer-events-none absolute inset-0 [perspective:1000px] [perspective-origin:50%_34%]'>
-      {/* Virajul (bank) sta pe stratul lui, ca sa nu se bata cu transformarea scrisa
-          de mouse pe rig si cu translatia camerei de pe lume — un element poate
-          avea o singura transformare. */}
+    {/* Virajul (bank) sta pe stratul lui, ca sa nu se bata cu transformarea scrisa
+        de mouse pe rig si cu translatia camerei de pe lume — un element poate avea
+        o singura transformare. E si IN AFARA perspectivei, ca sa cuprinda si cerul:
+        rotateZ e o rotatie in planul ecranului, deci arata la fel aplicata inainte
+        sau dupa proiectie. Originea trebuie mutata pe punctul de focus — altfel
+        imaginea deja proiectata s-ar roti in jurul centrului, nu al punctului de
+        fuga, si toata scena ar balansa in loc sa se incline. */}
+    <div
+      className={cn('absolute inset-0', bank !== 0 && 'bank-turn')}
+      style={{ '--bank': `${bank}deg`, transformOrigin: '50% 34%' } as React.CSSProperties}
+    >
+      {/* Cerul e desenat INAINTEA scenei 3D si in afara ei. Cat a stat inauntru, la
+          z = 0, sortarea dupa adancime il punea mereu in FATA planetelor, care sunt
+          la z negativ — se vedeau steluțe peste sfere. Aici e un fundal simplu: se
+          deseneaza primul, deci planetele il acopera.
+          Tot nu poate participa la intoarcerea de 180° (un panou plat dispare cand
+          ajunge pe muchie, la 90°), asa ca traduce intoarcerea intr-o PANORAMARE
+          orizontala. E lat de patru ecrane si tiluit, ca la capatul panoramarii
+          (±100vw) sa nu se vada marginea. */}
       <div
-        className={cn('absolute inset-0 [transform-style:preserve-3d]', bank !== 0 && 'bank-turn')}
-        style={{ '--bank': `${bank}deg` } as React.CSSProperties}
-      >
-      {/* „Rig”: se inclina usor dupa mouse (rotateY/rotateX mici), peste glisajul lumii. */}
-      <div
-        ref={rigRef}
-        className='absolute inset-0 [transform-style:preserve-3d]'
+        ref={skyRef}
+        className='pointer-events-none absolute inset-0 overflow-hidden'
         style={{ transition: 'transform 220ms ease-out' }}
       >
-        {/* Cerul sta in scena (sub rig), altfel ramane nemiscat cand camera vireaza:
-            primeste si inclinarea de viraj, si privirea de mouse.
-            Nu poate insa participa la intoarcerea de 180°: un panou plat dispare
-            cand ajunge pe muchie, la 90°. Asa ca sta cu fata la camera si traduce
-            intoarcerea intr-o PANORAMARE orizontala. E lat de patru ecrane si tiluit,
-            ca la capatul panoramarii (±100vw) sa nu se vada marginea. */}
         <div
-          className='pointer-events-none absolute -top-[20%] -bottom-[20%] left-[-150vw] flex w-[400vw]'
+          className='absolute -top-[20%] -bottom-[20%] left-[-150vw] flex w-[400vw]'
           style={{ transform: `translateX(${(-yaw / 180) * 100}vw)`, transition: TURN }}
         >
           {Array.from({ length: SKY_TILES }, (_, n) => (
@@ -215,6 +227,15 @@ export function Space({ index, bank, yaw, onSelect }: SpaceProps) {
             </div>
           ))}
         </div>
+      </div>
+      {/* Camera: perspective + perspective-origin 50% 34% = punctul de fixare al scenei */}
+      <div className='pointer-events-none absolute inset-0 [perspective:1000px] [perspective-origin:50%_34%]'>
+      {/* „Rig”: se inclina usor dupa mouse (rotateY/rotateX mici), peste glisajul lumii. */}
+      <div
+        ref={rigRef}
+        className='absolute inset-0 [transform-style:preserve-3d]'
+        style={{ transition: 'transform 220ms ease-out' }}
+      >
         {/* Retragerea camerei cu FOCUS_Z e in spatiul CAMEREI, deci trebuie sa stea
             IN AFARA intoarcerii: daca ar fi inauntru, la 180° planeta focalizata
             ar ajunge fix in spatele camerei. */}

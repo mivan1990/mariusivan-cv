@@ -14,7 +14,7 @@ export function Journey({ onFinish }: JourneyProps) {
   const { t } = useLanguage();
   const [i, setI] = useState(0); // indexul opririi curente (conduce camera si scena)
   const [panelI, setPanelI] = useState(0); // indexul opririi afisata in panoul de text (se schimba la sosire)
-  const [sosit, setSosit] = useState(true); // false cat esti in drum: panoul se estompeaza, dar NU se goleste
+  const [sosit, setSosit] = useState(true); // false cat esti in drum: panoul e gol, fara niciun text
   const [warp, setWarp] = useState(false); // warp in desfasurare (dârele sunt montate)
   const [dir, setDir] = useState<1 | -1>(1); // ultima directie, pt. animatia de sosire
   const [bank, setBank] = useState(0); // unghiul de inclinare in viraj (aplicat scenei si dârelor)
@@ -48,9 +48,9 @@ export function Journey({ onFinish }: JourneyProps) {
     // Textul nou nu are voie sa apara inainte de asta — altfel il citesti in plin
     // zbor, cand inca esti la jumatatea drumului.
     //
-    // Panoul NU se goleste intre timp, doar se estompeaza: informatia opririi de
-    // unde ai plecat ramane pe ecran pana cand o inlocuieste cea noua, deci nu mai
-    // exista nicio secunda de ecran gol.
+    // Cat tine zborul panoul e gol: nici textul opririi de unde ai plecat nu are
+    // ce cauta acolo — ai plecat de la ea. Iesirea e scurta (300ms) ca sa nu ramana
+    // atarnata pe ecran dupa ce ai pornit.
     window.setTimeout(() => { setPanelI(target); setSosit(true) }, 2800)
     window.setTimeout(() => { setWarp(false); setBank(0) }, 5000)
   };
@@ -106,8 +106,8 @@ export function Journey({ onFinish }: JourneyProps) {
       <div className='pointer-events-none absolute inset-x-0 bottom-0 z-10 px-5 pb-10 bg-gradient-to-t from-black via-black/85 to-transparent pt-24'>
         <div
           className={cn(
-            'pointer-events-auto mx-auto max-w-2xl text-center transition-opacity duration-500 motion-reduce:transition-none',
-            sosit ? 'opacity-100' : 'opacity-40',
+            'pointer-events-auto mx-auto max-w-2xl text-center transition-opacity duration-300 motion-reduce:transition-none',
+            sosit ? 'opacity-100' : 'opacity-0',
           )}
         >
           {/* key pe stop.id => re-montare la fiecare schimbare, declanseaza animatia de sosire */}
