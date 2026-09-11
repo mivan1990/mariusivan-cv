@@ -318,10 +318,10 @@ Status: `[ ]` = de făcut, `[x]` = făcut, `[~]` = în curs.
 - Atenție la I3: `xp.mariusivan.ro` părea că merge și *înainte* de vhost, fiindcă nginx cădea pe blocul rădăcinii. Acum are vhost propriu, deci schimbarea `root`-ului la pasul 3 nu-l mai atinge.
 
 ### I1b. Certificatul rădăcinii, expirat
-- [ ] `certbot renew --cert-name mariusivan.ro` — expirat pe 31.08.2026, cauza (DNS) e reparată
-- [ ] `turneu.numlock.ro` expiră pe 19.09.2026, aceeași cauză
-- [ ] Dacă certbot atârnă: Cloudflare Origin Certificate (gratuit, 15 ani, `*.mariusivan.ro`)
+- [x] `certbot renew --cert-name mariusivan.ro` — reînnoit, valabil până pe 10.12.2026
+- [x] `turneu.numlock.ro` expiră pe 19.09.2026 — intră singur la reînnoire acum că DNS-ul merge
 - Estimare: 15 min
+- Status: **gata** (2026-09-11). „Blocajul" de la dry-run era pauza aleatorie a lui `certbot renew`, nu o eroare. Vhost-ul rădăcinii a rămas neatins.
 
 ### I2. Pas 2: Build CV local
 - [ ] `npm run build` — verifică build-ul

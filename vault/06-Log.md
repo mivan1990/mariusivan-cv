@@ -760,9 +760,14 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - [x] Record Cloudflare `A` → `89.44.120.87`, Proxied
 - [x] `certbot --nginx -d xp.mariusivan.ro --redirect` — certificat până pe **10 decembrie 2026**, reînnoire automată programată
 - [x] Verificat direct pe origine, ocolind Cloudflare: SNI `xp.mariusivan.ro` → `CN = xp.mariusivan.ro`. Vhost propriu, certificat propriu, nu fallback. Pagina 200, `/api/` 200, fallback SPA pe rută inexistentă 200. Rădăcina neatinsă
-- [x] Un dry-run de `certbot renew` pentru rădăcină a atârnat până la timeout de două ori, fără să se plângă de ceva. Serverul a rămas curat (`nginx -t` trece, zero urme de challenge). Nelămurit — dar `xp` a trecut pe același drum, deci nu e blocaj general
-- [x] Rămâne: **certificatul rădăcinii e tot expirat**. Acum că DNS-ul merge, `certbot renew --cert-name mariusivan.ro` ar trebui să treacă. Plasa de siguranță din plan: Cloudflare Origin Certificate, gratuit, 15 ani, acoperă `*.mariusivan.ro`
+- [x] Un dry-run de `certbot renew` pentru rădăcină a „atârnat" până la timeout de două ori. **Nu atârna: dormea.** `certbot renew` își pune o pauză aleatorie (aici 293s) înainte de treabă, ca să nu lovească toată lumea serverele Let's Encrypt la aceeași oră. Timeout-urile mele de 120 și 150s o tăiau în somn. `xp` a mers din prima fiindcă `certbot --nginx` cere un certificat nou pe loc, fără pauza aia
 - [x] Găsit în repo, fără legătură cu serverul: `VPS.rtf` cu parola de root stătea în rădăcina proiectului, neurmărit dar **neignorat**. Taskul J1 e literalmente `git add .` — ar fi publicat-o. Adăugat în `.gitignore`
 - Commit: `6520366` (.gitignore)
+
+#### 14:15 — Certificatul rădăcinii, reînnoit
+- [x] `certbot renew --cert-name mariusivan.ro` — trece acum că DNS-ul merge. Valabil până pe **10 decembrie 2026**, pentru `mariusivan.ro` și `www.mariusivan.ro`
+- [x] Vhost-ul rădăcinii **neatins**: același md5 (`3a4ebbd9…`) înainte și după. Certbot a dat doar reload
+- [x] Verificat pe origine: `CN = mariusivan.ro`, `notBefore` 11 sept. Ambele site-uri 200 din exterior, `/api/` 200
+- [x] `turneu.numlock.ro` expiră pe 19 septembrie, dar acum intră singur la reînnoire — e sub pragul de 30 de zile și `certbot.timer` rulează de două ori pe zi. Cauza care îl bloca era DNS-ul, reparat
 
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]] · [[04-Deploy]]
