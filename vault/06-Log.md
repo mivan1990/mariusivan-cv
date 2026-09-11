@@ -737,4 +737,15 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - [x] `npm run build` — trece
 - Commit: `3a1ab9c` (fără push)
 
+#### 12:40 — Stelele nu se mai văd prin planete
+- [x] Cauza: cerul era un panou plat la **z = 0** înăuntrul rig-ului 3D, iar planetele stau toate la z negativ. Sortarea după adâncime îl punea deci mereu în **fața** lor — steluțe peste sfere
+- [x] Soluția respinsă: împins cerul departe în z, în spatele celei mai îndepărtate planete. Ar fi rezolvat sortarea, dar strica senzația — un plan la z = -12000 se plimbă vreo **200px** pe ecran la o înclinare de mouse de 12°
+- [x] Soluția aleasă: cerul iese cu totul din scena 3D și se desenează **înaintea** ei, ca fundal simplu peste care planetele se așază
+- [x] Ca să nu pierdem ce câștigase stând în rig: stratul de viraj s-a mutat **în afara** containerului de perspectivă, ca să cuprindă și cerul. `rotateZ` e o rotație în planul ecranului, deci arată la fel aplicată înainte sau după proiecție — dar originea trebuie mutată pe punctul de focus, altfel imaginea deja proiectată se rotește în jurul centrului și toată scena balansează în loc să se încline
+- [x] Mouse-ul nu mai rotește cerul în 3D, ci îl deplasează ușor în sens invers cursorului. Pe un câmp de stele se citește identic, iar o rotație de 12° pe un panou plat oricum nu producea decât o distorsiune invizibilă
+- [x] Întoarcerea de 180° panoramează cerul la fel ca înainte, neschimbat
+- [x] Verificat: o stea care cade geometric în discul sferei focalizate nu se mai vede; virajul măsurat la **-14°** la 403ms, orizontal la 1.5s; cerul panoramează tot **741px** (un ecran) la o întoarcere
+- [x] `npm run build` — trece
+- Commit: `31482a8` (fără push)
+
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]
