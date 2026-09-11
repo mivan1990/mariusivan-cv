@@ -45,3 +45,7 @@ vault/.obsidian/cache
 # Artefacte scrise de unelte rulate din radacina proiectului
 outputs/
 .claude/
+
+# Credentiale — nu ajung niciodata in repo
+VPS.rtf
+*.rtf
