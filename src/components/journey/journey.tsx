@@ -14,7 +14,7 @@ export function Journey({ onFinish }: JourneyProps) {
   const { t } = useLanguage();
   const [i, setI] = useState(0); // indexul opririi curente (conduce camera si scena)
   const [panelI, setPanelI] = useState(0); // indexul opririi afisata in panoul de text (se schimba la sosire)
-  const [panelOn, setPanelOn] = useState(true); // panoul e ascuns doar cat dureaza schimbul de text, nu tot zborul
+  const [sosit, setSosit] = useState(true); // false cat esti in drum: panoul se estompeaza, dar NU se goleste
   const [warp, setWarp] = useState(false); // warp in desfasurare (dârele sunt montate)
   const [dir, setDir] = useState<1 | -1>(1); // ultima directie, pt. animatia de sosire
   const [bank, setBank] = useState(0); // unghiul de inclinare in viraj (aplicat scenei si dârelor)
@@ -41,15 +41,17 @@ export function Journey({ onFinish }: JourneyProps) {
     setBank(bankAngle(i, target, { reversed: nextYaw !== 0, turning }))
     setYaw(nextYaw)
     setI(target) // camera porneste in aceeasi clipa cu warp-ul
-    setPanelOn(false)
-    // 1200ms: „ochirea” (x, y) se termina la 1s, deci planeta tinta sta deja in
-    // punctul de focus si se vede spre cine zbori — de aici incolo n-ai de ce sa
-    // mai astepti textul. Mai devreme de atat ar aparea in timpul virajului.
+    setSosit(false)
+    // 2800ms = momentul in care chiar ai ajuns. Masurat pe cresterea planetei
+    // tinta: 90% din marimea finala la 2.35s, 95% la 2.85s, apoi un tarait pana
+    // la 100% pe care ochiul nu-l mai prinde; darele se sting si ele pe la 3s.
+    // Textul nou nu are voie sa apara inainte de asta — altfel il citesti in plin
+    // zbor, cand inca esti la jumatatea drumului.
     //
-    // Panoul se leaga de ACEST moment, nu de sfarsitul warp-ului. Cat a fost legat
-    // de `warp`, textul se schimba pe la 1.2s dar in spatele unui parinte la
-    // opacitate 0, si reaparea abia la 5.1s — masurat: 4.7 secunde de ecran gol.
-    window.setTimeout(() => { setPanelI(target); setPanelOn(true) }, 1200)
+    // Panoul NU se goleste intre timp, doar se estompeaza: informatia opririi de
+    // unde ai plecat ramane pe ecran pana cand o inlocuieste cea noua, deci nu mai
+    // exista nicio secunda de ecran gol.
+    window.setTimeout(() => { setPanelI(target); setSosit(true) }, 2800)
     window.setTimeout(() => { setWarp(false); setBank(0) }, 5000)
   };
 
@@ -105,7 +107,7 @@ export function Journey({ onFinish }: JourneyProps) {
         <div
           className={cn(
             'pointer-events-auto mx-auto max-w-2xl text-center transition-opacity duration-500 motion-reduce:transition-none',
-            panelOn ? 'opacity-100' : 'opacity-0',
+            sosit ? 'opacity-100' : 'opacity-40',
           )}
         >
           {/* key pe stop.id => re-montare la fiecare schimbare, declanseaza animatia de sosire */}
@@ -114,7 +116,7 @@ export function Journey({ onFinish }: JourneyProps) {
             className={cn('flex flex-col items-center text-center', dir === 1 ? 'arrive-fwd' : 'arrive-back')}
           >
             <p className='mt-8 font-mono-code text-xs uppercase tracking-[0.2em] text-white/50'>
-              {t.journey.stopLabel} {i + 1} / {t.journey.stops.length}
+              {t.journey.stopLabel} {panelI + 1} / {t.journey.stops.length}
             </p>
             <h2 className='mt-3 text-xl font-bold sm:text-2xl'>{stop.company}</h2>
             <p className='mt-1 text-sm text-white/60'>
