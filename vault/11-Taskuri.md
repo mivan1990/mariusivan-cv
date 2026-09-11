@@ -308,12 +308,20 @@ Status: `[ ]` = de făcut, `[x]` = făcut, `[~]` = în curs.
 ## Faza I — Deploy pe Prod
 
 ### I1. Pas 1: Muta XP-ul pe subdomeniu
-- [ ] Cloudflare → DNS → record `A`, nume `xp`, același IP, Proxied ON
-- [ ] Vhost nou pe VPS pentru `xp.mariusivan.ro`
-- [ ] `certbot --nginx -d xp.mariusivan.ro`
-- [ ] Verifică: `https://xp.mariusivan.ro` funcționează
+- [x] Cloudflare → DNS → record `A`, nume `xp`, același IP, Proxied ON
+- [x] Vhost nou pe VPS pentru `xp.mariusivan.ro`
+- [x] `certbot --nginx -d xp.mariusivan.ro`
+- [x] Verifică: `https://xp.mariusivan.ro` funcționează
 - Dependențe: H2
 - Estimare: 30 min
+- Status: **gata** (2026-09-11). Pe drum a trebuit reparat DNS-ul serverului — `systemd-resolved` nu funcționa pe `venet0` (OpenVZ), deci certbot nu ajungea la Let's Encrypt de pe 31 august. Detalii în [[06-Log]].
+- Atenție la I3: `xp.mariusivan.ro` părea că merge și *înainte* de vhost, fiindcă nginx cădea pe blocul rădăcinii. Acum are vhost propriu, deci schimbarea `root`-ului la pasul 3 nu-l mai atinge.
+
+### I1b. Certificatul rădăcinii, expirat
+- [ ] `certbot renew --cert-name mariusivan.ro` — expirat pe 31.08.2026, cauza (DNS) e reparată
+- [ ] `turneu.numlock.ro` expiră pe 19.09.2026, aceeași cauză
+- [ ] Dacă certbot atârnă: Cloudflare Origin Certificate (gratuit, 15 ani, `*.mariusivan.ro`)
+- Estimare: 15 min
 
 ### I2. Pas 2: Build CV local
 - [ ] `npm run build` — verifică build-ul
@@ -432,7 +440,7 @@ Status: `[ ]` = de făcut, `[x]` = făcut, `[~]` = în curs.
 - [x] G2. Preview build
 - [x] H1. Build pentru producție
 - [x] H2. Configurație pentru VPS
-- [ ] I1. Pas 1: Muta XP-ul pe subdomeniu
+- [x] I1. Pas 1: Muta XP-ul pe subdomeniu
 - [ ] I2. Pas 2: Build CV local
 - [ ] I3. Pas 3: Deploy pe VPS
 - [ ] I4. Verificare finală

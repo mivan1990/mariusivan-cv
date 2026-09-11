@@ -56,7 +56,7 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - [ ] G2: Preview build
 - [ ] H1: Build pentru producție
 - [ ] H2: Configurație pentru VPS
-- [ ] I1: Pas 1: Muta XP-ul pe subdomeniu
+- [x] I1: Pas 1: Muta XP-ul pe subdomeniu
 - [ ] I2: Pas 2: Build CV local
 - [ ] I3: Pas 3: Deploy pe VPS
 - [ ] I4: Verificare finală
@@ -748,4 +748,21 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - [x] `npm run build` — trece
 - Commit: `31482a8` (fără push)
 
-[[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]
+### 2026-09-11 — Deploy
+
+#### 14:00 — I1: XP-ul are subdomeniul lui, `xp.mariusivan.ro`
+- [x] **Găsit pe drum, înainte de orice: DNS-ul serverului era rupt.** E container OpenVZ (`venet0`), iar `systemd-resolved` nu folosea serverele globale pentru link — `Current Scopes: none`, `-DefaultRoute`. Orice interogare întorcea SERVFAIL. Rețeaua era sănătoasă: UDP și TCP pe 53 ajungeau la 8.8.8.8, HTTPS către IP direct mergea
+- [x] Consecința: **certificatul rădăcinii expirase pe 31 august**. Certbot încerca zilnic și pica pe `Temporary failure in name resolution` — nu ajungea la Let's Encrypt. `turneu.numlock.ro` expiră pe 19 septembrie, din aceeași cauză
+- [x] Reparat prin ocolirea lui `resolved`: `/etc/resolv.conf` static, `1.1.1.1` + `8.8.8.8`. Rollback: `ln -sf ../run/systemd/resolve/stub-resolv.conf /etc/resolv.conf`
+- [x] **A doua descoperire: `xp.mariusivan.ro` „mergea" deja, din accident.** În `sites-available/default`, `listen 443 ssl default_server` e comentat. Pentru un nume care nu se potrivește cu niciun `server_name`, nginx cade pe primul bloc de pe 443 din ordinea fișierelor — vhost-ul `mariusivan.ro`, cu root în `/var/www/portfolio/dist` și blocul `/api/`. De-aia se vedea XP-ul, cu tot cu pariuri
+- [x] De ce conta: la **pasul 3**, când `root`-ul rădăcinii trece pe `/var/www/cv/dist`, `xp.mariusivan.ro` ar fi început să servească **CV-ul**. Ai fi crezut că subdomeniul e gata și s-ar fi rupt fix la lansare. Vhost-ul explicit nu e formalitate — e ce ține pasul 3 în picioare
+- [x] Vhost nou `/etc/nginx/sites-available/xp.mariusivan.ro` → `/var/www/portfolio/dist`, cu blocul `location /api/` copiat **verbatim** din vhost-ul rădăcinii (aceleași headere de proxy — pariurile FEG depind de ele) plus `try_files` pentru SPA
+- [x] Record Cloudflare `A` → `89.44.120.87`, Proxied
+- [x] `certbot --nginx -d xp.mariusivan.ro --redirect` — certificat până pe **10 decembrie 2026**, reînnoire automată programată
+- [x] Verificat direct pe origine, ocolind Cloudflare: SNI `xp.mariusivan.ro` → `CN = xp.mariusivan.ro`. Vhost propriu, certificat propriu, nu fallback. Pagina 200, `/api/` 200, fallback SPA pe rută inexistentă 200. Rădăcina neatinsă
+- [x] Un dry-run de `certbot renew` pentru rădăcină a atârnat până la timeout de două ori, fără să se plângă de ceva. Serverul a rămas curat (`nginx -t` trece, zero urme de challenge). Nelămurit — dar `xp` a trecut pe același drum, deci nu e blocaj general
+- [x] Rămâne: **certificatul rădăcinii e tot expirat**. Acum că DNS-ul merge, `certbot renew --cert-name mariusivan.ro` ar trebui să treacă. Plasa de siguranță din plan: Cloudflare Origin Certificate, gratuit, 15 ani, acoperă `*.mariusivan.ro`
+- [x] Găsit în repo, fără legătură cu serverul: `VPS.rtf` cu parola de root stătea în rădăcina proiectului, neurmărit dar **neignorat**. Taskul J1 e literalmente `git add .` — ar fi publicat-o. Adăugat în `.gitignore`
+- Commit: `6520366` (.gitignore)
+
+[[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]] · [[04-Deploy]]
