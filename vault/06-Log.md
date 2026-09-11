@@ -716,4 +716,15 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - [x] `npm run build` — trece
 - Commit: `280ceca` (fără push)
 
+#### 11:40 — Info-ul opririi apare la apropiere, nu după ce aterizezi
+- [x] Cerința: mai puțină așteptare până apare textul la sosirea pe planetă
+- [x] Prima încercare a fost **butonul greșit**: am mutat `setPanelI` de la 2200ms la 1200ms și nu s-a schimbat nimic pe ecran. Panoul era legat de steagul `warp`, care se stinge abia la 5000ms — textul se schimba în spatele unui părinte la opacitate 0
+- [x] Cronologia măsurată înainte: gol la **462ms**, text nou (invizibil) la 1236ms, reapare la 5119ms, **complet lizibil la 5480ms** — adică **4.7 secunde de ecran gol**
+- [x] Lecția: măsurasem opacitatea elementului, nu produsul opacităților părinților. Un `getComputedStyle(el).opacity` de 1 nu înseamnă că se vede ceva
+- [x] Panoul atârnă acum de momentul schimbării textului, nu de sfârșitul warp-ului. 1200ms e când se termină „ochirea" laterală și planeta țintă stă deja în punctul de focus — vezi spre ce zbori, deci n-ai ce aștepta. Mai devreme ar apărea în timpul virajului
+- [x] Animația de sosire: 620ms → 500ms
+- [x] Măsurat după: gol la 457ms, text la 1245ms, **lizibil la 1658ms**, ecran gol doar **869ms**. De la 5.5s la 1.7s
+- [x] `npm run build` — trece
+- Commit: `88e38e5` (fără push)
+
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]
