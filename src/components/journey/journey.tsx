@@ -14,6 +14,7 @@ export function Journey({ onFinish }: JourneyProps) {
   const { t } = useLanguage();
   const [i, setI] = useState(0); // indexul opririi curente (conduce camera si scena)
   const [panelI, setPanelI] = useState(0); // indexul opririi afisata in panoul de text (se schimba la sosire)
+  const [panelOn, setPanelOn] = useState(true); // panoul e ascuns doar cat dureaza schimbul de text, nu tot zborul
   const [warp, setWarp] = useState(false); // warp in desfasurare (dârele sunt montate)
   const [dir, setDir] = useState<1 | -1>(1); // ultima directie, pt. animatia de sosire
   const [bank, setBank] = useState(0); // unghiul de inclinare in viraj (aplicat scenei si dârelor)
@@ -40,7 +41,15 @@ export function Journey({ onFinish }: JourneyProps) {
     setBank(bankAngle(i, target, { reversed: nextYaw !== 0, turning }))
     setYaw(nextYaw)
     setI(target) // camera porneste in aceeasi clipa cu warp-ul
-    window.setTimeout(() => setPanelI(target), 2200) // textul apare devreme, planeta e deja in focus
+    setPanelOn(false)
+    // 1200ms: „ochirea” (x, y) se termina la 1s, deci planeta tinta sta deja in
+    // punctul de focus si se vede spre cine zbori — de aici incolo n-ai de ce sa
+    // mai astepti textul. Mai devreme de atat ar aparea in timpul virajului.
+    //
+    // Panoul se leaga de ACEST moment, nu de sfarsitul warp-ului. Cat a fost legat
+    // de `warp`, textul se schimba pe la 1.2s dar in spatele unui parinte la
+    // opacitate 0, si reaparea abia la 5.1s — masurat: 4.7 secunde de ecran gol.
+    window.setTimeout(() => { setPanelI(target); setPanelOn(true) }, 1200)
     window.setTimeout(() => { setWarp(false); setBank(0) }, 5000)
   };
 
@@ -96,7 +105,7 @@ export function Journey({ onFinish }: JourneyProps) {
         <div
           className={cn(
             'pointer-events-auto mx-auto max-w-2xl text-center transition-opacity duration-500 motion-reduce:transition-none',
-            warp ? 'opacity-0' : 'opacity-100',
+            panelOn ? 'opacity-100' : 'opacity-0',
           )}
         >
           {/* key pe stop.id => re-montare la fiecare schimbare, declanseaza animatia de sosire */}
