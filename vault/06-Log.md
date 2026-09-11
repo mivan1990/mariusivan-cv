@@ -727,4 +727,14 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - [x] `npm run build` — trece
 - Commit: `88e38e5` (fără push)
 
+#### 12:05 — Textul opririi se schimbă la sosire, iar panoul nu se mai golește
+- [x] Corecție la reglajul de dinainte: pusesem textul la 1200ms, dar acolo camera e la jumătatea drumului și dârele sunt în plin — se citea în zbor, nu la sosire
+- [x] Am **măsurat creșterea planetei țintă** ca să aflu unde e de fapt sosirea: **90%** din mărimea finală la 2.35s, **95%** la 2.85s, apoi un târâit până la 100% pe care ochiul nu-l prinde. Dârele se sting și ele pe la 3s. Deci schimbul se face la **2800ms**
+- [x] Panoul nu se mai golește în zbor, se **estompează la 40%**: oprirea de unde ai plecat rămâne pe ecran până o înlocuiește cea nouă. Înainte de perechea asta de reparații, ecranul era gol **4657ms** la fiecare salt — acum zero
+- [x] Găsit pe drum: eticheta „STOP n / 5" citea din `i`, care se schimbă la plecare, în timp ce restul panoului citea din `panelI`. Adică anunța numărul destinației peste numele opririi de plecare, tot zborul. Acum citește din `panelI`
+- [x] Măsurat: panoul nu coboară sub 40% în tranzit, text nou la **2807ms**, lizibil la **3265ms**, față de 5480ms înainte
+- [x] Rămâne: navigarea e blocată până la **5200ms** (`lockRef` + steagul `warp`), deci după ce textul apare la 3.3s mai aștepți ~2s până poți da din nou Next. Ultimele 2.2s de zbor mută planeta de la 95% la 100%
+- [x] `npm run build` — trece
+- Commit: `3a1ab9c` (fără push)
+
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]]
