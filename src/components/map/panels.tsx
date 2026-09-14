@@ -210,7 +210,10 @@ export function ProjectPanel({ id }: { id: string }) {
 
       <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{p.description}</p>
 
-      <p className="mt-3 rounded-lg bg-muted/50 px-4 py-3 text-sm text-muted-foreground">{p.highlight}</p>
+      {/* highlight e optional — fara el caseta ar ramane un dreptunghi gol */}
+      {p.highlight && (
+        <p className="mt-3 rounded-lg bg-muted/50 px-4 py-3 text-sm text-muted-foreground">{p.highlight}</p>
+      )}
 
       {/* stack-ul proiectului */}
       <div className="mt-4 flex flex-wrap gap-1.5">

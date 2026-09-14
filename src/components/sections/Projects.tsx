@@ -51,12 +51,15 @@ function ProjectCard({
       </CardHeader>
       <CardContent className="flex-1 space-y-4">
         <p className="text-sm leading-relaxed text-muted-foreground">{project.description}</p>
-        <div className="rounded-lg bg-muted/60 px-3 py-2.5">
-          <p className="text-xs leading-relaxed">
-            <span className="font-semibold text-foreground">→ </span>
-            {project.highlight}
-          </p>
-        </div>
+        {/* highlight e optional — fara el caseta ar ramane un dreptunghi gol */}
+        {project.highlight && (
+          <div className="rounded-lg bg-muted/60 px-3 py-2.5">
+            <p className="text-xs leading-relaxed">
+              <span className="font-semibold text-foreground">→ </span>
+              {project.highlight}
+            </p>
+          </div>
+        )}
         <div className="flex flex-wrap gap-1.5">
           {project.stack.map((s) => (
             <span
