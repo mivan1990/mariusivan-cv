@@ -213,6 +213,11 @@
 /* Numele planetelor departate apare la trecerea cu mouse-ul. */
 .planet-label {
   transition: opacity 200ms ease;
+  /* Eticheta e text, nu tinta: fiind copil al butonului, altfel ii intinde zona
+     de apasare pe latimea numelui. Masurat la oprirea 1, eticheta „Euronet”
+     acoperea centrul planetei FEG de langa ea, iar clicul pe FEG deschidea
+     Euronet. Hover-ul nu are de suferit — el porneste de pe sfera. */
+  pointer-events: none;
 }
 .planet:hover .planet-label {
   opacity: 1;
