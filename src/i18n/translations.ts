@@ -760,7 +760,7 @@ export const translations: Record<Lang, Translation> = {
           a: 'Intranetul FEG Group (Fortuna și Casa Pariurilor), construit ca monolit modular pe Laravel — 82 de module care acoperă operațiunile din agenții, HR, finanțe, conformitate și productivitatea angajaților, pentru ambele branduri și toate locațiile.',
         },
         {
-          q: 'Care sunt proiectele tale personale?',
+          q: 'Care sunt proiectele personale?',
           a: 'Trei, toate reale: Portfolio XP — un desktop Windows XP interactiv, live pe xp.mariusivan.ro, singurul proiect pe care un recrutor îl poate atinge în browser; CS2 Leaderboard — o aplicație în producție pe o mașină Windows locală, folosită activ de un grup de prieteni pentru competiții 2v2; Fortuna WC2026 — pariuri pe FIFA World Cup 2026 cu date live reale de la football-data.org.',
         },
         {
