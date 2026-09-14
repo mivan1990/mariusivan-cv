@@ -607,9 +607,9 @@ export const translations: Record<Lang, Translation> = {
     },
     journey: {
       introTitle: 'Treisprezece ani, cinci opriri.',
-      introText: 'Călătorește prin locurile în care am lucrat, planetă cu planetă — sau mergi direct la CV.',
+      introText: 'Călătorește prin locurile în care am lucrat, planetă cu planetă — sau mergi direct la portofoliu.',
       start: 'Pornește călătoria',
-      skip: 'Sari la CV',
+      skip: 'Portofoliu',
       next: 'Următoarea oprire',
       prev: 'Înapoi',
       land: 'Aterizează pe CV',
@@ -623,7 +623,7 @@ export const translations: Record<Lang, Translation> = {
           span: '2012 — 2013',
           roles: [{ title: 'Tehnician IT', period: 'Martie 2012 - Martie 2013' }],
           blurb:
-            'Instalam și configuram internet, televiziune și telefonie fixă direct la clienți acasă: cablare, routere și receivere, plus suport la fața locului până când toate conexiunile mergeau curat.',
+            'Instalam și configuram serviciile de internet, televiziune și telefonie fixă direct la clienți acasă: cablare, routere și receivere, plus suport la fața locului până când toate erau funcționale.',
         },
         {
           id: 'ea',
@@ -666,7 +666,7 @@ export const translations: Record<Lang, Translation> = {
             { title: 'Junior Software Developer', period: 'Ianuarie 2023 - Prezent' },
           ],
           blurb:
-            'Opt ani în aceeași companie, în trei roluri: suport hardware și rețea în agenții, apoi QA pe web și mobil, apoi scrisul codului — Laravel și PHP pe Intranetul intern și pe voteazaliga2.casapariurilor.ro.',
+            'Opt ani în aceeași companie, în trei roluri: suport hardware și rețea în agenții, QA pe web și mobil și web development — Laravel și PHP pe Intranet, voteazaliga2.casapariurilor.ro plus diferite aplicații și landing page-uri.',
         },
       ],
     },
