@@ -165,7 +165,7 @@ export const translations: Record<Lang, Translation> = {
       hero: 'Home',
       experience: 'Experience',
       projects: 'Projects',
-      skills: 'Skills',
+      skills: 'Technologies',
       faq: 'FAQ',
       contact: 'Contact',
     },
@@ -397,8 +397,8 @@ export const translations: Record<Lang, Translation> = {
       comingSoon: 'Coming soon',
     },
     skills: {
-      heading: 'Skills',
-      sub: 'What I use to build.',
+      heading: 'Technologies',
+      sub: 'What I have actually worked with.',
       groups: [
         {
           title: 'Languages',
@@ -419,6 +419,10 @@ export const translations: Record<Lang, Translation> = {
         {
           title: 'Tools',
           items: ['Git', 'Artisan', 'dompdf', 'FPDF', 'wkhtmltopdf', 'Google Maps'],
+        },
+        {
+          title: 'AI',
+          items: ['Claude Code', 'Qwen (self-hosted)'],
         },
       ],
     },
@@ -482,7 +486,7 @@ export const translations: Record<Lang, Translation> = {
       hero: 'Acasă',
       experience: 'Experiență',
       projects: 'Proiecte',
-      skills: 'Skills',
+      skills: 'Tehnologii',
       faq: 'FAQ',
       contact: 'Contact',
     },
@@ -714,8 +718,8 @@ export const translations: Record<Lang, Translation> = {
       comingSoon: 'Curând',
     },
     skills: {
-      heading: 'Skills',
-      sub: 'Cu ce construiesc.',
+      heading: 'Tehnologii',
+      sub: 'Cu ce am lucrat efectiv.',
       groups: [
         {
           title: 'Limbi',
@@ -736,6 +740,10 @@ export const translations: Record<Lang, Translation> = {
         {
           title: 'Instrumente',
           items: ['Git', 'Artisan', 'dompdf', 'FPDF', 'wkhtmltopdf', 'Google Maps'],
+        },
+        {
+          title: 'AI',
+          items: ['Claude Code', 'Qwen (local)'],
         },
       ],
     },
