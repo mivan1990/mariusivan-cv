@@ -147,11 +147,12 @@ export function Experience() {
             asa ramane loc pentru cardurile care plutesc in jur. */}
         <div className="absolute left-1/2 top-1/2 z-10 w-[min(190px,58%)] -translate-x-1/2 -translate-y-1/2 md:w-[min(420px,44%)]">
           <div className="flex flex-col items-center text-center">
-            {/* PLACEHOLDER — inlocuieste cu poza reala si pune un alt descriptiv
-                (ex. alt={e.personName}). Cat timp e desen generic, alt gol e corect. */}
+            {/* Poza e patrata (512px) si decupata pe fata, nu pe mijlocul
+                geometric — originalul e un portret cu capul in treimea de sus,
+                iar un decupaj centrat ii taia parul. */}
             <img
-              src="/profile-placeholder.svg"
-              alt=""
+              src="/marius.jpg"
+              alt={e.personName}
               width={144}
               height={144}
               loading="lazy"
