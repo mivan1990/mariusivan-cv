@@ -768,7 +768,7 @@ export const translations: Record<Lang, Translation> = {
           a: 'Backend: PHP 8.2, Laravel 10, MySQL, Redis la muncă, plus Python și FastAPI în proiectele personale. Frontend: React, TypeScript, Vite, Tailwind, shadcn/ui, plus Blade, Bootstrap și jQuery în proiectul din producție. Date și infrastructură: SQLite, Redis, AWS S3, nginx, Let’s Encrypt. AI: Claude Code și un Qwen rulat local.',
         },
         {
-          q: 'La ce fel de roluri ești deschis?',
+          q: 'La ce fel de roluri sunt deschis?',
           a: 'Roluri de backend, full-stack și product-engineering.',
         },
       ],
