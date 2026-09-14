@@ -770,4 +770,18 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - [x] Verificat pe origine: `CN = mariusivan.ro`, `notBefore` 11 sept. Ambele site-uri 200 din exterior, `/api/` 200
 - [x] `turneu.numlock.ro` expiră pe 19 septembrie, dar acum intră singur la reînnoire — e sub pragul de 30 de zile și `certbot.timer` rulează de două ori pe zi. Cauza care îl bloca era DNS-ul, reparat
 
+#### 2026-09-14 — FEGBet, demo public pe `fegbet.mariusivan.ro`
+- [x] Repo nou, public: `github.com/mivan1990/fegbet-demo`. **Istoric curat, nu fork** — `seed.py` cu numele reale ale colegilor e comis in istoricul originalului, deci un fork le-ar fi carat cu el oricat de curat ar fi fost ultimul commit
+- [x] Scos inainte de publicare: 11 nume de colegi din lotul FEG, 2 emailuri de serviciu, domeniul `@feg.eu`, si hostname-ul intern din `PLAN_SONNET.md`. Bazele de date (9 conturi reale cu hash-uri de parola) n-au plecat niciodata de pe laptop
+- [x] `seed_demo.py`: turneu complet — 4 grupe, bracket de 8, 31 de meciuri, 312 bilete, 53 de pronosticuri, campioana **FEG**. Punctele **nu** sunt scrise de mana: fiecare meci trece prin `settle_match`, acelasi motor pe care il foloseste adminul. Deci „recalculeaza" din panou nu schimba nimic
+- [x] De ce FEG campioana: piata „Marcator" exista doar la meciurile FEG. Daca echipa iese devreme, piata aia ramane aproape goala in date
+- [x] Auto-login ca `test@mariusivan.ro`, cu buton de comutare pe admin. Motivul comutatorului: partea interesanta e adminul — validezi un scor si motorul recalculeaza punctele tuturor — iar un vizitator logat ca user obisnuit nu vede nimic din asta. Autentificarea reala (JWT, bcrypt, rate limiting, roluri) a ramas neatinsa dedesubt
+- [x] **Doua capcane prinse inainte de productie.** `DATABASE_URL=sqlite:///./fegbet.db` e relativ la directorul din care PORNESTE procesul, nu la `backend/` — pornit de altundeva, serverul isi facea o baza noua, goala, si auto-login-ul lua 401. Se vedea doar ca „aplicatia e goala". Si parola adminului din `.env` era alta decat cea din butonul „Vezi ca admin" — s-ar fi vazut abia la primul click al unui vizitator
+- [x] Prima pagina spunea „Revino dupa ce adminul pune orele" — la un turneu incheiat suna a aplicatie nefunctionala. Acum arata campioana
+- [x] Pe server: serviciu systemd ca `www-data` (nu root) pe 127.0.0.1:8100, vhost nginx cu proxy, certificat pana pe **13 decembrie 2026**. Node-ul de pe VPS e v12, prea vechi pentru Vite 5 — frontend-ul se construieste local si se trimite doar `dist`
+- [x] Cron orar (`/etc/cron.d/fegbet-demo-reset`) care reconstruieste baza. Samanta e fixa, deci dupa fiecare resetare demo-ul arata identic — ce strica un vizitator din admin dispare intr-o ora. Testat, nu doar scris
+- [x] Verificat din exterior: `/`, `/api/health`, `/api/leaderboard`, `/bracket`, `/clasament` toate 200; HTTP se redirecteaza 301; certificatul originii e `CN = fegbet.mariusivan.ro`. Auto-login si comutatorul de admin testate in browser, pe productie
+- [x] Cardul FEGBet din CV trimitea spre hostul intern — link mort fix pentru publicul caruia ii e destinat CV-ul. Acum trimite spre demo
+- Commit: `3d6f0f6`
+
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]] · [[04-Deploy]]
