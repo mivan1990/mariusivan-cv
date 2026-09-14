@@ -30,7 +30,7 @@ export interface Project {
   role: string
   status: string
   description: string
-  highlight: string
+  highlight?: string
   stack: string[]
   liveUrl?: string
   repoUrl?: string
@@ -342,9 +342,7 @@ export const translations: Record<Lang, Translation> = {
           role: 'Creator & maintainer',
           status: 'Live — the strongest card',
           description:
-        'An interactive Windows XP desktop: draggable windows, taskbar, start menu and applications backed by a real betting backend. The only project a recruiter can touch live in a browser.',
-          highlight:
-            'Moves to xp.mariusivan.ro and links from the CV with a “Live demo” button.',
+        'An interactive Windows XP desktop app.',
           stack: ['React', 'TypeScript', 'Vite', 'Tailwind', 'FastAPI', 'SQLite'],
           liveUrl: 'https://xp.mariusivan.ro',
           repoUrl: 'https://github.com/mivan1990/mariusivan-portfolio',
@@ -661,9 +659,7 @@ export const translations: Record<Lang, Translation> = {
           role: 'Creator & maintainer',
           status: 'Live — cardul cel mai puternic',
           description:
-            'Un desktop Windows XP interactiv: ferestre draggable, taskbar, start menu și aplicații cu un backend real de pariuri. Singurul proiect pe care un recrutor îl poate atinge live în browser.',
-          highlight:
-            'Se mută pe xp.mariusivan.ro și e legat din CV cu un buton „Live demo”.',
+            'O aplicație desktop Windows XP interactivă.',
           stack: ['React', 'TypeScript', 'Vite', 'Tailwind', 'FastAPI', 'SQLite'],
           liveUrl: 'https://xp.mariusivan.ro',
           repoUrl: 'https://github.com/mivan1990/mariusivan-portfolio',
