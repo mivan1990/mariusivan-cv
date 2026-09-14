@@ -784,4 +784,14 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - [x] Cardul FEGBet din CV trimitea spre hostul intern — link mort fix pentru publicul caruia ii e destinat CV-ul. Acum trimite spre demo
 - Commit: `3d6f0f6`
 
+#### 2026-09-14 (2) — Bilete de exemplu, ore esalonate, si doua defecte de cache
+- [x] Biletele vizitatorului erau aleatoare, deci intamplatoare ca exemple: **niciun bilet pierdut integral** din 20, „Marcator" aparea de doua ori, „Calificare" de patru. Acum 8 bilete sunt alese deliberat — unul castigat integral (14p, toate cele patru piete), unul pierdut integral, unul cu o singura selectie, si partiale in proportii diferite. Fiecare dintre cele cinci piete apare si corecta, si gresita
+- [x] Treaba a fost data unui agent pe Sonnet. A livrat, dar stergea biletul aleator al vizitatorului **pe fiecare meci**, nu doar pe cele 8 de vitrina: 8 bilete in loc de 20 si vizitatorul pe **ultimul loc din 14**. Mutata stergerea in functia care chiar construieste biletul → 22 de bilete, locul 3 cu 119p
+- [x] Ce a facut bine agentul si merita pastrat: a lasat vizitatorul in bucla aleatoare in loc sa-l scoata, ca sa nu deplaseze sirul de numere aleatoare si sa schimbe biletele celorlalti 13 utilizatori. Detaliu subtil
+- [x] Orele meciurilor erau identice in cadrul unei etape — sase meciuri afisau „VIN 31 iul · 22:00". Acum grupele se joaca doua pe ora de la 18:00 (doua terenuri), sferturile la 90 de minute, semifinalele la doua ore, finala singura
+- [x] **Defect gasit la verificare, nu la citirea codului: `index.html` nu trimitea niciun `Cache-Control`.** Browserul isi alegea singur cat sa-l tina, pornind de la vechimea fisierului — iar fisierul avea trei zile. Rezultatul: dupa un deploy, vizitatorii ramaneau pe bundle-ul vechi, posibil zile. Am prins-o fiindca pagina incarca `index-Dc4I7hwl.js` cand pe server era `index-CBsvMvqg.js`. Acum `no-cache` pe index.html (revalidare, nu interzicere) si `immutable` pe fisierele din `/assets`, care au hash in nume
+- [x] Al doilea defect, tot de cache: paginile publice cer datele **inainte** ca auto-login-ul sa termine si tin raspunsul anonim in cache. Un vizitator aterizat direct pe `/meciuri` vedea „N-ai pariat pe meciul asta" pe toate meciurile, desi are 22 de bilete. Autentificarea invalideaza acum cache-ul de query-uri, in ambele sensuri
+- [x] Verificat: 403 teste trec, doua rulari consecutive ale seed-ului dau puncte SI ore identice, headerele confirmate pe origine si prin Cloudflare, pagina testata cu sesiunea golita — vizitator nou
+- Commit-uri: `65e336e`, `cbab9e3`, `fc5264f` (in `mivan1990/fegbet-demo`)
+
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]] · [[04-Deploy]]
