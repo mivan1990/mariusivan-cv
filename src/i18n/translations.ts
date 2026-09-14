@@ -188,7 +188,7 @@ export const translations: Record<Lang, Translation> = {
       sub: 'Where I work and what I build.',
       personName: 'Ivan Marius',
       mapItems: [
-        { name: 'Portfolio XP', img: '/projects/portfolio-xp.svg' },
+        { name: 'Portfolio XP', img: '/projects/portfolio-xp.jpg' },
         { name: 'Votează Liga 2', img: '/projects/voteaza-liga2.png', headerImg: '/projects/casa-pariurilor.png', url: 'https://voteazaliga2.casapariurilor.ro' },
         { name: 'FEGBet', img: '/projects/fegbet.svg' },
         { name: 'Intranet', img: '/projects/intranet.svg' },
@@ -509,7 +509,7 @@ export const translations: Record<Lang, Translation> = {
       sub: 'Unde lucrez și ce construiesc.',
       personName: 'Ivan Marius',
       mapItems: [
-        { name: 'Portfolio XP', img: '/projects/portfolio-xp.svg' },
+        { name: 'Portfolio XP', img: '/projects/portfolio-xp.jpg' },
         { name: 'Votează Liga 2', img: '/projects/voteaza-liga2.png', headerImg: '/projects/casa-pariurilor.png', url: 'https://voteazaliga2.casapariurilor.ro' },
         { name: 'FEGBet', img: '/projects/fegbet.svg' },
         { name: 'Intranet', img: '/projects/intranet.svg' },
