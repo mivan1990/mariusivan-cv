@@ -501,7 +501,7 @@ export const translations: Record<Lang, Translation> = {
       ctaSecondary: 'Explorează proiectele',
       ctaTertiary: 'Descarcă CV-ul',
       statTeam: { value: '≤6', label: 'echipă de developeri în care am crescut' },
-      statModules: { value: '82', label: 'module într-un singur monolith Laravel' },
+      statModules: { value: '82', label: 'module într-un singur monolit Laravel' },
       statSince: { value: '2023', label: 'în producție din' },
     },
     experience: {
@@ -525,7 +525,7 @@ export const translations: Record<Lang, Translation> = {
         '— și am crescut într-o echipă de maximum 6 developeri.',
       projectHeading: 'Descriere proiect',
       projectBody:
-        'Intranet intern la scară largă, construit ca monolith modular pe Laravel (82 module), acoperind operațiuni pariuri, HR, finanțe, conformitate și productivitate angajați pentru',
+        'Intranet la scară largă, construit ca monolit modular pe Laravel (82 de module), care acoperă operațiunile din agenții, HR, finanțe, conformitate și productivitatea angajaților pentru',
       projectBodyStrong:
         'ambele branduri și toate locațiile.',
       responsibilitiesHeading: 'Ce am lucrat',
@@ -756,8 +756,8 @@ export const translations: Record<Lang, Translation> = {
           a: 'Am început de la zero cunoștințe de programare și m-am autodidactat. Am intrat la FEG Group ca Junior Developer în ianuarie 2023 și am crescut într-o echipă de maximum 6 developeri.',
         },
         {
-          q: 'Care e monolith-ul Laravel cu 82 de module?',
-          a: 'Un intranet intern la scară largă la FEG Group (Fortuna și Casa Pariurilor), construit ca monolith modular pe Laravel — 82 de module care acoperă operațiuni pariuri, HR, finanțe, conformitate și productivitate angajați, pentru ambele branduri și toate locațiile.',
+          q: 'Ce e monolitul Laravel cu 82 de module?',
+          a: 'Intranetul FEG Group (Fortuna și Casa Pariurilor), construit ca monolit modular pe Laravel — 82 de module care acoperă operațiunile din agenții, HR, finanțe, conformitate și productivitatea angajaților, pentru ambele branduri și toate locațiile.',
         },
         {
           q: 'Care sunt proiectele tale personale?',
