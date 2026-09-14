@@ -190,7 +190,7 @@ export const translations: Record<Lang, Translation> = {
       mapItems: [
         { name: 'Portfolio XP', img: '/projects/portfolio-xp.svg' },
         { name: 'Votează Liga 2', img: '/projects/voteaza-liga2.png', headerImg: '/projects/casa-pariurilor.png', url: 'https://voteazaliga2.casapariurilor.ro' },
-        { name: 'FEGBet', img: '/projects/fegbet.svg', url: 'https://fegbet.fortunagame.ro' },
+        { name: 'FEGBet', img: '/projects/fegbet.svg', url: 'https://fegbet.mariusivan.ro' },
         { name: 'Intranet', img: '/projects/intranet.svg' },
       ],
       company: 'FEG Group — Fortuna Entertainment Group',
@@ -494,7 +494,7 @@ export const translations: Record<Lang, Translation> = {
       mapItems: [
         { name: 'Portfolio XP', img: '/projects/portfolio-xp.svg' },
         { name: 'Votează Liga 2', img: '/projects/voteaza-liga2.png', headerImg: '/projects/casa-pariurilor.png', url: 'https://voteazaliga2.casapariurilor.ro' },
-        { name: 'FEGBet', img: '/projects/fegbet.svg', url: 'https://fegbet.fortunagame.ro' },
+        { name: 'FEGBet', img: '/projects/fegbet.svg', url: 'https://fegbet.mariusivan.ro' },
         { name: 'Intranet', img: '/projects/intranet.svg' },
       ],
       company: 'FEG Group — Fortuna Entertainment Group',
