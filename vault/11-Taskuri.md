@@ -329,16 +329,17 @@ Status: `[ ]` = de făcut, `[x]` = făcut, `[~]` = în curs.
 - Estimare: 10 min
 
 ### I3. Pas 3: Deploy pe VPS
-- [ ] Copiază `dist/` în `/var/www/cv/dist`
-- [ ] Schimbă `root` în vhost-ul `mariusivan.ro`
-- [ ] `nginx -t && systemctl reload nginx`
+- [x] Copiază `dist/` în `/var/www/cv/dist`
+- [x] Schimbă `root` în vhost-ul `mariusivan.ro`
+- [x] `nginx -t && systemctl reload nginx`
 - Dependențe: I2
 - Estimare: 20 min
 
 ### I4. Verificare finală
-- [ ] `https://mariusivan.ro` arată CV-ul nou
-- [ ] `https://xp.mariusivan.ro` arată XP-ul
-- [ ] Butonul „Live demo" din CV → XP funcționează
+- [x] `https://mariusivan.ro` arată CV-ul nou
+- [x] `https://xp.mariusivan.ro` arată XP-ul
+- [x] Butonul „Live demo" din CV → XP funcționează
+- Status: **gata** (2026-09-14). Copie a vhost-ului inainte de schimbare: `/root/mariusivan.ro.inainte-de-cv-20260914-143947`. Rollback = un `root` schimbat inapoi si un reload.
 - Dependențe: I3
 - Estimare: 15 min
 
@@ -441,9 +442,9 @@ Status: `[ ]` = de făcut, `[x]` = făcut, `[~]` = în curs.
 - [x] H1. Build pentru producție
 - [x] H2. Configurație pentru VPS
 - [x] I1. Pas 1: Muta XP-ul pe subdomeniu
-- [ ] I2. Pas 2: Build CV local
-- [ ] I3. Pas 3: Deploy pe VPS
-- [ ] I4. Verificare finală
+- [x] I2. Pas 2: Build CV local
+- [x] I3. Pas 3: Deploy pe VPS
+- [x] I4. Verificare finală
 - [ ] J1. Git
 - [x] J2. README
 - [x] J3. Actualizare Obsidian

@@ -794,4 +794,13 @@ Jurnal de progres pentru proiectul CV. Fiecare intrare: dată, ce s-a făcut, ce
 - [x] Verificat: 403 teste trec, doua rulari consecutive ale seed-ului dau puncte SI ore identice, headerele confirmate pe origine si prin Cloudflare, pagina testata cu sesiunea golita — vizitator nou
 - Commit-uri: `65e336e`, `cbab9e3`, `fc5264f` (in `mivan1990/fegbet-demo`)
 
+#### 2026-09-14 (3) — CV-ul a trecut pe `mariusivan.ro` (pasii I2-I4)
+- [x] Build local, trimis in `/var/www/cv/dist` (676 kB), apoi `root` schimbat in vhost-ul radacinii din `/var/www/portfolio/dist` in `/var/www/cv/dist`. Copia vhost-ului dinainte: `/root/mariusivan.ro.inainte-de-cv-20260914-143947` — rollback = o linie inapoi si un reload
+- [x] Ordinea a contat: fisierele au plecat primele, nginx s-a atins ultimul. Daca se oprea la jumatate, site-ul ramanea neschimbat
+- [x] Verificat din exterior: `mariusivan.ro` si `www` = CV-ul nou, `xp.mariusivan.ro` = XP-ul, `fegbet.mariusivan.ro` = demo-ul. Rutele SPA intorc 200, pozele si placutele se incarca, harta si calatoria merg in productie
+- [x] Blocul `location /api/` a ramas pe vhost-ul radacinii. CV-ul e static, deci nu-l foloseste; planul zice ca poate fi scos, dar am schimbat un singur lucru odata — daca ceva se strica, se stie ce anume
+- [x] Continut intrat odata cu deploy-ul: poza reala in mijlocul hartii, desktopul XP pe placuta, cardul NUMLOCK, „Skills" devenit „Tehnologii" cu grupul AI, FAQ-ul romanesc la persoana intai, FEGBet in lista de proiecte, „Portfolio XP" redenumit „XP app"
+- [x] Doua reparatii de clic pe planete: planeta focalizata nu mai prinde clicuri (acoperea urmatoarea), iar etichetele nu mai fura clicul vecinelor. Verificat pe toate cele cinci opriri: zero coliziuni
+- Commit-uri: `14d3394`, `00c37ae`, `30bf00f`, `0fab996`
+
 [[README]] · [[05-Plan-Execuție]] · [[11-Taskuri]] · [[07-Handover]] · [[04-Deploy]]
