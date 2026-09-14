@@ -17,7 +17,7 @@ export function Intro({ onStart, onSkip }: IntroProps) {
       <Starfield />
 
       <div className='relative z-10 max-w-xl animate-journey-in'>
-        <h1 className='text-3xl font-bold tracking-tight sm:text-5xl'>{t.journey.introTitle}</h1>
+        <h1 className='text-3xl font-bold tracking-tight sm:text-[2.9rem] sm:leading-none'>{t.journey.introTitle}</h1>
         <p className='mt-4 text-base leading-relaxed text-white/70'>{t.journey.introText}</p>
 
         <div className='mt-9 flex flex-wrap items-center justify-center gap-3'>
