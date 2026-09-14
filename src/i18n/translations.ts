@@ -272,9 +272,9 @@ export const translations: Record<Lang, Translation> = {
     },
     journey: {
       introTitle: 'Thirteen years, five stops.',
-      introText: 'Travel through the places I worked, one planet at a time — or go straight to the CV.',
+      introText: 'Travel through the places I worked, one planet at a time — or go straight to the portfolio.',
       start: 'Start the journey',
-      skip: 'Skip to the CV',
+      skip: 'Portfolio',
       next: 'Next stop',
       prev: 'Previous',
       land: 'Land on the CV',
@@ -288,7 +288,7 @@ export const translations: Record<Lang, Translation> = {
           span: '2012 — 2013',
           roles: [{ title: 'IT Technician', period: 'March 2012 - March 2013' }],
           blurb:
-            'Installed and configured internet, television and landline services in customers homes: cabling, routers and receivers, and on-site support until every connection ran clean.',
+            'Installed and configured internet, television and landline services in customers’ homes: cabling, routers and receivers, and on-site support until everything was working.',
         },
         {
           id: 'ea',
@@ -331,7 +331,7 @@ export const translations: Record<Lang, Translation> = {
             { title: 'Junior Software Developer', period: 'January 2023 - Present' },
           ],
           blurb:
-            'Eight years in one company, across three roles: hardware and network support in the betting shops, then QA on web and mobile, then writing the code — Laravel and PHP on the internal Intranet and on voteazaliga2.casapariurilor.ro.',
+            'Eight years in one company, across three roles: hardware and network support in the betting shops, QA on web and mobile, and web development — Laravel and PHP on the Intranet and on voteazaliga2.casapariurilor.ro, plus assorted internal apps and landing pages.',
         },
       ],
     },
