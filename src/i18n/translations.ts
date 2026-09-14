@@ -190,7 +190,7 @@ export const translations: Record<Lang, Translation> = {
       sub: 'Where I work and what I build.',
       personName: 'Ivan Marius',
       mapItems: [
-        { name: 'Portfolio XP', img: '/projects/portfolio-xp.jpg' },
+        { name: 'XP app', img: '/projects/portfolio-xp.jpg' },
         { name: 'Votează Liga 2', img: '/projects/voteaza-liga2.png', headerImg: '/projects/casa-pariurilor.png', url: 'https://voteazaliga2.casapariurilor.ro' },
         { name: 'FEGBet', img: '/projects/fegbet.svg' },
         { name: 'Intranet', img: '/projects/intranet.svg' },
@@ -341,7 +341,7 @@ export const translations: Record<Lang, Translation> = {
       items: [
         {
           id: 'portfolio-xp',
-          name: 'Portfolio XP',
+          name: 'XP app',
           role: 'Creator & maintainer',
           status: 'Live — the strongest card',
           description:
@@ -456,7 +456,7 @@ export const translations: Record<Lang, Translation> = {
         },
         {
           q: 'What are your personal projects?',
-          a: 'Four, all real. Portfolio XP — an interactive Windows XP desktop, live at xp.mariusivan.ro. FEGBet — a betting-for-points app built for colleagues at work, with a public demo on invented data at fegbet.mariusivan.ro: you land already signed in, and one click puts you on the admin side. CS2 Leaderboard — a production app on a local Windows machine, actively used by a group of friends for 2v2 competitions. Fortuna WC2026 — FIFA World Cup 2026 betting with real live match data from football-data.org.',
+          a: 'Four, all real. XP app — an interactive Windows XP desktop, live at xp.mariusivan.ro. FEGBet — a betting-for-points app built for colleagues at work, with a public demo on invented data at fegbet.mariusivan.ro: you land already signed in, and one click puts you on the admin side. CS2 Leaderboard — a production app on a local Windows machine, actively used by a group of friends for 2v2 competitions. Fortuna WC2026 — FIFA World Cup 2026 betting with real live match data from football-data.org.',
         },
         {
           q: 'What technologies do you work with?',
@@ -525,7 +525,7 @@ export const translations: Record<Lang, Translation> = {
       sub: 'Unde lucrez și ce construiesc.',
       personName: 'Ivan Marius',
       mapItems: [
-        { name: 'Portfolio XP', img: '/projects/portfolio-xp.jpg' },
+        { name: 'XP app', img: '/projects/portfolio-xp.jpg' },
         { name: 'Votează Liga 2', img: '/projects/voteaza-liga2.png', headerImg: '/projects/casa-pariurilor.png', url: 'https://voteazaliga2.casapariurilor.ro' },
         { name: 'FEGBet', img: '/projects/fegbet.svg' },
         { name: 'Intranet', img: '/projects/intranet.svg' },
@@ -676,7 +676,7 @@ export const translations: Record<Lang, Translation> = {
       items: [
         {
           id: 'portfolio-xp',
-          name: 'Portfolio XP',
+          name: 'XP app',
           role: 'Creator & maintainer',
           status: 'Live — cardul cel mai puternic',
           description:
@@ -791,7 +791,7 @@ export const translations: Record<Lang, Translation> = {
         },
         {
           q: 'Care sunt proiectele personale?',
-          a: 'Patru, toate reale. Portfolio XP — un desktop Windows XP interactiv, live pe xp.mariusivan.ro. FEGBet — o aplicație de pariuri pe puncte, făcută pentru colegii de la muncă, cu demo public pe date inventate la fegbet.mariusivan.ro: intri direct logat, iar un click te trece pe partea de admin. CS2 Leaderboard — o aplicație în producție pe o mașină Windows locală, folosită activ de un grup de prieteni pentru competiții 2v2. Fortuna WC2026 — pariuri pe FIFA World Cup 2026 cu date live reale de la football-data.org.',
+          a: 'Patru, toate reale. XP app — un desktop Windows XP interactiv, live pe xp.mariusivan.ro. FEGBet — o aplicație de pariuri pe puncte, făcută pentru colegii de la muncă, cu demo public pe date inventate la fegbet.mariusivan.ro: intri direct logat, iar un click te trece pe partea de admin. CS2 Leaderboard — o aplicație în producție pe o mașină Windows locală, folosită activ de un grup de prieteni pentru competiții 2v2. Fortuna WC2026 — pariuri pe FIFA World Cup 2026 cu date live reale de la football-data.org.',
         },
         {
           q: 'Cu ce tehnologii lucrez?',
