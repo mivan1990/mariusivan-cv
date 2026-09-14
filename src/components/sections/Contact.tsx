@@ -35,12 +35,12 @@ function ContactRow({
             target={href.startsWith('http') ? '_blank' : undefined}
             rel="noreferrer"
             aria-label={a11y ? `${a11y} (${value})` : undefined}
-            className="text-sm font-medium text-foreground underline decoration-primary/40 underline-offset-4 hover:decoration-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm"
+            className="block break-words text-sm font-medium text-foreground underline decoration-primary/40 underline-offset-4 hover:decoration-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm"
           >
             {value}
           </a>
         ) : (
-          <div className="text-sm font-medium">{value}</div>
+          <div className="break-words text-sm font-medium">{value}</div>
         )}
       </div>
     </div>
@@ -64,7 +64,7 @@ export function Contact() {
             <Badge variant="outline" className="font-mono-code">{c.live}</Badge>
           </CardHeader>
           <CardContent className="space-y-5">
-            <div className="grid gap-5 sm:grid-cols-3">
+            <div className="grid gap-x-6 gap-y-5 sm:grid-cols-2">
               <ContactRow
                 icon={<Mail className="h-4.5 w-4.5 text-primary" />}
                 label="Email"

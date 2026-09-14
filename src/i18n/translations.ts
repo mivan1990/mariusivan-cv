@@ -190,7 +190,7 @@ export const translations: Record<Lang, Translation> = {
       mapItems: [
         { name: 'Portfolio XP', img: '/projects/portfolio-xp.svg' },
         { name: 'Votează Liga 2', img: '/projects/voteaza-liga2.png', headerImg: '/projects/casa-pariurilor.png', url: 'https://voteazaliga2.casapariurilor.ro' },
-        { name: 'FEGBet', img: '/projects/fegbet.svg', url: 'https://fegbet.mariusivan.ro' },
+        { name: 'FEGBet', img: '/projects/fegbet.svg' },
         { name: 'Intranet', img: '/projects/intranet.svg' },
       ],
       company: 'FEG Group — Fortuna Entertainment Group',
@@ -352,6 +352,21 @@ export const translations: Record<Lang, Translation> = {
           badgeTone: 'success',
         },
         {
+          id: 'fegbet',
+          name: 'FEGBet',
+          role: 'Creator & maintainer',
+          status: 'In use internally — public demo',
+          description:
+            'An internal web app for colleagues at FEG: betting on an office football tournament with no money involved, only points and pride. Four groups, a knockout bracket, five markets, and a scoring engine that recalculates everyone’s standing the moment an admin validates a score.',
+          highlight:
+            'The public demo runs the same code on invented data: you land already signed in, and one click puts you in the admin panel.',
+          stack: ['FastAPI', 'SQLAlchemy', 'SQLite', 'React', 'TypeScript', 'Vite', 'Tailwind', 'JWT'],
+          liveUrl: 'https://fegbet.mariusivan.ro',
+          repoUrl: 'https://github.com/mivan1990/fegbet-demo',
+          badge: 'Live demo',
+          badgeTone: 'success',
+        },
+        {
           id: 'cs2-leaderboard',
           name: 'CS2 Leaderboard',
           role: 'Creator & maintainer',
@@ -494,7 +509,7 @@ export const translations: Record<Lang, Translation> = {
       mapItems: [
         { name: 'Portfolio XP', img: '/projects/portfolio-xp.svg' },
         { name: 'Votează Liga 2', img: '/projects/voteaza-liga2.png', headerImg: '/projects/casa-pariurilor.png', url: 'https://voteazaliga2.casapariurilor.ro' },
-        { name: 'FEGBet', img: '/projects/fegbet.svg', url: 'https://fegbet.mariusivan.ro' },
+        { name: 'FEGBet', img: '/projects/fegbet.svg' },
         { name: 'Intranet', img: '/projects/intranet.svg' },
       ],
       company: 'FEG Group — Fortuna Entertainment Group',
@@ -652,6 +667,21 @@ export const translations: Record<Lang, Translation> = {
           stack: ['React', 'TypeScript', 'Vite', 'Tailwind', 'FastAPI', 'SQLite'],
           liveUrl: 'https://xp.mariusivan.ro',
           repoUrl: 'https://github.com/mivan1990/mariusivan-portfolio',
+          badge: 'Demo live',
+          badgeTone: 'success',
+        },
+        {
+          id: 'fegbet',
+          name: 'FEGBet',
+          role: 'Creator & maintainer',
+          status: 'Folosit intern — cu demo public',
+          description:
+            'Aplicație web internă pentru colegii de la FEG: se pariază pe meciurile unui turneu de fotbal de birou, fără bani, doar pe puncte și orgoliu. Patru grupe, fază eliminatorie, cinci piețe și un motor de punctaj care recalculează clasamentul tuturor în clipa în care un admin validează un scor.',
+          highlight:
+            'Demo-ul public rulează același cod pe date inventate: intri direct logat, iar un click te duce în panoul de admin.',
+          stack: ['FastAPI', 'SQLAlchemy', 'SQLite', 'React', 'TypeScript', 'Vite', 'Tailwind', 'JWT'],
+          liveUrl: 'https://fegbet.mariusivan.ro',
+          repoUrl: 'https://github.com/mivan1990/fegbet-demo',
           badge: 'Demo live',
           badgeTone: 'success',
         },
