@@ -33,6 +33,8 @@ export interface Project {
   highlight?: string
   stack: string[]
   liveUrl?: string
+  /** Ce scrie pe buton: „demo" pentru ceva de incercat, „site" pentru un site real. */
+  liveKind?: 'demo' | 'site'
   repoUrl?: string
   badge: string
   badgeTone: 'primary' | 'success' | 'info'
@@ -192,6 +194,7 @@ export const translations: Record<Lang, Translation> = {
         { name: 'Votează Liga 2', img: '/projects/voteaza-liga2.png', headerImg: '/projects/casa-pariurilor.png', url: 'https://voteazaliga2.casapariurilor.ro' },
         { name: 'FEGBet', img: '/projects/fegbet.svg' },
         { name: 'Intranet', img: '/projects/intranet.svg' },
+        { name: 'numlock.ro', img: '/projects/numlock.png' },
       ],
       company: 'FEG Group — Fortuna Entertainment Group',
       role: 'Junior Developer',
@@ -365,6 +368,19 @@ export const translations: Record<Lang, Translation> = {
           badgeTone: 'success',
         },
         {
+          id: 'numlock',
+          name: 'numlock.ro',
+          role: 'Co-owner & administrator',
+          status: 'Live — online store',
+          description:
+            'An online shop for desk gear: stitched-edge deskmats and mousepads for office and gaming setups. Built on Shopify — I co-own it and run the store, the catalogue and the day-to-day of it.',
+          stack: ['Shopify'],
+          liveUrl: 'https://numlock.ro',
+          liveKind: 'site',
+          badge: 'Live',
+          badgeTone: 'info',
+        },
+        {
           id: 'cs2-leaderboard',
           name: 'CS2 Leaderboard',
           role: 'Creator & maintainer',
@@ -513,6 +529,7 @@ export const translations: Record<Lang, Translation> = {
         { name: 'Votează Liga 2', img: '/projects/voteaza-liga2.png', headerImg: '/projects/casa-pariurilor.png', url: 'https://voteazaliga2.casapariurilor.ro' },
         { name: 'FEGBet', img: '/projects/fegbet.svg' },
         { name: 'Intranet', img: '/projects/intranet.svg' },
+        { name: 'numlock.ro', img: '/projects/numlock.png' },
       ],
       company: 'FEG Group — Fortuna Entertainment Group',
       role: 'Junior Developer',
@@ -684,6 +701,19 @@ export const translations: Record<Lang, Translation> = {
           repoUrl: 'https://github.com/mivan1990/fegbet-demo',
           badge: 'Demo live',
           badgeTone: 'success',
+        },
+        {
+          id: 'numlock',
+          name: 'numlock.ro',
+          role: 'Coproprietar & administrare',
+          status: 'Live — magazin online',
+          description:
+            'Magazin online de accesorii de birou: deskmat-uri și mousepad-uri cu margini cusute, pentru setup-uri de birou și gaming. Construit pe Shopify — sunt coproprietar și mă ocup de magazin, de catalog și de partea de zi cu zi.',
+          stack: ['Shopify'],
+          liveUrl: 'https://numlock.ro',
+          liveKind: 'site',
+          badge: 'Live',
+          badgeTone: 'info',
         },
         {
           id: 'cs2-leaderboard',

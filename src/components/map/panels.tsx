@@ -234,7 +234,7 @@ export function ProjectPanel({ id }: { id: string }) {
             className="inline-flex items-center gap-1.5 rounded-lg border border-border px-3 py-2 text-sm font-medium transition hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           >
             <ExternalLink className="h-4 w-4" />
-            {t.projects.liveDemo}
+            {p.liveKind === 'site' ? t.projects.visitSite : t.projects.liveDemo}
           </a>
         )}
         {p.repoUrl && (

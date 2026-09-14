@@ -20,7 +20,7 @@ import { FloatingPaths } from '@/components/ui/floating-paths'
 import { ExternalLink, HelpCircle, Layers, Mail } from 'lucide-react'
 import type { ReactNode } from 'react'
 
-// 7 elemente pe harta (pozitiile top/left sunt procentuale).
+// 8 elemente pe harta (pozitiile top/left sunt procentuale).
 // Pozitiile sunt imprastiate intentionat, la inaltimi diferite, ca harta sa nu
 // se citeasca a grila; banda centrala ramane libera pentru blocul cu poza.
 const MAP_ITEMS = [
@@ -31,6 +31,7 @@ const MAP_ITEMS = [
   { key: 'voteaza-liga2', kind: 'photo', pos: 'top-[70%] left-[4%] md:top-[72%] md:left-[18%]', box: 'w-16 aspect-[31/35] md:w-24 lg:w-32',    depth: 1.1 },
   { key: 'intranet',      kind: 'photo', pos: 'top-[74%] left-[42%] md:top-[73%] md:left-[50%]',box: 'w-20 aspect-[4/3] md:w-32 lg:w-48',      depth: 0.7 },
   { key: 'faq',           kind: 'tile',  pos: 'top-[52%] left-[80%] md:top-[46%] md:left-[84%]',box: 'w-14 aspect-square md:w-24 lg:w-28',     depth: 1.5 },
+  { key: 'numlock',       kind: 'photo', pos: 'top-[86%] left-[68%] md:top-[70%] md:left-[76%]',box: 'w-16 aspect-square md:w-24 lg:w-32',     depth: 1.3 },
 ]
 
 type MapItem = (typeof MAP_ITEMS)[number]
