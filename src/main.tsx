@@ -4,6 +4,7 @@ import { TooltipProvider } from '@/components/ui/tooltip'
 import { Experience } from '@/components/sections/Experience'
 import { CursorTrail } from '@/components/CursorTrail'
 import { LanguageToggle } from '@/components/LanguageToggle'
+import { HomeButton } from '@/components/HomeButton'
 import { Intro } from '@/components/journey/intro'
 import { Journey } from '@/components/journey/journey'
 import { cn } from '@/lib/utils'
@@ -36,7 +37,12 @@ function App() {
         {screen === 'journey' && <Journey onFinish={() => go('cv')} />}
         {screen === 'cv' && (
           <div className='relative min-h-screen bg-background text-foreground'>
-            {/* comutatorul de limba — singurul control ramas pe ecran */}
+            {/* Cele doua controale ale paginii, in oglinda: intoarcerea la
+                ecranul de start in stanga, limba in dreapta. Fara primul,
+                portofoliul era o fundatura — se iesea din el doar reincarcand. */}
+            <div className='absolute left-5 top-5 z-50'>
+              <HomeButton onClick={() => go('intro')} />
+            </div>
             <div className='absolute right-5 top-5 z-50'>
               <LanguageToggle />
             </div>
