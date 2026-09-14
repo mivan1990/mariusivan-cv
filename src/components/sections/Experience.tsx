@@ -26,12 +26,12 @@ import type { ReactNode } from 'react'
 const MAP_ITEMS = [
   { key: 'portfolio-xp',  kind: 'photo', pos: 'top-[1%] left-[2%] md:top-[2%] md:left-[4%]',    box: 'w-20 aspect-[4/3] md:w-32 lg:w-44',      depth: 1.4 },
   { key: 'skills',        kind: 'tile',  pos: 'top-[4%] left-[44%] md:top-[8%] md:left-[28%]',  box: 'w-14 aspect-square md:w-24 lg:w-32',     depth: 0.9 },
+  { key: 'numlock',       kind: 'photo', pos: 'top-[86%] left-[68%] md:top-[3%] md:left-[50%]', box: 'w-16 aspect-square md:w-24 lg:w-32',     depth: 1.3 },
   { key: 'fegbet',        kind: 'photo', pos: 'top-[12%] left-[72%] md:top-[6%] md:left-[72%]', box: 'w-20 aspect-square md:w-32 lg:w-44',     depth: 2 },
   { key: 'contact',       kind: 'tile',  pos: 'top-[36%] left-[0%] md:top-[38%] md:left-[3%]',  box: 'w-14 aspect-square md:w-24 lg:w-32',     depth: 1.2 },
   { key: 'voteaza-liga2', kind: 'photo', pos: 'top-[70%] left-[4%] md:top-[72%] md:left-[18%]', box: 'w-16 aspect-[31/35] md:w-24 lg:w-32',    depth: 1.1 },
   { key: 'intranet',      kind: 'photo', pos: 'top-[74%] left-[42%] md:top-[73%] md:left-[50%]',box: 'w-20 aspect-[4/3] md:w-32 lg:w-48',      depth: 0.7 },
   { key: 'faq',           kind: 'tile',  pos: 'top-[52%] left-[80%] md:top-[46%] md:left-[84%]',box: 'w-14 aspect-square md:w-24 lg:w-28',     depth: 1.5 },
-  { key: 'numlock',       kind: 'photo', pos: 'top-[86%] left-[68%] md:top-[70%] md:left-[76%]',box: 'w-16 aspect-square md:w-24 lg:w-32',     depth: 1.3 },
 ]
 
 type MapItem = (typeof MAP_ITEMS)[number]
