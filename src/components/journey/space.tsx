@@ -305,7 +305,12 @@ export function Space({ index, bank, yaw, onSelect }: SpaceProps) {
                 // e deja bloc de referinta pentru copiii lui absoluti.
                 className={cn(
                   'planet pointer-events-auto absolute [transform-style:preserve-3d] focus-visible:outline-none',
-                  behind && 'pointer-events-none',
+                  // Planeta pe care stai nu prinde clicuri. Apasata, `go()` iese
+                  // imediat (destinatia = oprirea curenta), deci butonul ei nu face
+                  // nimic — dar fiind cea mai mare si cea mai aproape de camera,
+                  // acoperea vecinele: de pe RDS, trei sferturi din sfera EA cadeau
+                  // sub zona ei de apasare, iar clicul pe EA ajungea la RDS.
+                  (behind || i === index) && 'pointer-events-none',
                 )}
                 style={{
                   // translate(-50%, -50%) la mijloc: procente relative la propria
@@ -331,8 +336,11 @@ export function Space({ index, bank, yaw, onSelect }: SpaceProps) {
                 {/* Zona de apasare, mai mare decat sfera: pe telefon planeta
                     urmatoare are vreo 40px, sub pragul de 44px pentru degete.
                     E copil al butonului, deci extinde tinta lui fara sa-i schimbe
-                    cutia — cutia da centrarea prin translate(-50%, -50%). */}
-                <span aria-hidden='true' className='absolute -inset-[35%]' />
+                    cutia — cutia da centrarea prin translate(-50%, -50%).
+                    Nu si pe planeta focalizata: marginea fiind procentuala, acolo
+                    unde sfera e mare da cei mai multi pixeli — exact unde nu e
+                    nevoie, si fix peste vecine. */}
+                {i !== index && <span aria-hidden='true' className='absolute -inset-[35%]' />}
                 {/* Inelul de vechime: cu cat mai multi ani, cu atat mai gros —
                     opt ani la FEG au alta greutate decat sase luni la Amber.
                     Grosimea e in px pe sfera de baza, deci se micsoreaza odata cu
