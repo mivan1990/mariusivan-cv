@@ -444,7 +444,7 @@ export const translations: Record<Lang, Translation> = {
         },
         {
           q: 'What technologies do you work with?',
-          a: 'Backend: PHP 8.2, Laravel 10, MySQL, Redis. Frontend: React, TypeScript, Vite, Tailwind, shadcn/ui, plus Blade, Bootstrap and jQuery in the production project. Data and infra: SQLite, Redis, AWS S3, nginx, Let’s Encrypt.',
+          a: 'Backend: PHP 8.2, Laravel 10, MySQL, Redis at work, plus Python and FastAPI in the personal projects. Frontend: React, TypeScript, Vite, Tailwind, shadcn/ui, plus Blade, Bootstrap and jQuery in the production project. Data and infra: SQLite, Redis, AWS S3, nginx, Let’s Encrypt. AI: Claude Code and a self-hosted Qwen.',
         },
         {
           q: 'What kind of roles are you open to?',
@@ -764,8 +764,8 @@ export const translations: Record<Lang, Translation> = {
           a: 'Patru, toate reale. Portfolio XP — un desktop Windows XP interactiv, live pe xp.mariusivan.ro. FEGBet — o aplicație de pariuri pe puncte, făcută pentru colegii de la muncă, cu demo public pe date inventate la fegbet.mariusivan.ro: intri direct logat, iar un click te trece pe partea de admin. CS2 Leaderboard — o aplicație în producție pe o mașină Windows locală, folosită activ de un grup de prieteni pentru competiții 2v2. Fortuna WC2026 — pariuri pe FIFA World Cup 2026 cu date live reale de la football-data.org.',
         },
         {
-          q: 'Cu ce tehnologii lucrezi?',
-          a: 'Backend: PHP 8.2, Laravel 10, MySQL, Redis. Frontend: React, TypeScript, Vite, Tailwind, shadcn/ui, plus Blade, Bootstrap și jQuery în proiectul din producție. Date și infrastructură: SQLite, Redis, AWS S3, nginx, Let’s Encrypt.',
+          q: 'Cu ce tehnologii lucrez?',
+          a: 'Backend: PHP 8.2, Laravel 10, MySQL, Redis la muncă, plus Python și FastAPI în proiectele personale. Frontend: React, TypeScript, Vite, Tailwind, shadcn/ui, plus Blade, Bootstrap și jQuery în proiectul din producție. Date și infrastructură: SQLite, Redis, AWS S3, nginx, Let’s Encrypt. AI: Claude Code și un Qwen rulat local.',
         },
         {
           q: 'La ce fel de roluri ești deschis?',
