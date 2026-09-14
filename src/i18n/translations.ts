@@ -752,7 +752,7 @@ export const translations: Record<Lang, Translation> = {
       sub: 'Întrebări pe care un recrutor le-ar pune înainte de primul call.',
       items: [
         {
-          q: 'Cum ai ajuns la programare?',
+          q: 'Cum am ajuns la programare?',
           a: 'Am început de la zero cunoștințe de programare și m-am autodidactat. Am intrat la FEG Group ca Junior Developer în ianuarie 2023 și am crescut într-o echipă de maximum 6 developeri.',
         },
         {
