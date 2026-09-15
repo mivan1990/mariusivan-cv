@@ -128,3 +128,29 @@ manual în el.
   ocupă 5 kB pe disc, zero impact la runtime. Nu e șters (vezi `11-Taskuri.md`, F1).
 
 [[README]] · [[04-Deploy]] · [[11-Taskuri]]
+
+## Cache — adaugat pe 2026-09-15, pe vhost-ul `mariusivan.ro`
+
+`index.html` nu trimitea niciun `Cache-Control`. Fara el, browserul isi alege
+singur cat sa-l tina, pornind de la vechimea fisierului — deci dupa un deploy,
+vizitatorii care se intorc raman pe bundle-ul vechi, uneori zile. S-a vazut
+direct: pagina incarca `index-DHTs-Ukc.js` cand pe server era deja `index-pzCbjGjP.js`.
+
+```nginx
+location /assets/ {
+    add_header Cache-Control "public, max-age=31536000, immutable";
+}
+location / {
+    add_header Cache-Control "no-cache";
+    try_files $uri $uri/ /index.html;
+}
+```
+
+`no-cache` nu interzice cache-ul, cere doar revalidare la fiecare cerere.
+Fisierele din `/assets` au hash-ul continutului in nume, deci o versiune noua
+vine mereu cu alt nume si pot sta oricat.
+
+Acelasi defect exista si in demo-ul FEGBet, unde fisierele le serveste FastAPI,
+nu nginx — reparat acolo in `backend/main.py` (commit `fc5264f` din `fegbet-demo`).
+
+Copie a vhost-ului dinainte: `/root/mariusivan.ro.inainte-de-cache-*`.
