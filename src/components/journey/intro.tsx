@@ -16,9 +16,14 @@ export function Intro({ onStart, onSkip }: IntroProps) {
     <div className='relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-black px-5 text-center text-white'>
       <Starfield />
 
-      <div className='relative z-10 max-w-xl animate-journey-in'>
-        <h1 className='text-3xl font-bold tracking-tight sm:text-[2.9rem] sm:leading-none'>{t.journey.introTitle}</h1>
-        <p className='mt-4 text-base leading-relaxed text-white/70'>{t.journey.introText}</p>
+      {/* Latimea e data de titlu, nu de paragraf: la 2.9rem, „Treisprezece ani,
+          cinci opriri.” cere 620px, iar `max-w-xl` (576) il rupea pe doua randuri.
+          In engleza incapea la limita, cu 12px de rezerva — de aceea se vedea
+          doar pe romana. Paragraful ramane ingust, ca randul lui sa nu se
+          lungeasca odata cu containerul. */}
+      <div className='relative z-10 max-w-2xl animate-journey-in'>
+        <h1 className='text-balance text-3xl font-bold tracking-tight sm:text-[2.9rem] sm:leading-none'>{t.journey.introTitle}</h1>
+        <p className='mx-auto mt-4 max-w-xl text-base leading-relaxed text-white/70'>{t.journey.introText}</p>
 
         <div className='mt-9 flex flex-wrap items-center justify-center gap-3'>
           <button
