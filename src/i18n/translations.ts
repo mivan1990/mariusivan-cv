@@ -55,44 +55,15 @@ export interface JourneyStop {
 }
 
 export interface Translation {
-  meta: {
-    title: string
-    description: string
-  }
-  nav: {
-    hero: string
-    experience: string
-    projects: string
-    skills: string
-    faq: string
-    contact: string
-  }
-  hero: {
-    eyebrow: string
-    name: string
-    role: string
-    tagline: string
-    taglineStrong: string
-    location: string
-    ctaPrimary: string
-    ctaSecondary: string
-    ctaTertiary: string
-    statTeam: { value: string; label: string }
-    statModules: { value: string; label: string }
-    statSince: { value: string; label: string }
-  }
+  /** Eticheta butonului de intoarcere la ecranul de start. */
+  home: string
   experience: {
     heading: string
-    sub: string
     personName: string
     mapItems: MapItem[]
     company: string
     role: string
     period: string
-    intro: string
-    introStrong: string
-    introTail: string
-    projectHeading: string
     projectBody: string
     projectBodyStrong: string
     responsibilitiesHeading: string
@@ -114,7 +85,6 @@ export interface Translation {
   }
   projects: {
     heading: string
-    sub: string
     items: Project[]
     liveDemo: string
     visitSite: string
@@ -123,30 +93,21 @@ export interface Translation {
   }
   skills: {
     heading: string
-    sub: string
     groups: { title: string; items: string[] }[]
   }
   faq: {
     heading: string
-    sub: string
     items: { q: string; a: string }[]
   }
   contact: {
     heading: string
-    sub: string
     email: string
     github: string
     live: string
     note: string
   }
-  footer: {
-    line: string
-    github: string
-  }
   a11y: {
     toggleLanguage: string
-    openMenu: string
-    closeMenu: string
     home: string
     liveDemo: string
     viewRepo: string
@@ -158,36 +119,9 @@ export interface Translation {
 
 export const translations: Record<Lang, Translation> = {
   en: {
-    meta: {
-      title: 'Marius Ivan — Software Developer',
-      description:
-        'Marius Ivan — Software Developer. From zero programming knowledge to building production systems for a two-brand betting group.',
-    },
-    nav: {
-      hero: 'Home',
-      experience: 'Experience',
-      projects: 'Projects',
-      skills: 'Technologies',
-      faq: 'FAQ',
-      contact: 'Contact',
-    },
-    hero: {
-      eyebrow: 'Software Developer',
-      name: 'Marius Ivan',
-      role: 'Backend & Full-Stack Developer',
-      tagline: 'Started with',
-      taglineStrong: 'zero programming knowledge',
-      location: 'Bucharest, Romania',
-      ctaPrimary: 'View live portfolio',
-      ctaSecondary: 'Browse projects',
-      ctaTertiary: 'Download CV',
-      statTeam: { value: '≤6', label: 'developer team I grew in' },
-      statModules: { value: '82', label: 'modules in one Laravel monolith' },
-      statSince: { value: '2023', label: 'shipped in production since' },
-    },
+    home: 'Home',
     experience: {
       heading: 'Experience',
-      sub: 'Where I work and what I build.',
       personName: 'Ivan Marius',
       mapItems: [
         { name: 'XP app', img: '/projects/portfolio-xp.jpg' },
@@ -199,13 +133,6 @@ export const translations: Record<Lang, Translation> = {
       company: 'FEG Group — Fortuna Entertainment Group',
       role: 'Junior Developer',
       period: 'January 2023 — Present',
-      intro:
-        'Fortuna Entertainment Group operates two betting brands: Fortuna and Casa Pariurilor. I joined as a Junior Developer in January 2023 —',
-      introStrong:
-        'starting from zero programming knowledge, self-taught',
-      introTail:
-        '— and grew within a team of up to 6 developers.',
-      projectHeading: 'Project overview',
       projectBody:
         'Large-scale internal business intranet built as a modular monolith on Laravel (82 modules), covering betting operations, HR, finance, compliance and employee productivity across',
       projectBodyStrong:
@@ -337,7 +264,6 @@ export const translations: Record<Lang, Translation> = {
     },
     projects: {
       heading: 'Projects',
-      sub: 'Real projects — from production to the live demo.',
       items: [
         {
           id: 'portfolio-xp',
@@ -414,7 +340,6 @@ export const translations: Record<Lang, Translation> = {
     },
     skills: {
       heading: 'Technologies',
-      sub: 'What I have actually worked with.',
       groups: [
         {
           title: 'Languages',
@@ -444,7 +369,6 @@ export const translations: Record<Lang, Translation> = {
     },
     faq: {
       heading: 'FAQ',
-      sub: 'Questions recruiters might ask before the first call.',
       items: [
         {
           q: 'How did you get into programming?',
@@ -470,20 +394,13 @@ export const translations: Record<Lang, Translation> = {
     },
     contact: {
       heading: 'Contact',
-      sub: 'Let’s build something.',
       email: 'mariusivan.dev@gmail.com',
       github: 'github.com/mivan1990',
       live: 'mariusivan.ro',
       note: 'Open to backend, full-stack and product-engineering roles.',
     },
-    footer: {
-      line: 'Built with React, TypeScript, Vite, Tailwind and shadcn/ui.',
-      github: 'github.com/mivan1990',
-    },
     a11y: {
       toggleLanguage: 'Switch to Romanian',
-      openMenu: 'Open menu',
-      closeMenu: 'Close menu',
       home: 'Go to top of page',
       liveDemo: 'Open live demo in a new tab',
       viewRepo: 'Open repository in a new tab',
@@ -493,36 +410,9 @@ export const translations: Record<Lang, Translation> = {
     },
   },
   ro: {
-    meta: {
-      title: 'Marius Ivan — Software Developer',
-      description:
-        'Marius Ivan — Software Developer. De la zero cunoștințe de programare la sisteme în producție pentru un grup de pariuri cu două branduri.',
-    },
-    nav: {
-      hero: 'Acasă',
-      experience: 'Experiență',
-      projects: 'Proiecte',
-      skills: 'Tehnologii',
-      faq: 'FAQ',
-      contact: 'Contact',
-    },
-    hero: {
-      eyebrow: 'Software Developer',
-      name: 'Marius Ivan',
-      role: 'Backend & Full-Stack Developer',
-      tagline: 'Am început cu',
-      taglineStrong: 'zero cunoștințe de programare',
-      location: 'București, România',
-      ctaPrimary: 'Vezi portofoliul live',
-      ctaSecondary: 'Explorează proiectele',
-      ctaTertiary: 'Descarcă CV-ul',
-      statTeam: { value: '≤6', label: 'echipă de developeri în care am crescut' },
-      statModules: { value: '82', label: 'module într-un singur monolit Laravel' },
-      statSince: { value: '2023', label: 'în producție din' },
-    },
+    home: 'Acasă',
     experience: {
       heading: 'Experiență',
-      sub: 'Unde lucrez și ce construiesc.',
       personName: 'Ivan Marius',
       mapItems: [
         { name: 'XP app', img: '/projects/portfolio-xp.jpg' },
@@ -534,13 +424,6 @@ export const translations: Record<Lang, Translation> = {
       company: 'FEG Group — Fortuna Entertainment Group',
       role: 'Junior Developer',
       period: 'Ianuarie 2023 — Prezent',
-      intro:
-        'Fortuna Entertainment Group operează două branduri de pariuri: Fortuna și Casa Pariurilor. Am intrat ca Junior Developer în ianuarie 2023 —',
-      introStrong:
-        'începând de la zero cunoștințe de programare, autodidact',
-      introTail:
-        '— și am crescut într-o echipă de maximum 6 developeri.',
-      projectHeading: 'Descriere proiect',
       projectBody:
         'Intranet la scară largă, construit ca monolit modular pe Laravel (82 de module), care acoperă operațiunile din agenții, HR, finanțe, conformitate și productivitatea angajaților pentru',
       projectBodyStrong:
@@ -672,7 +555,6 @@ export const translations: Record<Lang, Translation> = {
     },
     projects: {
       heading: 'Proiecte',
-      sub: 'Proiecte reale — de la producție la demo-ul live.',
       items: [
         {
           id: 'portfolio-xp',
@@ -749,7 +631,6 @@ export const translations: Record<Lang, Translation> = {
     },
     skills: {
       heading: 'Tehnologii',
-      sub: 'Cu ce am lucrat efectiv.',
       groups: [
         {
           title: 'Limbi',
@@ -779,7 +660,6 @@ export const translations: Record<Lang, Translation> = {
     },
     faq: {
       heading: 'FAQ',
-      sub: 'Întrebări pe care un recrutor le-ar pune înainte de primul call.',
       items: [
         {
           q: 'Cum am ajuns la programare?',
@@ -805,20 +685,13 @@ export const translations: Record<Lang, Translation> = {
     },
     contact: {
       heading: 'Contact',
-      sub: 'Să construim ceva.',
       email: 'mariusivan.dev@gmail.com',
       github: 'github.com/mivan1990',
       live: 'mariusivan.ro',
       note: 'Deschis la roluri de backend, full-stack și product-engineering.',
     },
-    footer: {
-      line: 'Construit cu React, TypeScript, Vite, Tailwind și shadcn/ui.',
-      github: 'github.com/mivan1990',
-    },
     a11y: {
       toggleLanguage: 'Comută pe Engleză',
-      openMenu: 'Deschide meniul',
-      closeMenu: 'Închide meniul',
       home: 'Mergi sus, la începutul paginii',
       liveDemo: 'Deschide demo-ul live într-un tab nou',
       viewRepo: 'Deschide repo-ul într-un tab nou',

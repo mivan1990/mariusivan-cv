@@ -13,16 +13,15 @@ interface HomeButtonProps {
  * calatorie sau sarind peste ea, nu mai aveai cum sa te intorci la stele decat
  * reincarcand pagina.
  *
- * Eticheta refoloseste `nav.hero`, care e deja „Home” / „Acasa” in traduceri —
- * o cheie noua ar fi insemnat acelasi cuvant scris a doua oara, cu riscul ca
- * cele doua sa se desincronizeze la prima corectura.
+ * Eticheta statea in `nav.hero`, dar grupul `nav` erau linkurile barei de
+ * navigare, stearsa odata cu restul paginii vechi. Acum are cheia ei, `home`.
  */
 export function HomeButton({ onClick }: HomeButtonProps) {
   const { t } = useLanguage()
   return (
     <Button onClick={onClick} variant="outline" size="sm" className="gap-1.5">
       <ArrowLeft className="h-3.5 w-3.5" aria-hidden="true" />
-      <span className="text-xs font-medium">{t.nav.hero}</span>
+      <span className="text-xs font-medium">{t.home}</span>
     </Button>
   )
 }
