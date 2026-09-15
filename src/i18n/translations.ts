@@ -277,7 +277,7 @@ export const translations: Record<Lang, Translation> = {
       skip: 'Portfolio',
       next: 'Next stop',
       prev: 'Previous',
-      land: 'Land on the CV',
+      land: 'Land on the portfolio',
       stopLabel: 'Stop',
       scrollHint: 'Scroll to travel',
       stops: [
@@ -612,7 +612,7 @@ export const translations: Record<Lang, Translation> = {
       skip: 'Portofoliu',
       next: 'Următoarea oprire',
       prev: 'Înapoi',
-      land: 'Aterizează pe CV',
+      land: 'Aterizează pe portofoliu',
       stopLabel: 'Oprirea',
       scrollHint: 'Derulează ca să călătorești',
       stops: [
